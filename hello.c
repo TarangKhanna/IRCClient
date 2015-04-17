@@ -24,7 +24,7 @@ static gboolean delete_event( GtkWidget *widget,
     /* Change TRUE to FALSE and the main window will be destroyed with
      * a "delete-event". */
 
-    return FALSE;
+    return TRUE;
 }
 
 /* Another callback */
