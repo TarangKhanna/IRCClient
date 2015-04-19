@@ -275,7 +275,6 @@ int main(int argc, char **argv) {
     GtkWidget *window;
     GtkWidget *button;
     GtkWidget *vpaned;
-    GtkWidget *hpaned;
     GtkWidget *list;
     GtkWidget *text;
     gtk_init (&argc, &argv);
@@ -294,10 +293,6 @@ int main(int argc, char **argv) {
     vpaned = gtk_vpaned_new ();
     gtk_container_add (GTK_CONTAINER (window), vpaned);
     gtk_widget_show (vpaned);
-    
-    hpaned = gtk_hpaned_new ();
-    gtk_container_add (GTK_CONTAINER (window), hpaned);
-    gtk_widget_show (hpaned);
     /* Now create the contents of the two halves of the window */
    
     list = create_list ();
@@ -308,9 +303,33 @@ int main(int argc, char **argv) {
     gtk_paned_add2 (GTK_PANED (vpaned), text);
     gtk_widget_show (text);
 
-    button = gtk_button_new_with_label ("Create Account");
-    gtk_paned_add1 (GTK_PANED (hpaned), button);
+    hbox = gtk_hbox_new (FALSE, 0);
+    gtk_container_add (GTK_CONTAINER (vbox), hbox);
+    gtk_widget_show (hbox);
+                                  
+    check = gtk_check_button_new_with_label ("Editable");
+    gtk_box_pack_start (GTK_BOX (hbox), check, TRUE, TRUE, 0);
+    g_signal_connect (check, "toggled",
+	              G_CALLBACK (entry_toggle_editable), entry);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check), TRUE);
+    gtk_widget_show (check);
+    
+    check = gtk_check_button_new_with_label ("Visible");
+    gtk_box_pack_start (GTK_BOX (hbox), check, TRUE, TRUE, 0);
+    g_signal_connect (check, "toggled",
+	              G_CALLBACK (entry_toggle_visibility), entry);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check), TRUE);
+    gtk_widget_show (check);
+                                   
+    button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
+    g_signal_connect_swapped (button, "clicked",
+			      G_CALLBACK (gtk_widget_destroy),
+			      window);
+    gtk_box_pack_start (GTK_BOX (vbox), button, TRUE, TRUE, 0);
+    gtk_widget_set_can_default (button, TRUE);
+    gtk_widget_grab_default (button);
     gtk_widget_show (button);
+    
     /* When the button receives the "clicked" signal, it will call the
      * function hello() passing it NULL as its argument.  The hello()
      * function is defined above. */
