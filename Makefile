@@ -20,6 +20,9 @@ timer: timer.c
 TestIRCServer: TestIRCServer.c
 	g++ -g -o TestIRCServer TestIRCServer.c
 
+talk-client: talk-client.c
+	g++ -g -o talk-client talk-client.c `pkg-config --cflags --libs gtk+-2.0`
+
 clean:
 	rm -f hello panned entry radio timer TestIRCServer
 git:
