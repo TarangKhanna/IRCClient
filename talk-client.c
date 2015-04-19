@@ -295,9 +295,9 @@ int main(int argc, char **argv) {
     gtk_container_add (GTK_CONTAINER (window), vpaned);
     gtk_widget_show (vpaned);
     
-    hpaned = gtk_hpaned_new ();
-    gtk_container_add (GTK_CONTAINER (window), hpaned);
-    gtk_widget_show (hpaned);
+    //hpaned = gtk_hpaned_new ();
+    //gtk_container_add (GTK_CONTAINER (window), hpaned);
+    //gtk_widget_show (hpaned);
     /* Now create the contents of the two halves of the window */
    
     list = create_list ();
