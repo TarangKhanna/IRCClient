@@ -295,21 +295,21 @@ int main(int argc, char **argv) {
     gtk_container_add (GTK_CONTAINER (window), vpaned);
     gtk_widget_show (vpaned);
     
-    //hpaned = gtk_hpaned_new ();
-    //gtk_container_add (GTK_CONTAINER (window), hpaned);
-    //gtk_widget_show (hpaned);
+    hpaned = gtk_hpaned_new ();
+    gtk_container_add (GTK_CONTAINER (window), hpaned);
+    gtk_widget_show (hpaned);
     /* Now create the contents of the two halves of the window */
    
     list = create_list ();
     gtk_paned_add1 (GTK_PANED (vpaned), list);
     gtk_widget_show (list);
    
-    //text = create_text ();
-    //gtk_paned_add2 (GTK_PANED (vpaned), text);
-    //gtk_widget_show (text);
+    text = create_text ();
+    gtk_paned_add2 (GTK_PANED (vpaned), text);
+    gtk_widget_show (text);
 
     button = gtk_button_new_with_label ("Create Account");
-    gtk_paned_add2 (GTK_PANED (vpaned), button);
+    gtk_paned_add1 (GTK_PANED (hpaned), button);
     gtk_widget_show (button);
     /* When the button receives the "clicked" signal, it will call the
      * function hello() passing it NULL as its argument.  The hello()
