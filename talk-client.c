@@ -275,6 +275,7 @@ int main(int argc, char **argv) {
     GtkWidget *window;
     GtkWidget *button;
     GtkWidget *vpaned;
+    GtkWidget *hpaned;
     GtkWidget *list;
     GtkWidget *text;
     gtk_init (&argc, &argv);
