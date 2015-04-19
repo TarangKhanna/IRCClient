@@ -280,18 +280,9 @@ int main(int argc, char **argv) {
     gtk_init (&argc, &argv);
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
    
-    
+    gtk_window_set_title (GTK_WINDOW (window), "IRCServer");
     /* Creates a new button with the label "Hello World". */
-    button = gtk_button_new_with_label ("Create Account");
-    
-    /* When the button receives the "clicked" signal, it will call the
-     * function hello() passing it NULL as its argument.  The hello()
-     * function is defined above. */
-    g_signal_connect (button, "clicked",
-		      G_CALLBACK (add_user), NULL);
-    
-    g_signal_connect (window, "destroy",
-	              G_CALLBACK (gtk_main_quit), NULL);
+ 
      /* Sets the border width of the window. */
     gtk_container_set_border_width (GTK_CONTAINER (window), 10);
     gtk_widget_set_size_request (GTK_WIDGET (window), 450, 400);
@@ -312,9 +303,18 @@ int main(int argc, char **argv) {
     text = create_text ();
     gtk_paned_add2 (GTK_PANED (vpaned), text);
     gtk_widget_show (text);
-    
-    /* The final step is to display this newly created widget. */
+
+    button = gtk_button_new_with_label ("Create Account");
+    gtk_paned_add3 (GTK_PANED (vpaned), button);
     gtk_widget_show (button);
+    /* When the button receives the "clicked" signal, it will call the
+     * function hello() passing it NULL as its argument.  The hello()
+     * function is defined above. */
+    g_signal_connect (button, "clicked",
+		      G_CALLBACK (add_user), NULL);
+    
+    g_signal_connect (window, "destroy",
+	              G_CALLBACK (gtk_main_quit), NULL);
     
     /* and the window */
     gtk_widget_show (window);
