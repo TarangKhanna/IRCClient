@@ -104,8 +104,11 @@ void printUsage()
 	exit(1);
 }
 
-void add_user() {
+void add_user(GtkWidget *widget,
+                   gpointer   data)
+    {
 	// Try first to add user in case it does not exist.
+	g_print ("ADD-USER\n");
 	char response[ MAX_RESPONSE ];
 	sendCommand(host, port, "ADD-USER", user, password, "", response);
 	
@@ -175,6 +178,22 @@ int main(int argc, char **argv) {
 		printUsage();
 	}
 
+    GtkWidget *window;
+    GtkWidget *button;
+    gtk_init (&argc, &argv);
+    window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+    /* Sets the border width of the window. */
+    gtk_container_set_border_width (GTK_CONTAINER (window), 10);
+    
+    /* Creates a new button with the label "Hello World". */
+    button = gtk_button_new_with_label ("Add User");
+    
+    /* When the button receives the "clicked" signal, it will call the
+     * function hello() passing it NULL as its argument.  The hello()
+     * function is defined above. */
+    g_signal_connect (button, "clicked",
+		      G_CALLBACK (add_user), NULL);
+
 	host = argv[1];
 	sport = argv[2];
 	user = argv[3];
@@ -186,7 +205,7 @@ int main(int argc, char **argv) {
 	sscanf(sport, "%d", &port);
 
 	add_user();
-
+    
 	// Enter room
 	enter_room();
 
