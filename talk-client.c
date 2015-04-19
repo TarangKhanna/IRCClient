@@ -180,13 +180,15 @@ int main(int argc, char **argv) {
 
     GtkWidget *window;
     GtkWidget *button;
+    GtkWidget *vpaned;
+    GtkWidget *list;
+    GtkWidget *text;
     gtk_init (&argc, &argv);
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-    /* Sets the border width of the window. */
-    gtk_container_set_border_width (GTK_CONTAINER (window), 10);
+   
     
     /* Creates a new button with the label "Hello World". */
-    button = gtk_button_new_with_label ("Add User");
+    button = gtk_button_new_with_label ("Create Account");
     
     /* When the button receives the "clicked" signal, it will call the
      * function hello() passing it NULL as its argument.  The hello()
@@ -194,8 +196,28 @@ int main(int argc, char **argv) {
     g_signal_connect (button, "clicked",
 		      G_CALLBACK (add_user), NULL);
     
+    g_signal_connect (window, "destroy",
+	              G_CALLBACK (gtk_main_quit), NULL);
+     /* Sets the border width of the window. */
+    gtk_container_set_border_width (GTK_CONTAINER (window), 10);
+    gtk_widget_set_size_request (GTK_WIDGET (window), 450, 400);
+
     /* This packs the button into the window (a gtk container). */
     gtk_container_add (GTK_CONTAINER (window), button);
+
+    vpaned = gtk_vpaned_new ();
+    gtk_container_add (GTK_CONTAINER (window), vpaned);
+    gtk_widget_show (vpaned);
+   
+    /* Now create the contents of the two halves of the window */
+   
+    list = create_list ();
+    gtk_paned_add1 (GTK_PANED (vpaned), list);
+    gtk_widget_show (list);
+   
+    text = create_text ();
+    gtk_paned_add2 (GTK_PANED (vpaned), text);
+    gtk_widget_show (text);
     
     /* The final step is to display this newly created widget. */
     gtk_widget_show (button);
