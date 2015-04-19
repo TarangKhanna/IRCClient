@@ -110,7 +110,7 @@ void add_user(GtkWidget *widget,
 	// Try first to add user in case it does not exist.
 	g_print ("ADD-USER\n");
 	char response[ MAX_RESPONSE ];
-	sendCommand(host, port, "ADD-USER", user, password, "", response);
+	//sendCommand(host, port, "ADD-USER", user, password, "", response);
 	
 	if (!strcmp(response,"OK\r\n")) {
 		printf("User %s added\n", user);
@@ -174,9 +174,9 @@ int main(int argc, char **argv) {
 
 	char line[MAX_MESSAGE_LEN+1];
 	
-	if (argc < 5) {
-		printUsage();
-	}
+	//if (argc < 5) {
+	//	printUsage();
+	//}
 
     GtkWidget *window;
     GtkWidget *button;
