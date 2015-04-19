@@ -193,7 +193,20 @@ int main(int argc, char **argv) {
      * function is defined above. */
     g_signal_connect (button, "clicked",
 		      G_CALLBACK (add_user), NULL);
-
+    
+    /* This packs the button into the window (a gtk container). */
+    gtk_container_add (GTK_CONTAINER (window), button);
+    
+    /* The final step is to display this newly created widget. */
+    gtk_widget_show (button);
+    
+    /* and the window */
+    gtk_widget_show (window);
+    
+    /* All GTK applications must have a gtk_main(). Control ends here
+     * and waits for an event to occur (like a key press or
+     * mouse event). */
+    gtk_main ();
 	host = argv[1];
 	sport = argv[2];
 	user = argv[3];
