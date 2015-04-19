@@ -296,7 +296,6 @@ int main(int argc, char **argv) {
 	//}
 
     GtkWidget *window;
-    GtkWidget *window;
     GtkWidget *vbox, *hbox;
     GtkWidget *entry;
     GtkWidget *button;
