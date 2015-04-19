@@ -217,7 +217,7 @@ int main(int argc, char **argv) {
 	// Convert port to number
 	sscanf(sport, "%d", &port);
 
-	add_user();
+	//add_user();
     
 	// Enter room
 	enter_room();
