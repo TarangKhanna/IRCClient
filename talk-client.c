@@ -333,20 +333,6 @@ int main(int argc, char **argv) {
     hbox = gtk_hbox_new (FALSE, 0);
     gtk_container_add (GTK_CONTAINER (vbox), hbox);
     gtk_widget_show (hbox);
-                                  
-    check = gtk_check_button_new_with_label ("Editable");
-    gtk_box_pack_start (GTK_BOX (hbox), check, TRUE, TRUE, 0);
-    g_signal_connect (check, "toggled",
-	              G_CALLBACK (entry_toggle_editable), entry);
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check), TRUE);
-    gtk_widget_show (check);
-    
-    check = gtk_check_button_new_with_label ("Visible");
-    gtk_box_pack_start (GTK_BOX (hbox), check, TRUE, TRUE, 0);
-    g_signal_connect (check, "toggled",
-	              G_CALLBACK (entry_toggle_visibility), entry);
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check), TRUE);
-    gtk_widget_show (check);
                                    
     button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
     g_signal_connect_swapped (button, "clicked",
