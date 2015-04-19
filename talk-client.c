@@ -296,7 +296,12 @@ int main(int argc, char **argv) {
 	//}
 
     GtkWidget *window;
+    GtkWidget *window;
+    GtkWidget *vbox, *hbox;
+    GtkWidget *entry;
     GtkWidget *button;
+    GtkWidget *check;
+    gint tmp_pos;
     GtkWidget *vpaned;
     GtkWidget *list;
     GtkWidget *text;
