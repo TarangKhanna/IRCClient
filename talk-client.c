@@ -192,7 +192,7 @@ int main(int argc, char **argv) {
 	//add_user();
     
 	// Enter room
-	enter_room();
+	//enter_room();
 
 	// Start message thread
 	//startGetMessageThread();
