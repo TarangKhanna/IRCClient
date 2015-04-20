@@ -25,6 +25,19 @@ int port;
 
 int lastMessage = 0;
 
+GdkPixbuf *create_pixbuf(const gchar * filename)
+{
+   GdkPixbuf *pixbuf;
+   GError *error = NULL;
+   pixbuf = gdk_pixbuf_new_from_file(filename, &error);
+   if(!pixbuf) {
+      fprintf(stderr, "%s\n", error->message);
+      g_error_free(error);
+   }
+
+   return pixbuf;
+}
+
 int open_client_socket(char * host, int port) {
 	// Initialize socket address structure
 	struct  sockaddr_in socketAddress;
@@ -73,7 +86,7 @@ int open_client_socket(char * host, int port) {
 }
 
 int sendCommand(char * host, int port, char * command, char * user,
-		char * password, char * args, char * response) {
+	char * password, char * args, char * response) {
 	int sock = open_client_socket( host, port);
 
 	// Send command
@@ -303,8 +316,10 @@ int main(int argc, char **argv) {
     gtk_paned_add2 (GTK_PANED (vpaned), text);
     gtk_widget_show (text);
 
-    /* Creates a new button with the label "Hello World". */
-    
+    gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
+
+    gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("web.png"));
+
     gtk_widget_show (window);
 
     gtk_main ();
