@@ -137,16 +137,16 @@ int main( int   argc,
 
     // Add send button. Use columns 0 to 1 (exclusive) and rows 4 to 7 (exclusive)
     GtkWidget *send_button = gtk_button_new_with_label ("Send");
-
-    gdk_color_parse ("red", &color);
-
-    gtk_widget_modify_fg (send_button, GTK_STATE_NORMAL,    &color);
     gtk_table_attach_defaults(GTK_TABLE (table), send_button, 0, 1, 7, 8); 
     gtk_widget_show (send_button);
     
     gtk_widget_show (table);
     gtk_widget_show (window);
+    
 
+    gdk_color_parse ("red", &color);
+
+    gtk_widget_modify_fg (send_button, GTK_STATE_NORMAL,    &color);
     gtk_main ();
 
     return 0;
