@@ -273,7 +273,52 @@ int main(int argc, char **argv) {
 	//	printUsage();
 	//}
 
-    GtkWidget *window;
+   
+	//add_user();
+    
+	// Enter room
+	//enter_room();
+
+	// Start message thread
+	//startGetMessageThread();
+
+	while (1) {
+		printPrompt();
+
+		char * s = fgets(line,MAX_MESSAGE_LEN, stdin);
+		if (s==NULL) {
+			leave_room();
+			printf("talk-client exiting...\n");
+			exit(1);
+		}
+
+		if (!isatty(0)) {
+			// If it is not a terminal, echo command as well
+			printf("%s\n", line);
+		}
+
+		if (line[0]=='-') {
+			// This is a command process it
+			if (!strcmp(line,"-help")) {
+				printHelp();
+			}
+			else if (!strcmp(line,"-quit")) {
+				printf("talk-client exiting...\n");
+				exit(1);
+			}
+			// Put other commands here
+		}
+		else if (line[0]==0) {
+			// Empty line. Print help
+			printf("Type -help to print the available commands\n");
+		}
+		else {
+			// Send message
+		}
+	}
+	
+	printf("TEST ENDS\n");
+	 GtkWidget *window;
     GtkWidget *vpaned;
     GtkWidget *list;
     GtkWidget *text;
@@ -319,49 +364,5 @@ int main(int argc, char **argv) {
 	// Convert port to number
 	sscanf(sport, "%d", &port);
 
-	//add_user();
-    
-	// Enter room
-	//enter_room();
-
-	// Start message thread
-	//startGetMessageThread();
-
-	while (1) {
-		printPrompt();
-
-		char * s = fgets(line,MAX_MESSAGE_LEN, stdin);
-		if (s==NULL) {
-			leave_room();
-			printf("talk-client exiting...\n");
-			exit(1);
-		}
-
-		if (!isatty(0)) {
-			// If it is not a terminal, echo command as well
-			printf("%s\n", line);
-		}
-
-		if (line[0]=='-') {
-			// This is a command process it
-			if (!strcmp(line,"-help")) {
-				printHelp();
-			}
-			else if (!strcmp(line,"-quit")) {
-				printf("talk-client exiting...\n");
-				exit(1);
-			}
-			// Put other commands here
-		}
-		else if (line[0]==0) {
-			// Empty line. Print help
-			printf("Type -help to print the available commands\n");
-		}
-		else {
-			// Send message
-		}
-	}
-	
-	printf("TEST ENDS\n");
 	return 0;
 }
