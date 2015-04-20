@@ -330,18 +330,7 @@ int main(int argc, char **argv) {
     gtk_paned_add2 (GTK_PANED (vpaned), text);
     gtk_widget_show (text);
 
-    hbox = gtk_hbox_new (FALSE, 0);
-    gtk_container_add (GTK_CONTAINER (vbox), hbox);
-    gtk_widget_show (hbox);
-                                   
-    button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
-    g_signal_connect_swapped (button, "clicked",
-			      G_CALLBACK (gtk_widget_destroy),
-			      window);
-    gtk_box_pack_start (GTK_BOX (vbox), button, TRUE, TRUE, 0);
-    gtk_widget_set_can_default (button, TRUE);
-    gtk_widget_grab_default (button);
-    gtk_widget_show (button);
+  
     
     /* When the button receives the "clicked" signal, it will call the
      * function hello() passing it NULL as its argument.  The hello()
