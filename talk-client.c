@@ -321,7 +321,7 @@ int main(int argc, char **argv) {
 
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
 
-    gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("chat_icon.gif"));
+    gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("chat-icon_small.png"));
 
     gtk_widget_show (window);
 
