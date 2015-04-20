@@ -323,6 +323,23 @@ int main(int argc, char **argv) {
 
     gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("chat-icon_small.png"));
 
+    GtkWidget *label1, *label2, *label3;
+	GtkWidget *hbox;
+	GtkWidget *vbox;
+
+	label1 = gtk_label_new("Label 1");
+	label2 = gtk_label_new("Label 2");
+	label3 = gtk_label_new("Label 3");
+
+	hbox = gtk_hbox_new(TRUE, 5);
+	vbox = gtk_vbox_new(FALSE, 10);
+
+	gtk_box_pack_start(GTK_BOX(vbox), label1, TRUE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(vbox), label2, TRUE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(hbox), vbox, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(hbox), label3, FALSE, FALSE, 5);
+
+	gtk_container_add(GTK_CONTAINER(window), hbox);
     gtk_widget_show (window);
 
     gtk_main ();
