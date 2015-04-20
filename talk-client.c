@@ -287,6 +287,7 @@ int main(int argc, char **argv) {
  
      /* Sets the border width of the window. */
     gtk_container_set_border_width (GTK_CONTAINER (window), 10);
+    
     gtk_widget_set_size_request (GTK_WIDGET (window), 450, 400);
 
     /* This packs the button into the window (a gtk container). */
