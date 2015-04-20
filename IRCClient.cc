@@ -143,7 +143,6 @@ int main( int   argc,
     gtk_widget_show (table);
     gtk_widget_show (window);
     
-
     gdk_color_parse ("red", &color);
 
     gtk_widget_modify_fg (send_button, GTK_STATE_NORMAL,    &color);
