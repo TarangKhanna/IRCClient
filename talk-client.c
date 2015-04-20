@@ -291,6 +291,10 @@ int main(int argc, char **argv) {
     GtkWidget *list;
     GtkWidget *text;
 
+    GtkWidget *label1, *label2, *label3;
+	GtkWidget *hbox;
+	GtkWidget *vbox;
+    
     gtk_init (&argc, &argv);
    
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
@@ -299,18 +303,11 @@ int main(int argc, char **argv) {
 	              G_CALLBACK (gtk_main_quit), NULL);
     gtk_container_set_border_width (GTK_CONTAINER (window), 10);
     gtk_widget_set_size_request (GTK_WIDGET (window), 450, 400);
+   
 
+    // labels
+  
     
-
-    gtk_window_set_title(GTK_WINDOW(window), "Tarang's IRCServer");
-
-    gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
-
-    gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("chat-icon_small.png"));
-
-    GtkWidget *label1, *label2, *label3;
-	GtkWidget *hbox;
-	GtkWidget *vbox;
 
 	label1 = gtk_label_new("Label 1");
 	label2 = gtk_label_new("Label 2");
@@ -325,6 +322,31 @@ int main(int argc, char **argv) {
 	gtk_box_pack_start(GTK_BOX(hbox), label3, FALSE, FALSE, 5);
 
 	gtk_container_add(GTK_CONTAINER(window), hbox);
+
+    /* create a vpaned widget and add it to our toplevel window */
+   
+    vpaned = gtk_vpaned_new ();
+    gtk_container_add (GTK_CONTAINER (window), vpaned);
+    gtk_widget_show (vpaned);
+   
+    /* Now create the contents of the two halves of the window */
+   
+    list = create_list ();
+    gtk_paned_add1 (GTK_PANED (vpaned), list);
+    gtk_widget_show (list);
+   
+    text = create_text ();
+    gtk_paned_add2 (GTK_PANED (vpaned), text);
+
+    gtk_widget_show (text);
+
+    gtk_window_set_title(GTK_WINDOW(window), "Tarang's IRCServer");
+
+    gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
+
+    gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("chat-icon_small.png"));
+
+    
     gtk_widget_show (window);
 
     gtk_main ();
