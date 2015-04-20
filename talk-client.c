@@ -166,7 +166,7 @@ void * getMessagesThread(void * arg) {
 
 void startGetMessageThread()
 {
-	pthread_t threads;
+	//pthread_t threads;
 	pthread_create(&threads, NULL, getMessagesThread, NULL);
 }
 
@@ -195,7 +195,7 @@ int main(int argc, char **argv) {
 	enter_room();
 
 	// Start message thread
-	startGetMessageThread();
+	//startGetMessageThread();
 
 	while (1) {
 		printPrompt();
