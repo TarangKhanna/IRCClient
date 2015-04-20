@@ -99,6 +99,7 @@ int main( int   argc,
     GtkWidget *list;
     GtkWidget *messages;
     GtkWidget *myMessage;
+    GdkColor color;
 
     gtk_init (&argc, &argv);
    
@@ -115,7 +116,7 @@ int main( int   argc,
     gtk_table_set_row_spacings(GTK_TABLE (table), 5);
     gtk_table_set_col_spacings(GTK_TABLE (table), 5);
     gtk_widget_show (table);
-
+   
     // Add list of rooms. Use columns 0 to 4 (exclusive) and rows 0 to 4 (exclusive)
     list_rooms = gtk_list_store_new (1, G_TYPE_STRING);
     update_list_rooms();
@@ -128,6 +129,10 @@ int main( int   argc,
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
     gtk_widget_show (messages);
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
+
+    gdk_color_parse ("red", &color);
+
+    gtk_widget_modify_fg (messages, GTK_STATE_NORMAL,    &color);
 
     myMessage = create_text ("I am fine, thanks and you?\n");
     gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 0, 4, 5, 7);
