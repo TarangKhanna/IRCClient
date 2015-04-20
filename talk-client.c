@@ -300,22 +300,6 @@ int main(int argc, char **argv) {
 	gtk_container_set_border_width(GTK_CONTAINER(window), 10);
 	gtk_widget_set_size_request(GTK_WIDGET(window), 450, 400);
 
-	/* create a vpaned widget and add it to our toplevel window */
-
-	vpaned = gtk_vpaned_new();
-	gtk_container_add(GTK_CONTAINER(window), vpaned);
-	gtk_widget_show(vpaned);
-
-	/* Now create the contents of the two halves of the window */
-
-	list = create_list();
-	gtk_paned_add1(GTK_PANED(vpaned), list);
-	gtk_widget_show(list);
-
-	text = create_text();
-	gtk_paned_add2(GTK_PANED(vpaned), text);
-
-	gtk_widget_show(text);
 
 	gtk_window_set_title(GTK_WINDOW(window), "Tarang's IRCServer");
 
