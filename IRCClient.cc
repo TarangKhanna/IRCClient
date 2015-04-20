@@ -132,8 +132,7 @@ int main( int   argc,
 
     gdk_color_parse ("red", &color);
 
-    gtk_widget_modify_fg (messages, GTK_STATE_NORMAL,    &color);
-
+    gtk_widget_modify_fg (widget, GTK_STATE_NORMAL,    &color);
     myMessage = create_text ("I am fine, thanks and you?\n");
     gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 0, 4, 5, 7);
     gtk_widget_show (myMessage);
