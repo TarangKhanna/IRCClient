@@ -314,7 +314,10 @@ int main(int argc, char **argv) {
    
     text = create_text ();
     gtk_paned_add2 (GTK_PANED (vpaned), text);
+
     gtk_widget_show (text);
+
+    gtk_window_set_title(GTK_WINDOW(window), "Tarang's IRCServer");
 
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
 
