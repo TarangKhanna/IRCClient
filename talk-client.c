@@ -166,7 +166,7 @@ void * getMessagesThread(void * arg) {
 
 void startGetMessageThread()
 {
-	pthread_t threads[5];
+	pthread_t threads;
 	pthread_create(&threads, NULL, getMessagesThread, NULL);
 }
 
