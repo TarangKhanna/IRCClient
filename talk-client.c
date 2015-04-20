@@ -278,6 +278,16 @@ static GtkWidget *create_text( void )
    return scrolled_window;
 }
 
+void button_clicked(GtkWidget *button, gpointer data)
+{
+    const char *password_text = gtk_entry_get_text(GTK_ENTRY((GtkWidget *)data));
+
+    if(strcmp(password_text, password) == 0)
+        printf("Access granted!\n");
+    else
+        printf("Access denied!\n");
+}
+
 int main(int argc, char **argv) {
 
 	char line[MAX_MESSAGE_LEN+1];
@@ -287,69 +297,45 @@ int main(int argc, char **argv) {
 	//}
 
     GtkWidget *window;
-    GtkWidget *vpaned;
-    GtkWidget *list;
-    GtkWidget *text;
+    GtkWidget *username_label, *password_label;
+    GtkWidget *username_entry, *password_entry;
+    GtkWidget *ok_button;
+    GtkWidget *hbox1, *hbox2;
+    GtkWidget *vbox;
 
-    GtkWidget *label1, *label2, *label3;
-	GtkWidget *hbox;
-	GtkWidget *vbox;
-    
-    gtk_init (&argc, &argv);
-   
-    window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_title (GTK_WINDOW (window), "Paned Windows");
-    g_signal_connect (window, "destroy",
-	              G_CALLBACK (gtk_main_quit), NULL);
-    gtk_container_set_border_width (GTK_CONTAINER (window), 10);
-    gtk_widget_set_size_request (GTK_WIDGET (window), 450, 400);
-   
-
-    // labels
-  
-    
-
-	label1 = gtk_label_new("Label 1");
-	label2 = gtk_label_new("Label 2");
-	label3 = gtk_label_new("Label 3");
-
-	hbox = gtk_hbox_new(TRUE, 5);
-	vbox = gtk_vbox_new(FALSE, 10);
-
-	gtk_box_pack_start(GTK_BOX(vbox), label1, TRUE, FALSE, 5);
-	gtk_box_pack_start(GTK_BOX(vbox), label2, TRUE, FALSE, 5);
-	gtk_box_pack_start(GTK_BOX(hbox), vbox, FALSE, FALSE, 5);
-	gtk_box_pack_start(GTK_BOX(hbox), label3, FALSE, FALSE, 5);
-
-	gtk_container_add(GTK_CONTAINER(window), hbox);
-
-    /* create a vpaned widget and add it to our toplevel window */
-   
-    vpaned = gtk_vpaned_new ();
-    gtk_container_add (GTK_CONTAINER (window), vpaned);
-    gtk_widget_show (vpaned);
-   
-    /* Now create the contents of the two halves of the window */
-   
-    list = create_list ();
-    gtk_paned_add1 (GTK_PANED (vpaned), list);
-    gtk_widget_show (list);
-   
-    text = create_text ();
-    gtk_paned_add2 (GTK_PANED (vpaned), text);
-
-    gtk_widget_show (text);
-
-    gtk_window_set_title(GTK_WINDOW(window), "Tarang's IRCServer");
-
+    gtk_init(&argc, &argv);
+    window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    gtk_window_set_title(GTK_WINDOW(window), "Basic Widgets");
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
+    gtk_window_set_default_size(GTK_WINDOW(window), 200, 200);
 
-    gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("chat-icon_small.png"));
+    g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(closeApp), NULL);
 
-    
-    gtk_widget_show (window);
+    username_label = gtk_label_new("Login: ");
+    password_label = gtk_label_new("Password: ");
+    username_entry = gtk_entry_new();
+    password_entry = gtk_entry_new();
+    gtk_entry_set_visibility(GTK_ENTRY(password_entry), FALSE);
+    ok_button = gtk_button_new_with_label("OK");
 
-    gtk_main ();
+    g_signal_connect(G_OBJECT(ok_button), "clicked", G_CALLBACK(button_clicked),
+                     password_entry);
+
+    hbox1 = gtk_hbox_new(TRUE, 5);
+    hbox2 = gtk_hbox_new(TRUE, 5);
+    vbox = gtk_vbox_new(FALSE, 10);
+
+    gtk_box_pack_start(GTK_BOX(hbox1), username_label, TRUE, FALSE, 5);
+    gtk_box_pack_start(GTK_BOX(hbox1), username_entry, TRUE, FALSE, 5);
+    gtk_box_pack_start(GTK_BOX(hbox2), password_label, TRUE, FALSE, 5);
+    gtk_box_pack_start(GTK_BOX(hbox2), password_entry, TRUE, FALSE, 5);
+    gtk_box_pack_start(GTK_BOX(vbox), hbox1, FALSE, FALSE, 5);
+    gtk_box_pack_start(GTK_BOX(vbox), hbox2, FALSE, FALSE, 5);
+    gtk_box_pack_start(GTK_BOX(vbox), ok_button, FALSE, FALSE, 5);
+    gtk_container_add(GTK_CONTAINER(window), vbox);
+
+    gtk_widget_show_all(window);
+    gtk_main();
 
 	host = argv[1];
 	sport = argv[2];
