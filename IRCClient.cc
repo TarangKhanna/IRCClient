@@ -118,7 +118,6 @@ int main( int   argc,
     gtk_init (&argc, &argv);
    
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_title (GTK_WINDOW (window), "Paned Windows");
     g_signal_connect (window, "destroy",
 	              G_CALLBACK (gtk_main_quit), NULL);
     gtk_container_set_border_width (GTK_CONTAINER (window), 10);
@@ -144,7 +143,6 @@ int main( int   argc,
     gtk_widget_show (messages);
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
 
-    
     myMessage = create_text ("I am fine, thanks and you?\n");
     gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 0, 4, 5, 7);
     gtk_widget_show (myMessage);
@@ -153,7 +151,9 @@ int main( int   argc,
     GtkWidget *send_button = gtk_button_new_with_label ("Send");
     gtk_table_attach_defaults(GTK_TABLE (table), send_button, 0, 1, 7, 8); 
     gtk_widget_show (send_button);
-    
+     GtkWidget *create_account = gtk_button_new_with_label ("Create Account");
+    gtk_table_attach_defaults(GTK_TABLE (table), send_button, 1, 2, 0, 1); 
+    gtk_widget_show (create_account);
     gtk_widget_show (table);
     gtk_widget_show (window);
     
