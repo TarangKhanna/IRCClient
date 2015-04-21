@@ -126,8 +126,8 @@ int main( int   argc,
     // Create a table to place the widgets. Use a 7x4 Grid (7 rows x 4 columns)
     GtkWidget *table = gtk_table_new (7, 4, TRUE);
     gtk_container_add (GTK_CONTAINER (window), table);
-    gtk_table_set_row_spacings(GTK_TABLE (table), 5);
-    gtk_table_set_col_spacings(GTK_TABLE (table), 5);
+    gtk_table_set_row_spacings(GTK_TABLE (table), 15);
+    gtk_table_set_col_spacings(GTK_TABLE (table), 15);
     gtk_widget_show (table);
    
     // Add list of rooms. Use columns 0 to 4 (exclusive) and rows 0 to 4 (exclusive)
