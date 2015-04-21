@@ -7,7 +7,7 @@ GtkListStore * list_rooms;
 void update_list_rooms() {
     GtkTreeIter iter;
     int i;
-
+    // update 
     /* Add some messages to the window */
     for (i = 0; i < 10; i++) {
         gchar *msg = g_strdup_printf ("Room %d", i);
@@ -133,8 +133,8 @@ int main( int   argc,
     // Add list of rooms. Use columns 0 to 4 (exclusive) and rows 0 to 4 (exclusive)
     list_rooms = gtk_list_store_new (1, G_TYPE_STRING);
     update_list_rooms();
-    list = create_list ("Messages", list_rooms);
-    gtk_table_attach_defaults (GTK_TABLE (table), list, 2, 4, 0, 2);
+    list = create_list ("Rooms", list_rooms);
+    gtk_table_attach_defaults (GTK_TABLE (table), list, 0, 2, 0, 2);
     gtk_widget_show (list);
    
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
@@ -162,24 +162,6 @@ int main( int   argc,
 	gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
 
 	gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("chat-icon_small.png"));
-
-	GtkWidget *label1, *label2, *label3;
-	GtkWidget *hbox;
-	GtkWidget *vbox;
-
-	label1 = gtk_label_new("Label 1");
-	label2 = gtk_label_new("Label 2");
-	label3 = gtk_label_new("Label 3");
-
-	hbox = gtk_hbox_new(TRUE, 5);
-	vbox = gtk_vbox_new(FALSE, 10);
-
-	gtk_box_pack_start(GTK_BOX(vbox), label1, TRUE, FALSE, 5);
-	gtk_box_pack_start(GTK_BOX(vbox), label2, TRUE, FALSE, 5);
-	gtk_box_pack_start(GTK_BOX(hbox), vbox, FALSE, FALSE, 5);
-	gtk_box_pack_start(GTK_BOX(hbox), label3, FALSE, FALSE, 5);
-
-	gtk_container_add(GTK_CONTAINER(table), hbox);
 
     gtk_main ();
 
