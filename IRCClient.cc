@@ -114,6 +114,7 @@ int main( int   argc,
     GtkWidget *messages;
     GtkWidget *myMessage;
     GdkColor color;
+    
 
     gtk_init (&argc, &argv);
    
@@ -152,10 +153,13 @@ int main( int   argc,
     gtk_table_attach_defaults(GTK_TABLE (table), send_button, 0, 1, 7, 8); 
     gtk_widget_show (send_button);
     GtkWidget *create_account = gtk_button_new_with_label ("Create");
+    gdk_color_parse ("red", &color);
+    gtk_widget_modify_bg (GTK_WIDGET(create_account), GTK_STATE_NORMAL, &color);
     gtk_table_attach_defaults(GTK_TABLE (table), create_account, 3, 4, 7, 8);  // create button
     gtk_widget_show (create_account);
     gtk_widget_show (table);
     gtk_widget_show (window);
+   
     
     gtk_window_set_title(GTK_WINDOW(window), "Tarang's IRCServer");
 
