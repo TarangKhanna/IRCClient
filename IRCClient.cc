@@ -121,7 +121,7 @@ int main( int   argc,
     g_signal_connect (window, "destroy",
 	              G_CALLBACK (gtk_main_quit), NULL);
     gtk_container_set_border_width (GTK_CONTAINER (window), 10);
-    gtk_widget_set_size_request (GTK_WIDGET (window), 450, 400);
+    gtk_widget_set_size_request (GTK_WIDGET (window), 950, 800);
 
     // Create a table to place the widgets. Use a 7x4 Grid (7 rows x 4 columns)
     GtkWidget *table = gtk_table_new (7, 4, TRUE);
