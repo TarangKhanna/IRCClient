@@ -179,7 +179,7 @@ int main( int   argc,
 	gtk_box_pack_start(GTK_BOX(hbox), vbox, FALSE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(hbox), label3, FALSE, FALSE, 5);
 
-	gtk_container_add(GTK_CONTAINER(window), hbox);
+	gtk_container_add(GTK_CONTAINER(table), hbox);
 
     gtk_main ();
 
