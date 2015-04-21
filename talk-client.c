@@ -222,7 +222,7 @@ static GtkWidget *create_list(void)
 
 	cell = gtk_cell_renderer_text_new();
 
-	column = gtk_tree_view_column_new_with_attributes("Messages2",
+	column = gtk_tree_view_column_new_with_attributes("Messages",
 		cell,
 		"text", 0,
 		NULL);

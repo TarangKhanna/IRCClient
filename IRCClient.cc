@@ -69,6 +69,20 @@ static void insert_text( GtkTextBuffer *buffer, const char * initialText )
    gtk_text_buffer_insert (buffer, &iter, initialText,-1);
 }
    
+
+GdkPixbuf *create_pixbuf(const gchar * filename)
+{
+	GdkPixbuf *pixbuf;
+	GError *error = NULL;
+	pixbuf = gdk_pixbuf_new_from_file(filename, &error);
+	if (!pixbuf) {
+		fprintf(stderr, "%s\n", error->message);
+		g_error_free(error);
+	}
+
+	return pixbuf;
+}
+
 /* Create a scrolled text area that displays a "message" */
 static GtkWidget *create_text( const char * initialText )
 {
@@ -143,9 +157,30 @@ int main( int   argc,
     gtk_widget_show (table);
     gtk_widget_show (window);
     
-    gdk_color_parse ("red", &color);
+    gtk_window_set_title(GTK_WINDOW(window), "Tarang's IRCServer");
 
-    gtk_widget_modify_fg (send_button, GTK_STATE_NORMAL,    &color);
+	gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
+
+	gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("chat-icon_small.png"));
+
+	GtkWidget *label1, *label2, *label3;
+	GtkWidget *hbox;
+	GtkWidget *vbox;
+
+	label1 = gtk_label_new("Label 1");
+	label2 = gtk_label_new("Label 2");
+	label3 = gtk_label_new("Label 3");
+
+	hbox = gtk_hbox_new(TRUE, 5);
+	vbox = gtk_vbox_new(FALSE, 10);
+
+	gtk_box_pack_start(GTK_BOX(vbox), label1, TRUE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(vbox), label2, TRUE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(hbox), vbox, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(hbox), label3, FALSE, FALSE, 5);
+
+	gtk_container_add(GTK_CONTAINER(window), hbox);
+
     gtk_main ();
 
     return 0;
