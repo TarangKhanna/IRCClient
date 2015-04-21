@@ -152,7 +152,7 @@ int main( int   argc,
     gtk_table_attach_defaults(GTK_TABLE (table), send_button, 0, 1, 7, 8); 
     gtk_widget_show (send_button);
     GtkWidget *create_account = gtk_button_new_with_label ("Create");
-    gtk_table_attach_defaults(GTK_TABLE (table), create_account, 0, 1, 0, 1); 
+    gtk_table_attach_defaults(GTK_TABLE (table), create_account, 2, 4, 7, 8);  // create button
     gtk_widget_show (create_account);
     gtk_widget_show (table);
     gtk_widget_show (window);
