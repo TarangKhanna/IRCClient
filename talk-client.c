@@ -116,9 +116,10 @@ void printUsage()
 {
 	printf("Usage: talk-client host port user password\n");
 	exit(1);
-}
+}  
 
-void add_user(host, port, user, password)
+void add_user(char * host, int port, char * user,
+	char * password)
 {
 	// Try first to add user in case it does not exist.
 	char response[MAX_RESPONSE];
