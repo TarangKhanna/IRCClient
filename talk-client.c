@@ -125,7 +125,7 @@ void add_user(char * host, int port, char * user,
 	char response[MAX_RESPONSE];
 	sendCommand(host, port, "ADD-USER", user, password, "", response);
 
-	if ((strcmp(response, "OK\r\n") == 0) {
+	if (strcmp(response, "OK\r\n") == 0) {
 		printf("User %s added\n", user);
 	}
 }
