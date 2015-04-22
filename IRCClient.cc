@@ -180,7 +180,7 @@ int main( int   argc,
     //gtk_widget_show (myMessage);
     
     //create a text box
-    entry = gtk_entry_new_with_max_length(20);
+    entry = gtk_entry_new_with_max_length(0);
     //gtk_entry_set_max_length (GTK_ENTRY (entry),3);
     gtk_table_attach_defaults (GTK_TABLE (table), entry, 2, 6, 5, 8);
     gtk_widget_show(entry);
