@@ -18,6 +18,7 @@ char * host;
 char * user;
 char * password;
 char * sport;
+char * args;
 int port;
 
 #define MAX_MESSAGES 100
@@ -107,7 +108,7 @@ int sendCommand(char * host, int port, char * command, char * user,
 		len += n;
 	}
 
-	printf("response:%s\n", response);
+	//printf("response:%s\n", response);
 
 	close(sock);
 }
@@ -122,7 +123,7 @@ void add_user(char * host, int port, char * user,
 	char * password)
 {
 	// Try first to add user in case it does not exist.
-	char response[MAX_RESPONSE];
+    char response[MAX_RESPONSE];
 	sendCommand(host, port, "ADD-USER", user, password, "", response);
 
 	if (strcmp(response, "OK\r\n") == 0) {
@@ -130,23 +131,72 @@ void add_user(char * host, int port, char * user,
 	}
 }
 
-void enter_room() {
+void create_room(char * host, int port, char * user,
+	char * password, char * args) {
+    char response[MAX_RESPONSE];
+	sendCommand(host, port, "CREATE-ROOM", user, password, args, response);
+
+	if (strcmp(response, "OK\r\n") == 0) {
+		printf("User %s added\n", user);
+	}
 }
 
-void leave_room() {
+void enter_room(char * host, int port, char * user,
+	char * password, char * args) {
+    char response[MAX_RESPONSE];
+	sendCommand(host, port, "ENTER-ROOM", user, password, args, response);
+
+	if (strcmp(response, "OK\r\n") == 0) {
+		printf("User %s added\n", user);
+	}
+}
+
+void leave_room(char * host, int port, char * user,
+	char * password, char * args) {
+    char response[MAX_RESPONSE];
+	sendCommand(host, port, "LEAVE-ROOM", user, password, args, response);
+
+	if (strcmp(response, "OK\r\n") == 0) {
+		printf("User %s added\n", user);
+	}
 }
 
 void get_messages() {
+    char response[MAX_RESPONSE];
+	sendCommand(host, port, "GET-MESSAGES", user, password, args, response);
 
+	if (strcmp(response, "OK\r\n") == 0) {
+		printf("User %s added\n", user);
+	}
 }
 
-void send_message(char * msg) {
+void send_message(char * host, int port, char * user,
+	char * password, char * args) {
+    char response[MAX_RESPONSE];
+	sendCommand(host, port, "SEND-MESSAGE", user, password, args, response);
+
+	if (strcmp(response, "OK\r\n") == 0) {
+		printf("User %s added\n", user);
+	}
 }
 
 void print_users_in_room() {
+    char response[MAX_RESPONSE];
+	sendCommand(host, port, "GET-USERS-IN-ROOM", user, password, args, response);
+
+	if (strcmp(response, "OK\r\n") == 0) {
+		printf("User %s added\n", user);
+	}
 }
 
 void print_users() {
+	// Try first to add user in case it does not exist.
+    char response[MAX_RESPONSE];
+	sendCommand(host, port, "GET-ALL-USERS", user, password, "", response);
+
+	if (strcmp(response, "OK\r\n") == 0) {
+		printf("User %s added\n", user);
+	}
 }
 
 void printPrompt() {
@@ -187,7 +237,7 @@ int main(int argc, char **argv) {
 
 	char line[MAX_MESSAGE_LEN + 1];
 
-	if (argc < 5) {
+	if (argc < 6) {
 		printUsage();
 	}
 
@@ -195,16 +245,19 @@ int main(int argc, char **argv) {
 	sport = argv[2];
 	user = argv[3];
 	password = argv[4];
+	args = argv[5];
 
 	printf("\nStarting talk-client %s %s %s %s\n", host, sport, user, password);
 
 	// Convert port to number
 	sscanf(sport, "%d", &port);
 
-	//add_user();
+	add_user(host, port, user, password);
+
+    enter_room(host, port, user, password, args);
 
 	// Enter room
-	//enter_room();
+	enter_room(host, port, user, password, args);
 
 	// Start message thread
 	//startGetMessageThread();
