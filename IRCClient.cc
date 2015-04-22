@@ -193,7 +193,7 @@ int main( int   argc,
 
     //Label for room
     labelRoom = gtk_label_new("Enter room name");
-    gtk_misc_set_alignment(GTK_MISC(label),0.0,0.5);
+    gtk_misc_set_alignment(GTK_MISC(labelRoom),0.0,0.5);
     gtk_table_attach(GTK_TABLE(table), labelRoom,0, 2, 2, 3, GTK_FILL, GTK_FILL, 0, 0);
     //gtk_table_attach_defaults(GTK_TABLE(table), labelRoom, 0, 2, 2, 3);
     gtk_widget_show(labelRoom);
