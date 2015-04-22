@@ -132,6 +132,7 @@ int main( int   argc,
     GtkWidget *myMessage;
     GdkColor color;
     GdkColor color2;
+    GdkColor color3;
     GtkWidget *frame;
     GtkWidget *entry;
     GtkWidget *entryRoom;
@@ -185,14 +186,19 @@ int main( int   argc,
     gtk_widget_show(entry);
 
     //create a text Room box
-    entryRoom = gtk_entry_new_with_max_length(20);
+    entryRoom = gtk_entry_new_with_max_length(0);
     //gtk_entry_set_max_length (GTK_ENTRY (entry),3);
     gtk_table_attach_defaults (GTK_TABLE (table), entryRoom, 0, 2, 3, 4);
     gtk_widget_show(entryRoom);
 
     //Label for room
-    labelRoom = gtk_label_new("Enter A room Name");
-    gtk_table_attach_defaults(GTK_TABLE(table), labelRoom, 0, 2, 2, 3);
+    labelRoom = gtk_label_new("Enter room name");
+    gtk_misc_set_alignment(GTK_MISC(label),0.0,0.5);
+    gtk_table_attach(GTK_TABLE(table), labelRoom,0, 2, 2, 3, GTK_FILL, GTK_FILL, 0, 0);
+    //gtk_table_attach_defaults(GTK_TABLE(table), labelRoom, 0, 2, 2, 3);
+    gtk_widget_show(labelRoom);
+    gdk_color_parse ("black", &color3);
+    gtk_widget_modify_bg (GTK_WIDGET(labelRoom), GTK_STATE_NORMAL, &color3);
     
     // Add send button. Use columns 0 to 1 (exclusive) and rows 4 to 7 (exclusive)
     GtkWidget *send_button = gtk_button_new_with_label ("Send");
