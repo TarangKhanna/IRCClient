@@ -117,14 +117,13 @@ void printUsage()
 	exit(1);
 }
 
-void add_user(GtkWidget *widget,
-	gpointer   data)
+void add_user(host, port, user, password)
 {
 	// Try first to add user in case it does not exist.
 	char response[MAX_RESPONSE];
 	sendCommand(host, port, "ADD-USER", user, password, "", response);
 
-	if (!strcmp(response, "OK\r\n")) {
+	if ((strcmp(response, "OK\r\n") == 0) {
 		printf("User %s added\n", user);
 	}
 }
