@@ -115,7 +115,7 @@ int sendCommand(char * host, int port, char * command, char * user,
 
 void printUsage()
 {
-	printf("Usage: talk-client host port user password\n");
+	printf("Usage: talk-client host port user password args\n");
 	exit(1);
 }  
 
