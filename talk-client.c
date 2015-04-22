@@ -8,7 +8,6 @@
 #include <netdb.h>
 #include <stdio.h>
 #include <string.h>
-#include <string>
 #include <unistd.h>
 #include <stdlib.h>
 #include <pthread.h>
