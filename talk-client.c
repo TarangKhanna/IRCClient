@@ -113,7 +113,7 @@ int sendCommand(char * host, int port, char * command, char * user,
 
 void printUsage()
 {
-	printf("Usage: talk-client host port user password args\n");
+	printf("Usage: talk-client host port user password\n");
 	exit(1);
 }  
 
@@ -235,7 +235,7 @@ int main(int argc, char **argv) {
 
 	char line[MAX_MESSAGE_LEN + 1];
 
-	if (argc < 6) {
+	if (argc < 5) {
 		printUsage();
 	}
 
@@ -243,7 +243,6 @@ int main(int argc, char **argv) {
 	sport = argv[2];
 	user = argv[3];
 	password = argv[4];
-	args = argv[5];
 
 	printf("\nStarting talk-client %s %s %s %s\n", host, sport, user, password);
 
@@ -252,10 +251,10 @@ int main(int argc, char **argv) {
 
 	add_user(host, port, user, password);
 
-    enter_room(host, port, user, password, args);
+    create_room(host, port, user, password, "y");
 
 	// Enter room
-	enter_room(host, port, user, password, args);
+	enter_room(host, port, user, password, "y");
 
 	// Start message thread
 	//startGetMessageThread();
@@ -265,7 +264,7 @@ int main(int argc, char **argv) {
 
 		char * s = fgets(line, MAX_MESSAGE_LEN, stdin);
 		if (s == NULL) {
-			leave_room(host, port, user, password, args);
+			leave_room(host, port, user, password, "y");
 			printf("talk-client exiting...\n");
 			exit(1);
 		}
