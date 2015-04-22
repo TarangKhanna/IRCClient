@@ -257,7 +257,7 @@ int main(int argc, char **argv) {
 	enter_room(host, port, user, password, "y");
 
 	// Start message thread
-	//startGetMessageThread();
+	startGetMessageThread();
 
 	while (1) {
 		printPrompt();
