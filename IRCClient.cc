@@ -192,7 +192,7 @@ int main( int   argc,
     gtk_widget_show(entryRoom);
 
     //Label for room
-    labelRoom = gtk_label_new("Enter room name");
+    labelRoom = gtk_label_new("Enter room name:");
     gtk_misc_set_alignment(GTK_MISC(labelRoom),0.0,0.5);
     gtk_table_attach(GTK_TABLE(table), labelRoom,0, 2, 2, 3, GTK_FILL, GTK_FILL, 0, 0);
     //gtk_table_attach_defaults(GTK_TABLE(table), labelRoom, 0, 2, 2, 3);
@@ -217,7 +217,7 @@ int main( int   argc,
     gtk_widget_show (table);
     gtk_widget_show (window);
     
-    gtk_window_set_title(GTK_WINDOW(window), "Tarang's IRCServer");
+    gtk_window_set_title(GTK_WINDOW(window), "Tarang's IRCClient");
 
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
 
