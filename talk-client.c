@@ -267,7 +267,7 @@ int main(int argc, char **argv) {
 
 		char * s = fgets(line, MAX_MESSAGE_LEN, stdin);
 		if (s == NULL) {
-			leave_room();
+			leave_room(host, port, user, password, args);
 			printf("talk-client exiting...\n");
 			exit(1);
 		}
