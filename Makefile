@@ -21,7 +21,7 @@ TestIRCServer: TestIRCServer.c
 	g++ -g -o TestIRCServer TestIRCServer.c
 
 talk-client: talk-client.c
-	g++ -g -o talk-client talk-client.c `pkg-config --cflags --libs gtk+-2.0`
+	gcc -g -o talk-client talk-client.c `pkg-config --cflags --libs gtk+-2.0`
 
 IRCClient: IRCClient.cc
 	g++ -g -o IRCClient IRCClient.cc talk-client.c talk-client `pkg-config --cflags --libs gtk+-2.0`
