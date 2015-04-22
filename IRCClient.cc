@@ -208,12 +208,29 @@ int main( int   argc,
     gtk_widget_show (send_button); 
 
     GtkWidget *create_account = gtk_button_new_with_label ("Create");
-    gdk_color_parse ("orange", &color);
+    //gdk_color_parse ("orange", &color);
     gtk_widget_modify_bg (GTK_WIDGET(create_account), GTK_STATE_NORMAL, &color);
     gtk_table_attach_defaults(GTK_TABLE (table), create_account, 0, 1, 7, 8);  // create button
     gtk_widget_show (create_account);
 
-   
+    GtkWidget *create_room = gtk_button_new_with_label ("Create Room");
+    gtk_table_attach_defaults(GTK_TABLE (table), create_room, 0, 2, 4, 5); 
+    //gdk_color_parse ("orange", &color);
+    gtk_widget_modify_bg (GTK_WIDGET(create_room), GTK_STATE_NORMAL, &color);
+    gtk_widget_show (create_room); 
+
+    GtkWidget *enter_room = gtk_button_new_with_label ("Enter Room");
+    gtk_table_attach_defaults(GTK_TABLE (table), enter_room, 0, 2, 5, 6); 
+    //gdk_color_parse ("orange", &color);
+    gtk_widget_modify_bg (GTK_WIDGET(enter_room), GTK_STATE_NORMAL, &color);
+    gtk_widget_show (enter_room); 
+
+    GtkWidget *leave_room = gtk_button_new_with_label ("Leave Room");
+    gtk_table_attach_defaults(GTK_TABLE (table), leave_room, 0, 2, 6, 7); 
+    //gdk_color_parse ("orange", &color);
+    gtk_widget_modify_bg (GTK_WIDGET(leave_room), GTK_STATE_NORMAL, &color);
+    gtk_widget_show (leave_room); 
+
     gtk_widget_show (table);
     gtk_widget_show (window);
     
