@@ -144,11 +144,11 @@ int main( int   argc,
                 G_CALLBACK (gtk_main_quit), NULL);
     gtk_container_set_border_width (GTK_CONTAINER (window), 10);
     gtk_widget_set_size_request (GTK_WIDGET (window), 650, 550);
-    gdk_color_parse ("brown", &color2);
+    gdk_color_parse ("silver", &color2);
     gtk_widget_modify_bg (GTK_WIDGET(window), GTK_STATE_NORMAL, &color2);
     
     // Create a table to place the widgets. Use a 7x4 Grid (7 rows x 4 columns)
-    GtkWidget *table = gtk_table_new (12, 10, TRUE);
+    GtkWidget *table = gtk_table_new (13, 11, TRUE);
     gtk_container_add (GTK_CONTAINER (window), table);
     gtk_table_set_row_spacings(GTK_TABLE (table), 10);
     gtk_table_set_col_spacings(GTK_TABLE (table), 10);
@@ -158,7 +158,7 @@ int main( int   argc,
     list_rooms = gtk_list_store_new (1, G_TYPE_STRING);
     update_list_rooms();
     list = create_list ("Rooms", list_rooms);
-    gtk_table_attach_defaults (GTK_TABLE (table), list, 0, 3, 0, 2);
+    gtk_table_attach_defaults (GTK_TABLE (table), list, 0, 4, 0, 5);
     gtk_widget_show (list);
     gtk_table_set_homogeneous(GTK_TABLE (table), TRUE);
     
@@ -167,16 +167,16 @@ int main( int   argc,
     list_users = gtk_list_store_new (1, G_TYPE_STRING);
     update_list_users();
     userList = create_list ("Users in room", list_users);
-    gtk_table_attach_defaults (GTK_TABLE (table), userList, 3, 6, 0, 2);
+    gtk_table_attach_defaults (GTK_TABLE (table), userList, 4, 8, 0, 3);
     gtk_widget_show (userList);
 
     messages = create_text ("Peter: Hi how are you\nMary: I am fine, thanks and you?\nPeter: Fine thanks.\n");
-    gtk_table_attach_defaults (GTK_TABLE (table), messages, 2, 6, 2, 5);
+    gtk_table_attach_defaults (GTK_TABLE (table), messages, 4, 8, 3, 6);
     gtk_widget_show (messages);
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
 
     myMessage = create_text ("I am fine, thanks and you?\n");
-    gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 2, 6, 5, 7);
+    gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 4, 8, 6, 8);
     gtk_widget_show (myMessage);
     
     //create a text box
@@ -188,13 +188,13 @@ int main( int   argc,
     //create a text Room box
     entryRoom = gtk_entry_new_with_max_length(0);
     //gtk_entry_set_max_length (GTK_ENTRY (entry),3);
-    gtk_table_attach_defaults (GTK_TABLE (table), entryRoom, 0, 2, 3, 4);
+    gtk_table_attach_defaults (GTK_TABLE (table), entryRoom, 0, 2, 6, 7);
     gtk_widget_show(entryRoom);
 
     //Label for room
     labelRoom = gtk_label_new("Enter room name:");
     gtk_misc_set_alignment(GTK_MISC(labelRoom),0.0,0.5);
-    gtk_table_attach(GTK_TABLE(table), labelRoom,0, 2, 2, 3, GTK_FILL, GTK_FILL, 0, 0);
+    gtk_table_attach(GTK_TABLE(table), labelRoom,0, 2, 5, 6, GTK_FILL, GTK_FILL, 0, 0);
     //gtk_table_attach_defaults(GTK_TABLE(table), labelRoom, 0, 2, 2, 3);
     gtk_widget_show(labelRoom);
     gdk_color_parse ("black", &color3);
@@ -202,34 +202,47 @@ int main( int   argc,
     
     // Add send button. Use columns 0 to 1 (exclusive) and rows 4 to 7 (exclusive)
     GtkWidget *send_button = gtk_button_new_with_label ("Send");
-    gtk_table_attach_defaults(GTK_TABLE (table), send_button, 5, 6, 7, 8); 
+    gtk_table_attach_defaults(GTK_TABLE (table), send_button, 6, 8, 9, 10); 
     gdk_color_parse ("orange", &color);
     gtk_widget_modify_bg (GTK_WIDGET(send_button), GTK_STATE_NORMAL, &color);
     gtk_widget_show (send_button); 
 
-    GtkWidget *create_account = gtk_button_new_with_label ("Create");
+    //GtkWidget *create_account = gtk_button_new_with_label ("Create");
     //gdk_color_parse ("orange", &color);
-    gtk_widget_modify_bg (GTK_WIDGET(create_account), GTK_STATE_NORMAL, &color);
-    gtk_table_attach_defaults(GTK_TABLE (table), create_account, 0, 1, 7, 8);  // create button
-    gtk_widget_show (create_account);
+    //gtk_widget_modify_bg (GTK_WIDGET(create_account), GTK_STATE_NORMAL, &color);
+    //gtk_table_attach_defaults(GTK_TABLE (table), create_account, 0, 1, 8, 9);  // create button
+    //gtk_widget_show (create_account);
 
     GtkWidget *create_room = gtk_button_new_with_label ("Create Room");
-    gtk_table_attach_defaults(GTK_TABLE (table), create_room, 0, 2, 4, 5); 
+    gtk_table_attach_defaults(GTK_TABLE (table), create_room, 0, 2, 7, 8); 
     //gdk_color_parse ("orange", &color);
     gtk_widget_modify_bg (GTK_WIDGET(create_room), GTK_STATE_NORMAL, &color);
     gtk_widget_show (create_room); 
 
     GtkWidget *enter_room = gtk_button_new_with_label ("Enter Room");
-    gtk_table_attach_defaults(GTK_TABLE (table), enter_room, 0, 2, 5, 6); 
+    gtk_table_attach_defaults(GTK_TABLE (table), enter_room, 0, 2, 8, 9); 
     //gdk_color_parse ("orange", &color);
     gtk_widget_modify_bg (GTK_WIDGET(enter_room), GTK_STATE_NORMAL, &color);
     gtk_widget_show (enter_room); 
 
     GtkWidget *leave_room = gtk_button_new_with_label ("Leave Room");
-    gtk_table_attach_defaults(GTK_TABLE (table), leave_room, 0, 2, 6, 7); 
+    gtk_table_attach_defaults(GTK_TABLE (table), leave_room, 0, 2, 9, 10); 
     //gdk_color_parse ("orange", &color);
     gtk_widget_modify_bg (GTK_WIDGET(leave_room), GTK_STATE_NORMAL, &color);
     gtk_widget_show (leave_room); 
+
+    // login-if user exists - dont add- if user doesnt exist
+    // dont add just login - no signup button - 1 button, two text entry
+    GtkWidget *login_button = gtk_button_new_with_label ("Log In");
+    gtk_table_attach_defaults(GTK_TABLE (table), login_button, 9, 11, 9, 10); 
+    //gdk_color_parse ("orange", &color);
+    gtk_widget_modify_bg (GTK_WIDGET(login_button), GTK_STATE_NORMAL, &color);
+    gtk_widget_show (login_button);  
+
+    entryRoom = gtk_entry_new_with_max_length(0);
+    //gtk_entry_set_max_length (GTK_ENTRY (entry),3);
+    gtk_table_attach_defaults (GTK_TABLE (table), entryRoom, 0, 2, 4, 5);
+    gtk_widget_show(entryRoom);
 
     gtk_widget_show (table);
     gtk_widget_show (window);
