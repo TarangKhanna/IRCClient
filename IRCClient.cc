@@ -154,7 +154,7 @@ int main( int   argc,
     gtk_widget_modify_bg (GTK_WIDGET(window), GTK_STATE_NORMAL, &color2);
     
     // Create a table to place the widgets. Use a 7x4 Grid (7 rows x 4 columns)
-    GtkWidget *table = gtk_table_new (13, 11, TRUE);
+    GtkWidget *table = gtk_table_new (14, 12, TRUE);
     gtk_container_add (GTK_CONTAINER (window), table);
     gtk_table_set_row_spacings(GTK_TABLE (table), 10);
     gtk_table_set_col_spacings(GTK_TABLE (table), 10);
@@ -245,14 +245,20 @@ int main( int   argc,
     // login-if user exists - dont add- if user doesnt exist
     // dont add just login - no signup button - 1 button, two text entry
     GtkWidget *login_button = gtk_button_new_with_label ("Log In");
-    gtk_table_attach_defaults(GTK_TABLE (table), login_button, 9, 11, 9, 10); 
+    gtk_table_attach_defaults(GTK_TABLE (table), login_button, 10, 12, 11, 12); 
     //gdk_color_parse ("orange", &color);
     gtk_widget_modify_bg (GTK_WIDGET(login_button), GTK_STATE_NORMAL, &color);
-    gtk_widget_show (login_button);  
+    gtk_widget_show (login_button);
+
+    GtkWidget *signup_button = gtk_button_new_with_label ("Signup");
+    gtk_table_attach_defaults(GTK_TABLE (table), signup_button, 10, 12, 12, 13); 
+    //gdk_color_parse ("orange", &color);
+    gtk_widget_modify_bg (GTK_WIDGET(signup_button), GTK_STATE_NORMAL, &color);
+    gtk_widget_show (signup_button);  
 
     entryRoom = gtk_entry_new_with_max_length(0);
     //gtk_entry_set_max_length (GTK_ENTRY (entry),3);
-    gtk_table_attach_defaults (GTK_TABLE (table), entryRoom, 0, 2, 4, 5);
+    gtk_table_attach_defaults (GTK_TABLE (table), entryRoom, 0, 2, 3, 4);
     gtk_widget_show(entryRoom);
 
     labelRoom = gtk_label_new("Enter User Name:");
@@ -261,8 +267,12 @@ int main( int   argc,
 
     userName = gtk_entry_new_with_max_length(0);
     //gtk_entry_set_max_length (GTK_ENTRY (entry),3);
-    gtk_table_attach_defaults (GTK_TABLE (table), userName, 9, 11, 6, 7);
+    gtk_table_attach_defaults (GTK_TABLE (table), userName, 10, 12, 7, 9);
     gtk_widget_show(userName);
+
+    GtkWidget *image = gtk_image_new_from_file("user-icon-1.jpg");
+    gtk_table_attach_defaults(GTK_TABLE (table), image, 10, 12, 0, 5); 
+    gtk_widget_show (image);
 
     gtk_widget_show (table);
     gtk_widget_show (window);
@@ -272,7 +282,7 @@ int main( int   argc,
 
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
 
-    gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("chat-icon_small.png"));
+    gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("chat_pic.png"));
 
     gtk_main ();
 
