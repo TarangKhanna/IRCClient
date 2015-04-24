@@ -139,6 +139,10 @@ int main( int   argc,
     GtkWidget *userName;
     GtkWidget *passWord;
     GtkWidget *labelRoom;
+    GtkWidget *labelUser;
+    GtkWidget *labelPass;
+    GtkWidget *labelMsg;
+
     gtk_init (&argc, &argv);
    
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
@@ -164,6 +168,11 @@ int main( int   argc,
     gtk_widget_show (list);
     gtk_table_set_homogeneous(GTK_TABLE (table), TRUE);
     
+    labelMsg = gtk_label_new("Messages:");
+    gtk_misc_set_alignment(GTK_MISC(labelMsg),0.0,0.5);
+    gtk_table_attach(GTK_TABLE(table), labelMsg,4, 8, 4, 5, GTK_FILL, GTK_FILL, 0, 0);
+    //gtk_widget_modify_bg (GTK_WIDGET(labelMsg), GTK_STATE_NORMAL, &color2);
+    gtk_widget_show(labelMsg);
 
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
     list_users = gtk_list_store_new (1, G_TYPE_STRING);
@@ -173,12 +182,12 @@ int main( int   argc,
     gtk_widget_show (userList);
 
     messages = create_text ("Peter: Hi how are you\nMary: I am fine, thanks and you?\nPeter: Fine thanks.\n");
-    gtk_table_attach_defaults (GTK_TABLE (table), messages, 4, 8, 4, 8);
+    gtk_table_attach_defaults (GTK_TABLE (table), messages, 4, 8, 5, 10);
     gtk_widget_show (messages);
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
 
     myMessage = create_text ("I am fine, thanks and you?\n");
-    gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 4, 8, 8, 10);
+    gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 4, 8, 10, 12);
     gtk_widget_show (myMessage);
     
     //create a text box
