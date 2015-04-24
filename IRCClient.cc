@@ -169,16 +169,16 @@ int main( int   argc,
     list_users = gtk_list_store_new (1, G_TYPE_STRING);
     update_list_users();
     userList = create_list ("Users in room", list_users);
-    gtk_table_attach_defaults (GTK_TABLE (table), userList, 4, 8, 0, 3);
+    gtk_table_attach_defaults (GTK_TABLE (table), userList, 4, 8, 0, 4);
     gtk_widget_show (userList);
 
     messages = create_text ("Peter: Hi how are you\nMary: I am fine, thanks and you?\nPeter: Fine thanks.\n");
-    gtk_table_attach_defaults (GTK_TABLE (table), messages, 4, 8, 3, 6);
+    gtk_table_attach_defaults (GTK_TABLE (table), messages, 4, 8, 4, 8);
     gtk_widget_show (messages);
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
 
     myMessage = create_text ("I am fine, thanks and you?\n");
-    gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 4, 8, 6, 8);
+    gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 4, 8, 8, 10);
     gtk_widget_show (myMessage);
     
     //create a text box
@@ -204,7 +204,7 @@ int main( int   argc,
     
     // Add send button. Use columns 0 to 1 (exclusive) and rows 4 to 7 (exclusive)
     GtkWidget *send_button = gtk_button_new_with_label ("Send");
-    gtk_table_attach_defaults(GTK_TABLE (table), send_button, 6, 8, 9, 10); 
+    gtk_table_attach_defaults(GTK_TABLE (table), send_button, 6, 8, 12, 13); 
     gdk_color_parse ("orange", &color);
     gtk_widget_modify_bg (GTK_WIDGET(send_button), GTK_STATE_NORMAL, &color);
     gtk_widget_show (send_button); 
@@ -245,6 +245,10 @@ int main( int   argc,
     //gtk_entry_set_max_length (GTK_ENTRY (entry),3);
     gtk_table_attach_defaults (GTK_TABLE (table), entryRoom, 0, 2, 4, 5);
     gtk_widget_show(entryRoom);
+
+    labelRoom = gtk_label_new("Enter User Name:");
+    gtk_misc_set_alignment(GTK_MISC(labelRoom),0.0,0.5);
+    gtk_table_attach(GTK_TABLE(table), labelRoom,9, 11, 5, 7, GTK_FILL, GTK_FILL, 0, 0);
 
     userName = gtk_entry_new_with_max_length(0);
     //gtk_entry_set_max_length (GTK_ENTRY (entry),3);
