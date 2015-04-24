@@ -136,6 +136,8 @@ int main( int   argc,
     GtkWidget *frame;
     GtkWidget *entry;
     GtkWidget *entryRoom;
+    GtkWidget *userName;
+    GtkWidget *passWord;
     GtkWidget *labelRoom;
     gtk_init (&argc, &argv);
    
@@ -243,6 +245,11 @@ int main( int   argc,
     //gtk_entry_set_max_length (GTK_ENTRY (entry),3);
     gtk_table_attach_defaults (GTK_TABLE (table), entryRoom, 0, 2, 4, 5);
     gtk_widget_show(entryRoom);
+
+    userName = gtk_entry_new_with_max_length(0);
+    //gtk_entry_set_max_length (GTK_ENTRY (entry),3);
+    gtk_table_attach_defaults (GTK_TABLE (table), userName, 9, 11, 6, 7);
+    gtk_widget_show(userName);
 
     gtk_widget_show (table);
     gtk_widget_show (window);
