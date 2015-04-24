@@ -143,12 +143,12 @@ int main( int   argc,
     g_signal_connect (window, "destroy",
                 G_CALLBACK (gtk_main_quit), NULL);
     gtk_container_set_border_width (GTK_CONTAINER (window), 10);
-    gtk_widget_set_size_request (GTK_WIDGET (window), 550, 450);
+    gtk_widget_set_size_request (GTK_WIDGET (window), 650, 550);
     gdk_color_parse ("brown", &color2);
     gtk_widget_modify_bg (GTK_WIDGET(window), GTK_STATE_NORMAL, &color2);
     
     // Create a table to place the widgets. Use a 7x4 Grid (7 rows x 4 columns)
-    GtkWidget *table = gtk_table_new (8, 6, TRUE);
+    GtkWidget *table = gtk_table_new (12, 10, TRUE);
     gtk_container_add (GTK_CONTAINER (window), table);
     gtk_table_set_row_spacings(GTK_TABLE (table), 10);
     gtk_table_set_col_spacings(GTK_TABLE (table), 10);
@@ -158,7 +158,7 @@ int main( int   argc,
     list_rooms = gtk_list_store_new (1, G_TYPE_STRING);
     update_list_rooms();
     list = create_list ("Rooms", list_rooms);
-    gtk_table_attach_defaults (GTK_TABLE (table), list, 0, 2, 0, 2);
+    gtk_table_attach_defaults (GTK_TABLE (table), list, 0, 3, 0, 2);
     gtk_widget_show (list);
     gtk_table_set_homogeneous(GTK_TABLE (table), TRUE);
     
@@ -167,7 +167,7 @@ int main( int   argc,
     list_users = gtk_list_store_new (1, G_TYPE_STRING);
     update_list_users();
     userList = create_list ("Users in room", list_users);
-    gtk_table_attach_defaults (GTK_TABLE (table), userList, 2, 4, 0, 2);
+    gtk_table_attach_defaults (GTK_TABLE (table), userList, 3, 6, 0, 2);
     gtk_widget_show (userList);
 
     messages = create_text ("Peter: Hi how are you\nMary: I am fine, thanks and you?\nPeter: Fine thanks.\n");
@@ -175,15 +175,15 @@ int main( int   argc,
     gtk_widget_show (messages);
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
 
-    //myMessage = create_text ("I am fine, thanks and you?\n");
-    //gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 2, 6, 5, 7);
-    //gtk_widget_show (myMessage);
+    myMessage = create_text ("I am fine, thanks and you?\n");
+    gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 2, 6, 5, 7);
+    gtk_widget_show (myMessage);
     
     //create a text box
-    entry = gtk_entry_new_with_max_length(0);
+    //entry = gtk_entry_new_with_max_length(0);
     //gtk_entry_set_max_length (GTK_ENTRY (entry),3);
-    gtk_table_attach_defaults (GTK_TABLE (table), entry, 2, 6, 5, 8);
-    gtk_widget_show(entry);
+    //gtk_table_attach_defaults (GTK_TABLE (table), entry, 2, 6, 5, 8);
+    //gtk_widget_show(entry);
 
     //create a text Room box
     entryRoom = gtk_entry_new_with_max_length(0);
@@ -233,7 +233,8 @@ int main( int   argc,
 
     gtk_widget_show (table);
     gtk_widget_show (window);
-    
+    gtk_widget_hide (window);
+    gtk_widget_show (window);
     gtk_window_set_title(GTK_WINDOW(window), "Tarang's IRCClient");
 
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
