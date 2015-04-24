@@ -122,6 +122,13 @@ static GtkWidget *create_text( const char * initialText )
    return scrolled_window;
 }
 
+static void entry_toggle_visibility( GtkWidget *checkbutton,
+                                     GtkWidget *entry )
+{
+  gtk_entry_set_visibility (GTK_ENTRY (entry),
+          GTK_TOGGLE_BUTTON (checkbutton)->active);
+}
+
 int main( int   argc,
           char *argv[] )
 {
@@ -245,13 +252,13 @@ int main( int   argc,
     // login-if user exists - dont add- if user doesnt exist
     // dont add just login - no signup button - 1 button, two text entry
     GtkWidget *login_button = gtk_button_new_with_label ("Log In");
-    gtk_table_attach_defaults(GTK_TABLE (table), login_button, 10, 12, 11, 12); 
+    gtk_table_attach_defaults(GTK_TABLE (table), login_button, 10, 12, 12, 13); 
     //gdk_color_parse ("orange", &color);
     gtk_widget_modify_bg (GTK_WIDGET(login_button), GTK_STATE_NORMAL, &color);
     gtk_widget_show (login_button);
 
     GtkWidget *signup_button = gtk_button_new_with_label ("Signup");
-    gtk_table_attach_defaults(GTK_TABLE (table), signup_button, 10, 12, 12, 13); 
+    gtk_table_attach_defaults(GTK_TABLE (table), signup_button, 10, 12, 13, 14); 
     //gdk_color_parse ("orange", &color);
     gtk_widget_modify_bg (GTK_WIDGET(signup_button), GTK_STATE_NORMAL, &color);
     gtk_widget_show (signup_button);  
@@ -269,6 +276,17 @@ int main( int   argc,
     //gtk_entry_set_max_length (GTK_ENTRY (entry),3);
     gtk_table_attach_defaults (GTK_TABLE (table), userName, 10, 12, 7, 9);
     gtk_widget_show(userName);
+
+    passWord = gtk_entry_new_with_max_length(0);
+    //gtk_entry_set_max_length (GTK_ENTRY (entry),3);
+    gtk_table_attach_defaults (GTK_TABLE (table), passWord, 10, 12, 9, 11);
+    gtk_widget_show(passWord);
+    
+    // radio visibility
+
+    GtkWidget * check = gtk_check_button_new_with_label ("Editable");
+    g_signal_connect (check, "toggled",
+                G_CALLBACK (entry_toggle_visibility), passWord);
 
     GtkWidget *image = gtk_image_new_from_file("user-icon-1.jpg");
     gtk_table_attach_defaults(GTK_TABLE (table), image, 10, 12, 0, 5); 
