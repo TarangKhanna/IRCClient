@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <gtk/gtk.h>
+
 char * host;
 char * user;
 char * password;
