@@ -118,9 +118,8 @@ void add_user(char * host, int port, char * user,
   char * password)
 {
   // Try first to add user in case it does not exist.
-    char response[MAX_RESPONSE];
+  char response[MAX_RESPONSE];
   sendCommand(host, port, "ADD-USER", user, password, "", response);
-  cout << "here2\n";
   if (strcmp(response, "OK\r\n") == 0) {
     printf("User %s added\n", user);
   }
@@ -140,14 +139,12 @@ void create_room2(char * host, int port, char * user,
 void list_room(char * host, int port, char * user,
   char * password, char * args) {
   char response[MAX_RESPONSE];
-  cout << "here2\n";
   sendCommand(host, port, "LIST-ROOMS", user, password, "", response);
   
   if (strcmp(response, "DENIED\r\n") == 0) {
     printf("Denied");
   } else {
     cout << response;
-    cout << "here\n";
   }
 }
 
@@ -549,7 +546,7 @@ int main( int   argc,
     gtk_table_attach_defaults(GTK_TABLE (table), image, 10, 12, 0, 5); 
     gtk_widget_show (image);
     
-   // g_signal_connect(image, "expose-event", G_CALLBACK(resize_image), (gpointer)window);
+    // g_signal_connect(image, "expose-event", G_CALLBACK(resize_image), (gpointer)window);
 
     gtk_widget_show (table);
     gtk_widget_show (window);
