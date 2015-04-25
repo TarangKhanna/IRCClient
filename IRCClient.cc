@@ -14,7 +14,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <pthread.h>
-
+#include <iostream>
+using namespace std;
 
 GtkListStore * list_rooms;
 GtkListStore * list_users;
@@ -122,9 +123,9 @@ void add_user(char * host, int port, char * user,
   }
 }
 
-void create_room(char * host, int port, char * user,
+void create_room2(char * host, int port, char * user,
   char * password, char * args) {
-    char response[MAX_RESPONSE];
+  char response[MAX_RESPONSE];
   sendCommand(host, port, "CREATE-ROOM", user, password, args, response);
 
   if (strcmp(response, "OK\r\n") == 0) {
@@ -135,11 +136,13 @@ void create_room(char * host, int port, char * user,
 
 void list_room(char * host, int port, char * user,
   char * password, char * args) {
-    char response[MAX_RESPONSE];
+  char response[MAX_RESPONSE];
   sendCommand(host, port, "LIST-ROOMS", user, password, "", response);
-
+  
   if (strcmp(response, "DENIED\r\n") == 0) {
     printf("Denied");
+  } else {
+    cout << response;
   }
 }
 
@@ -441,8 +444,8 @@ int main( int   argc,
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 2, 10, 5, 11);
     gtk_widget_show (messages);
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
-
-    myMessage = create_text ("I am fine, thanks and you?\n");
+    wcout << L"Hello, \u0444!\n";
+    myMessage = create_text ("Hello\n");
     gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 2, 10, 11, 13);
     gtk_widget_show (myMessage);
     
@@ -533,7 +536,7 @@ int main( int   argc,
     
     // radio visibility
 
-    GtkWidget * check = gtk_check_button_new_with_label ("Editable");
+    GtkWidget *check = gtk_check_button_new_with_label ("Editable");
     g_signal_connect (check, "toggled",
                 G_CALLBACK (entry_toggle_visibility), passWord);
 
@@ -554,6 +557,11 @@ int main( int   argc,
     gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("chat_pic.png"));
 
     gtk_main ();
+
+     
+    add_user ("IRCServer", 8013, "user", "password");
+    create_room2("IRCServer", 8013, "user", "password", "Room HA");
+    list_room("IRCServer", 8013, "user", "password", "");
 
     return 0;
 }
