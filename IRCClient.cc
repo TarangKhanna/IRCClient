@@ -1,9 +1,31 @@
 
 #include <stdio.h>
 #include <gtk/gtk.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
 
 GtkListStore * list_rooms;
 GtkListStore * list_users;
+
+
+
+gboolean resize_image(GtkWidget *widget, GdkEvent *event, GtkWidget *window)
+{
+  GdkPixbuf *pixbuf = gtk_image_get_pixbuf(GTK_IMAGE(widget));
+  if (pixbuf == NULL)
+  {
+    g_printerr("Failed to resize image\n");
+    return 1;
+  }
+  
+  printf("Width: %i\nHeight%i\n", widget->allocation.width, widget->allocation.height);
+  
+  pixbuf = gdk_pixbuf_scale_simple(pixbuf, widget->allocation.width, widget->allocation.height, GDK_INTERP_BILINEAR);
+  
+  gtk_image_set_from_pixbuf(GTK_IMAGE(widget), pixbuf);
+  
+  return FALSE;
+}
+
 void update_list_rooms() {
     GtkTreeIter iter;
     int i;
@@ -288,9 +310,11 @@ int main( int   argc,
     g_signal_connect (check, "toggled",
                 G_CALLBACK (entry_toggle_visibility), passWord);
 
-    GtkWidget *image = gtk_image_new_from_file("user-icon-1.jpg");
+    GtkWidget *image = gtk_image_new_from_file("new_user_1.png");
     gtk_table_attach_defaults(GTK_TABLE (table), image, 10, 12, 0, 5); 
     gtk_widget_show (image);
+    
+   // g_signal_connect(image, "expose-event", G_CALLBACK(resize_image), (gpointer)window);
 
     gtk_widget_show (table);
     gtk_widget_show (window);
