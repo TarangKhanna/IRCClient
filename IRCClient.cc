@@ -189,12 +189,12 @@ int main( int   argc,
     gtk_widget_show (userList);
 
     messages = create_text ("Peter: Hi how are you\nMary: I am fine, thanks and you?\nPeter: Fine thanks.\n");
-    gtk_table_attach_defaults (GTK_TABLE (table), messages, 4, 8, 5, 10);
+    gtk_table_attach_defaults (GTK_TABLE (table), messages, 2, 10, 5, 11);
     gtk_widget_show (messages);
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
 
     myMessage = create_text ("I am fine, thanks and you?\n");
-    gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 4, 8, 10, 12);
+    gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 2, 10, 11, 13);
     gtk_widget_show (myMessage);
     
     //create a text box
@@ -220,7 +220,7 @@ int main( int   argc,
     
     // Add send button. Use columns 0 to 1 (exclusive) and rows 4 to 7 (exclusive)
     GtkWidget *send_button = gtk_button_new_with_label ("Send");
-    gtk_table_attach_defaults(GTK_TABLE (table), send_button, 6, 8, 12, 13); 
+    gtk_table_attach_defaults(GTK_TABLE (table), send_button, 2, 4, 13, 14); 
     gdk_color_parse ("orange", &color);
     gtk_widget_modify_bg (GTK_WIDGET(send_button), GTK_STATE_NORMAL, &color);
     gtk_widget_show (send_button); 
