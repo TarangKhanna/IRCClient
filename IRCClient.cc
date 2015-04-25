@@ -310,7 +310,7 @@ int main( int   argc,
     g_signal_connect (check, "toggled",
                 G_CALLBACK (entry_toggle_visibility), passWord);
 
-    GtkWidget *image = gtk_image_new_from_file("new_user_1.png");
+    GtkWidget *image = gtk_image_new_from_file("new-user-image-default.png");
     gtk_table_attach_defaults(GTK_TABLE (table), image, 10, 12, 0, 5); 
     gtk_widget_show (image);
     
