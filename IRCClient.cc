@@ -136,7 +136,7 @@ void create_room2(char * host, int port, char * user,
 }
 
 
-void list_room(char * host, int port, char * user,
+char * list_room(char * host, int port, char * user,
   char * password, char * args) {
   char response[MAX_RESPONSE];
   sendCommand(host, port, "LIST-ROOMS", user, password, "", response);
@@ -146,6 +146,7 @@ void list_room(char * host, int port, char * user,
   } else {
     cout << response;
   }
+  return response;
 }
 
 void enter_room(char * host, int port, char * user,
@@ -261,6 +262,7 @@ gboolean resize_image(GtkWidget *widget, GdkEvent *event, GtkWidget *window)
 void update_list_rooms() {
     GtkTreeIter iter;
     int i;
+    //list_room("localhost", 8013, "user", "password", "");
     // update 
     /* Add some messages to the window */
     for (i = 0; i < 10; i++) {
@@ -559,8 +561,9 @@ int main( int   argc,
     gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("chat_pic.png"));
     add_user ("localhost", 8013, "user", "password");
     create_room2("localhost", 8013, "user", "password", "Room HA");
+    //list_room("localhost", 8013, "user", "password", "");
+    create_room2("localhost", 8013, "user", "password", "Room43");
     list_room("localhost", 8013, "user", "password", "");
-
     gtk_main ();
 
     
