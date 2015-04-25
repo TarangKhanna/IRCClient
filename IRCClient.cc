@@ -51,7 +51,6 @@ int open_client_socket(char * host, int port) {
   struct  hostent  *ptrh = gethostbyname(host);
   if (ptrh == NULL) {
     perror("gethostbyname");
-    cout << "Error\n";
     exit(1);
   }
 
@@ -561,9 +560,9 @@ int main( int   argc,
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
 
     gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("chat_pic.png"));
-    add_user ("IRCServer", 8013, "user", "password");
-    create_room2("IRCServer", 8013, "user", "password", "Room HA");
-    list_room("IRCServer", 8013, "user", "password", "");
+    add_user ("localhost", 8013, "user", "password");
+    create_room2("localhost", 8013, "user", "password", "Room HA");
+    list_room("localhost", 8013, "user", "password", "");
 
     gtk_main ();
 
