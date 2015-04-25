@@ -22,9 +22,9 @@ using namespace std;
 GtkListStore * list_rooms;
 GtkListStore * list_users;
 
-char * host;
-char * user;
-char * password;
+char * host = "localhost";
+char * user = "JS";
+char * password = "SJ";
 char * sport;
 char * args;
 int port;
@@ -114,12 +114,11 @@ void printUsage()
   exit(1);
 }  
 
-void add_user(char * host, int port, char * user,
-  char * password)
+void add_user()
 {
   // Try first to add user in case it does not exist.
   char response[MAX_RESPONSE];
-  sendCommand(host, port, "ADD-USER", user, password, "", response);
+  sendCommand(host, 8013, "ADD-USER", user, password, "", response);
   if (strcmp(response, "OK\r\n") == 0) {
     printf("User %s added\n", user);
   }
@@ -512,7 +511,7 @@ int main( int   argc,
     //gdk_color_parse ("orange", &color);
     gtk_widget_modify_bg (GTK_WIDGET(login_button), GTK_STATE_NORMAL, &color);
     gtk_widget_show (login_button);
-    g_signal_connect (login_button, "clicked", G_CALLBACK (add_user ("localhost", 8013, "user", "password"), NULL);
+    g_signal_connect (login_button, "clicked", G_CALLBACK (add_user), NULL);
 
     GtkWidget *signup_button = gtk_button_new_with_label ("Signup");
     gtk_table_attach_defaults(GTK_TABLE (table), signup_button, 10, 12, 13, 14); 
@@ -560,7 +559,7 @@ int main( int   argc,
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
 
     gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("chat_pic.png"));
-    add_user ("localhost", 8013, "user", "password");
+    //add_user ("localhost", 8013, "user", "password");
     create_room2("localhost", 8013, "user", "password", "Room HA");
     //list_room("localhost", 8013, "user", "password", "");
     create_room2("localhost", 8013, "user", "password", "Room43");
