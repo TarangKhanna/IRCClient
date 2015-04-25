@@ -15,17 +15,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <iostream>
-#include <time.h>
 //#include <curses.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <netdb.h>
-#include <stdio.h>
-#include <string.h>
-#include <unistd.h>
-#include <stdlib.h>
 
 using namespace std;
 
