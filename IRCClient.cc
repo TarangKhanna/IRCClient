@@ -27,7 +27,7 @@ char * user = "JS";
 char * password = "SJ";
 char * sport;
 char * args;
-int port;
+int port = 8013;
 
 #define MAX_MESSAGES 100
 #define MAX_MESSAGE_LEN 300
@@ -118,7 +118,7 @@ void add_user()
 {
   // Try first to add user in case it does not exist.
   char response[MAX_RESPONSE];
-  sendCommand(host, 8013, "ADD-USER", user, password, "", response);
+  sendCommand(host, port, "ADD-USER", user, password, "", response);
   if (strcmp(response, "OK\r\n") == 0) {
     printf("User %s added\n", user);
   }
@@ -188,7 +188,7 @@ void send_message(char * host, int port, char * user,
 }
 
 void print_users_in_room() {
-    char response[MAX_RESPONSE];
+  char response[MAX_RESPONSE];
   sendCommand(host, port, "GET-USERS-IN-ROOM", user, password, args, response);
 
   if (strcmp(response, "OK\r\n") == 0) {
@@ -382,6 +382,19 @@ static void entry_toggle_visibility( GtkWidget *checkbutton,
 {
   gtk_entry_set_visibility (GTK_ENTRY (entry),
           GTK_TOGGLE_BUTTON (checkbutton)->active);
+}
+
+void show_error(GtkWidget *widget, gpointer window)
+{
+  GtkWidget *dialog;
+  dialog = gtk_message_dialog_new(GTK_WINDOW(window),
+            GTK_DIALOG_DESTROY_WITH_PARENT,
+            GTK_MESSAGE_ERROR,
+            GTK_BUTTONS_OK,
+            "Error loading file");
+  gtk_window_set_title(GTK_WINDOW(dialog), "Error");
+  gtk_dialog_run(GTK_DIALOG(dialog));
+  gtk_widget_destroy(dialog);
 }
 
 int main( int   argc,
