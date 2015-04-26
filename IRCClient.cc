@@ -26,7 +26,7 @@ char * host = "localhost";
 char * user = "JS";
 char * password = "SJ";
 char * sport;
-char * args;
+char * args = "Room42";
 int port = 8013;
 
 #define MAX_MESSAGES 100
@@ -128,9 +128,9 @@ void create_room2(char * host, int port, char * user,
   char * password, char * args) {
   char response[MAX_RESPONSE];
   sendCommand(host, port, "CREATE-ROOM", user, password, args, response);
-
+  //create_room2("localhost", 8013, "user", "password", "Room43");
   if (strcmp(response, "OK\r\n") == 0) {
-    printf("User %s added\n", user);
+    printf("Room %s added\n", args);
   }
 }
 
@@ -442,7 +442,7 @@ int main( int   argc,
     gtk_table_attach_defaults (GTK_TABLE (table), list, 0, 4, 0, 5);
     gtk_widget_show (list);
     gtk_table_set_homogeneous(GTK_TABLE (table), TRUE);
-    
+
     labelMsg = gtk_label_new("Messages:");
     gtk_misc_set_alignment(GTK_MISC(labelMsg),0.0,0.5);
     gtk_table_attach(GTK_TABLE(table), labelMsg,4, 8, 4, 5, GTK_FILL, GTK_FILL, 0, 0);
@@ -504,6 +504,7 @@ int main( int   argc,
     //gdk_color_parse ("orange", &color);
     gtk_widget_modify_bg (GTK_WIDGET(create_room), GTK_STATE_NORMAL, &color);
     gtk_widget_show (create_room); 
+    g_signal_connect (create_room, "clicked", G_CALLBACK (create_room2), NULL);
 
     GtkWidget *enter_room = gtk_button_new_with_label ("Enter Room");
     gtk_table_attach_defaults(GTK_TABLE (table), enter_room, 0, 2, 8, 9); 
@@ -573,13 +574,12 @@ int main( int   argc,
 
     gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("chat_pic.png"));
     //add_user ("localhost", 8013, "user", "password");
-    create_room2("localhost", 8013, "user", "password", "Room HA");
+    //create_room2("localhost", 8013, "user", "password", "Room HA");
     //list_room("localhost", 8013, "user", "password", "");
-    create_room2("localhost", 8013, "user", "password", "Room43");
     list_room("localhost", 8013, "user", "password", "");
     gtk_main ();
 
     
     return 0;
 }
-
+ 
