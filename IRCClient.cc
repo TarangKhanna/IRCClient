@@ -21,6 +21,8 @@ using namespace std;
 
 GtkListStore * list_rooms;
 GtkListStore * list_users;
+GtkWidget *userName;
+GtkWidget *passWord;
 
 char * host = "localhost";
 char * user = "Tarang";
@@ -131,6 +133,19 @@ void login()
   sendCommand(host, port, "LOG-IN", user, password, "", response);
   if (strcmp(response, "OK\r\n") == 0) {
     printf("User %s added\n", user);
+  }
+}
+
+void signup()
+{
+  // Try first to add user in case it does not exist.
+  char response[MAX_RESPONSE];
+  user = gtk_entry_get_text(GTK_ENTRY(userEntry));
+  sendCommand(host, port, "ADD-USER", user, password, "", response);
+  if (strcmp(response, "OK\r\n") == 0) {
+    printf("User %s added\n", user);
+  } else {
+    printf("User %s taken\n", user);
   }
 }
 
@@ -420,8 +435,6 @@ int main( int   argc,
     GtkWidget *frame;
     GtkWidget *entry;
     GtkWidget *entryRoom;
-    GtkWidget *userName;
-    GtkWidget *passWord;
     GtkWidget *labelRoom;
     GtkWidget *labelUser;
     GtkWidget *labelPass;
