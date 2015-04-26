@@ -573,7 +573,7 @@ int main( int   argc,
    
     labelUser = gtk_label_new("Username:");
     gtk_misc_set_alignment(GTK_MISC(labelUser),0.0,0.5);
-    gtk_table_attach(GTK_TABLE(table), labelUser,10, 12, 6, 7, GTK_FILL, GTK_FILL, 0, 0);
+    gtk_table_attach(GTK_TABLE(table), labelUser,10, 12, 7, 8, GTK_FILL, GTK_FILL, 0, 0);
     gtk_widget_show(labelUser);
 
     labelPass = gtk_label_new("Password:");
