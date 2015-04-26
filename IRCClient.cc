@@ -555,6 +555,7 @@ int main( int   argc,
     //gdk_color_parse ("orange", &color);
     gtk_widget_modify_bg (GTK_WIDGET(signup_button), GTK_STATE_NORMAL, &color);
     gtk_widget_show (signup_button);  
+    g_signal_connect (signup_button, "clicked", G_CALLBACK (signup), (gpointer) "Signup");
 
     entryRoom = gtk_entry_new_with_max_length(0);
     //gtk_entry_set_max_length (GTK_ENTRY (entry),3);
