@@ -136,7 +136,7 @@ void login()
   }
 }
 
-void signup()
+void signup(GtkWidget *widget, gpointer data)
 {
   // Try first to add user in case it does not exist.
   char response[MAX_RESPONSE];
