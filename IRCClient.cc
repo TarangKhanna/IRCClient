@@ -23,8 +23,8 @@ GtkListStore * list_rooms;
 GtkListStore * list_users;
 
 char * host = "localhost";
-char * user = "JS";
-char * password = "SJ";
+char * user = "Tarang";
+char * password = "Khanna";
 char * sport;
 char * args = "Room42";
 int port = 8013;
@@ -119,6 +119,16 @@ void add_user()
   // Try first to add user in case it does not exist.
   char response[MAX_RESPONSE];
   sendCommand(host, port, "ADD-USER", user, password, "", response);
+  if (strcmp(response, "OK\r\n") == 0) {
+    printf("User %s added\n", user);
+  }
+}
+
+void login()
+{
+  // Try first to add user in case it does not exist.
+  char response[MAX_RESPONSE];
+  sendCommand(host, port, "LOG-IN", user, password, "", response);
   if (strcmp(response, "OK\r\n") == 0) {
     printf("User %s added\n", user);
   }
@@ -524,7 +534,7 @@ int main( int   argc,
     //gdk_color_parse ("orange", &color);
     gtk_widget_modify_bg (GTK_WIDGET(login_button), GTK_STATE_NORMAL, &color);
     gtk_widget_show (login_button);
-    g_signal_connect (login_button, "clicked", G_CALLBACK (add_user), NULL);
+    g_signal_connect (login_button, "clicked", G_CALLBACK (login), NULL);
 
     GtkWidget *signup_button = gtk_button_new_with_label ("Signup");
     gtk_table_attach_defaults(GTK_TABLE (table), signup_button, 10, 12, 13, 14); 
