@@ -124,8 +124,7 @@ void add_user()
   }
 }
 
-void create_room2(char * host, int port, char * user,
-  char * password, char * args) {
+void create_room2() {
   char response[MAX_RESPONSE];
   sendCommand(host, port, "CREATE-ROOM", user, password, args, response);
   //create_room2("localhost", 8013, "user", "password", "Room43");
