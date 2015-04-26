@@ -140,7 +140,8 @@ void signup()
 {
   // Try first to add user in case it does not exist.
   char response[MAX_RESPONSE];
-  user = gtk_entry_get_text(GTK_ENTRY(userEntry));
+  user = gtk_entry_get_text(GTK_ENTRY(userName));
+  password = gtk_entry_get_text(GTK_ENTRY(passWord));
   sendCommand(host, port, "ADD-USER", user, password, "", response);
   if (strcmp(response, "OK\r\n") == 0) {
     printf("User %s added\n", user);
