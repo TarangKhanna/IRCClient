@@ -570,6 +570,10 @@ int main( int   argc,
     //gtk_entry_set_max_length (GTK_ENTRY (entry),3);
     gtk_table_attach_defaults (GTK_TABLE (table), userName, 10, 12, 7, 9);
     gtk_widget_show(userName);
+   
+    labelUser = gtk_label_new("Username:");
+    gtk_misc_set_alignment(GTK_MISC(labelUser),0.0,0.5);
+    gtk_table_attach(GTK_TABLE(table), labelUser,10, 12, 9, 10, GTK_FILL, GTK_FILL, 0, 0);
 
     passWord = gtk_entry_new_with_max_length(0);
     //gtk_entry_set_max_length (GTK_ENTRY (entry),3);
