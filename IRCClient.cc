@@ -576,7 +576,7 @@ int main( int   argc,
     //add_user ("localhost", 8013, "user", "password");
     //create_room2("localhost", 8013, "user", "password", "Room HA");
     //list_room("localhost", 8013, "user", "password", "");
-    list_room("localhost", 8013, "user", "password", "");
+    //list_room("localhost", 8013, "user", "password", "");
     gtk_main ();
 
     
