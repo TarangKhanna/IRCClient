@@ -341,9 +341,7 @@ void update_list_rooms() {
                             -1);
             g_free (msg);
             r++;
-          } else {
-              //printf("No change \n");
-          }
+          } // or no change
       roomVec.swap(roomVecNew);
       roomVecNew.clear(); 
    } else if(times ==  0) {
