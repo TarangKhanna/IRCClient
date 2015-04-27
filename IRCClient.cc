@@ -194,9 +194,9 @@ char * list_room() {
   
   if (!(strstr(response, "OK\r\n") != NULL)) {
     printf(response);
-    printf("OK\n");
+    //printf("OK\n");
  } else {
-    printf(response);
+    //printf(response);
     printf("Denied Listing\n");
  }
   return response;
@@ -328,29 +328,31 @@ void update_list_rooms() {
       }
       int rn = roomVecNew.size();
       int r = roomVec.size();
-      printf("RN SIZE = %d\n", rn );
-      printf("R SIZE = %d\n", r );
-      while(rn > r)  {
-            //if(rn-r == 1) {
-              // printf("Could - Adding room = %s\n", roomVecNew[rn].c_str());
-            //}
-            printf("Adding room = %s\n", roomVecNew[r].c_str());
-            gchar *msg = g_strdup_printf (roomVecNew[r].c_str());
+      //printf("RN SIZE = %d\n", rn );
+      //printf("R SIZE = %d\n", r );
+      int i2;
+      int y2;
+      int count2 = 0;
+      for(i2 = 0; i2 < roomVecNew.size(); i2++) {
+        for(y2 = 0; y2 < roomVec.size(); y2++) {
+          if(roomVecNew[i2].compare(roomVec[y2]) != 0) {// diff 
+             count2++;
+          }
+          if(count2 == roomVec.size()) {
+            printf("Adding room = %s\n", roomVecNew[i2].c_str());
+            gchar *msg = g_strdup_printf (roomVecNew[i2].c_str());
             gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
             gtk_list_store_set (GTK_LIST_STORE (list_rooms), 
                             &iter,
                                   0, msg,
                             -1);
             g_free (msg);
-            r++;
-          } // or no change
-          int j;
-          printf("RN contains: \n");
-          for(j = 0; j< roomVecNew.size();j++) {
-            cout << roomVecNew[j] << '\n';
           }
+        }
+      }
+          //list is sorted!
       roomVec.swap(roomVecNew);
-      printf("R SIZE after = %d\n", roomVec.size() );
+      //printf("R SIZE after = %d\n", roomVec.size() );
       roomVecNew.clear(); 
 }
 
