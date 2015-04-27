@@ -330,7 +330,9 @@ void update_list_rooms() {
           string stok(tok);
           tok = strtok (NULL, "\r\n");
       }
-      if(roomVecNew.size() > roomVec.size())  {
+      int rn = roomVecNew.size();
+      int r = roomVec.size();
+      while(rn > r)  {
             gchar *msg = g_strdup_printf (roomVecNew[roomVecNew.size() -1].c_str());
             gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
             gtk_list_store_set (GTK_LIST_STORE (list_rooms), 
@@ -338,6 +340,7 @@ void update_list_rooms() {
                                   0, msg,
                             -1);
             g_free (msg);
+            r++;
           } else {
               //printf("No change \n");
           }
