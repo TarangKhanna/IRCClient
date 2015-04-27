@@ -336,7 +336,7 @@ void update_list_rooms() {
         for(y2 = 0; y2 < roomVec.size(); y2++) {
           if(roomVecNew[i2].compare(roomVec[y2]) != 0) {// diff 
              count2++;
-             printf("count2 Same! = %d\n", count2);
+             printf("count2 diff! = %d, size = %d\n", count2, roomVec.size());
 
           }
           if(count2 == roomVec.size()) {
