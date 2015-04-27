@@ -173,6 +173,7 @@ void signup(GtkWidget *widget, gpointer data)
   user = (char *) gtk_entry_get_text(GTK_ENTRY(userName));
   password = (char *) gtk_entry_get_text(GTK_ENTRY(passWord));
   sendCommand(host, port, "ADD-USER", user, password, "", response);
+  char * responseDup = (char *)malloc(sizeof(response)+1) ;
   responseDup = strdup(response);
   if (strstr(responseDup, "OK\r\n") != NULL) {
     //printf("User %s added\n", user);
@@ -188,6 +189,7 @@ void create_room2() {
   args = (char *) gtk_entry_get_text(GTK_ENTRY(entryRoom)); //strcat with message?
   sendCommand(host, port, "CREATE-ROOM", user, password, args, response);
   //create_room2("localhost", 8013, "user", "password", "Room43");
+  char * responseDup = (char *)malloc(sizeof(response)+1) ;
   responseDup = strdup(response);
   if (strstr(responseDup, "OK\r\n") != NULL) {
     update_list_rooms();
@@ -203,7 +205,7 @@ void create_room2() {
 char * list_room() {
   char response[MAX_RESPONSE];
   sendCommand(host, port, "LIST-ROOMS", user, password, "", response);
-  char responseDup[MAX_RESPONSE];
+  char * responseDup = (char *)malloc(sizeof(response)+1) ;
   responseDup = strdup(response);
   if (!(strstr(responseDup, "OK\r\n") != NULL)) {
     //printf(response);
@@ -220,7 +222,7 @@ void enter_room() {
   char response[MAX_RESPONSE];
   sendCommand(host, port, "ENTER-ROOM", user, password, args, response);
   //printf("HERE3\n");
-  char responseDup[MAX_RESPONSE];
+  char * responseDup = (char *)malloc(sizeof(response)+1) ;
   responseDup = strdup(response);
   if (strstr(responseDup, "OK\r\n") != NULL){
     printf("User %s Entered room %s\n", user, args);
