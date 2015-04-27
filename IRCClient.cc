@@ -398,6 +398,7 @@ void room_changed(GtkWidget *widget, gpointer text) {
   char *roomName;
   int i;
   GtkTextBuffer *buffer;
+
   vector<string> userRoomVec;// copy all into a vector and on roomchanged
   // create new view and add the whole vector into it
   if (gtk_tree_selection_get_selected(
@@ -418,10 +419,15 @@ void room_changed(GtkWidget *widget, gpointer text) {
           userRoomVec.push_back(stok);
           tok = strtok (NULL, "\r\n");
     }
+    if((strcmp(response2,"") != 0) && (response2," ") != 0) && (strcmp(response2,"\r\n") != 0) && (strcmp(response2,"\n") != 0)) {
+       
+      create_text_User(response2);
+    }
     for(i = 0; i < userRoomVec.size(); i++) {
      if((strcmp(userRoomVec[i].c_str(),"") != 0) && (strcmp(userRoomVec[i].c_str()," ") != 0) && (strcmp(userRoomVec[i].c_str(),"\r\n") != 0) && (strcmp(userRoomVec[i].c_str(),"\n") != 0)) {
-       insert_text(buffer ,userRoomVec[i].c_str());
-       insert_text(buffer ,"\n");
+       //insert_text(buffer ,userRoomVec[i].c_str());
+       //insert_text(buffer ,"\n");
+       
        cout << userRoomVec[i] << '\n';
        printf("PRINT USERS TILL HERE\n");
      }
