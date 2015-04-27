@@ -139,9 +139,11 @@ void login()
   //char response[MAX_RESPONSE];
   //memset(buffer,0,sizeof(buffer));
   char response[MAX_RESPONSE];
+  char response3[MAX_RESPONSE];
   user = (char *) gtk_entry_get_text(GTK_ENTRY(userName));
   password = (char *) gtk_entry_get_text(GTK_ENTRY(passWord));
   sendCommand(host, port, "LOG-IN", user, password, "", response);
+  strcpy()
   if (strstr(response, "OK\r\n") != NULL) {
     gtk_label_set_text(GTK_LABEL(currentStatus),"Logged In");
     printf("User %s added\n", user);
@@ -172,6 +174,7 @@ void create_room2() {
   sendCommand(host, port, "CREATE-ROOM", user, password, args, response);
   //create_room2("localhost", 8013, "user", "password", "Room43");
   if (strstr(response, "OK\r\n") != NULL) {
+    update_list_rooms();
     printf("Room %s added\n", args);
   }
 }
@@ -638,7 +641,7 @@ int main( int   argc,
     //sendCommand(host, port, "CREATE-ROOM", "superman", "clarkkent", args, "");
     //sendCommand(host, port, "CREATE-ROOM", "superman", "clarkkent", args, "");
     //sendCommand(host, port, "CREATE-ROOM", "superman", "clarkkent", args, "");
-    update_list_rooms();
+    //update_list_rooms();
     gtk_widget_show (table);
     gtk_widget_show (window);
     gtk_widget_hide (window);
