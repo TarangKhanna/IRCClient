@@ -319,10 +319,11 @@ void update_list_rooms() {
     char * tok;
     //int times = 0;
     // check for change 
-    tok = strtok (response2,"\r\n");
+    
     //string stok(tok);
       bool changed = false;
      if(times > 0) {
+      tok = strtok (response2,"\r\n");
       while (tok != NULL) {
           string stok(tok); 
           roomVecNew.push_back(stok);
@@ -358,11 +359,6 @@ void update_list_rooms() {
       roomVecNew.clear(); 
        } else if(times ==  0) {
     tok = strtok (response2,"\r\n");
-    //list_room("localhost", 8013, "user", "password", "");
-    // update 
-    /* Add some messages to the window */
-    //for (i = 0; i < 10; i++) {
-    printf("HEREEEE\n");
      while (tok != NULL) { 
         gchar *msg = g_strdup_printf (tok);
         gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
