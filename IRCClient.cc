@@ -397,7 +397,7 @@ void room_changed(GtkWidget *widget, gpointer text) {
     gtk_tree_model_get(model, &iter, 0, &value,  -1);
     gtk_label_set_text(GTK_LABEL(currentStatus), value);
     printf("Selected = %s\n",value); // updated response
-    buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+    buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (roomUser));
     response2 = strdup(print_users_in_room());
     insert_text(buffer ,response2);
     g_free(value);
