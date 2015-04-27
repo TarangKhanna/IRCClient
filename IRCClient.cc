@@ -263,13 +263,13 @@ void get_messages() {
   }
 }
 
-void send_message(char * host, int port, char * user,
-  char * password, char * args) {
+void send_message() {
   char response[MAX_RESPONSE];
   printf("Room %s\n", args);
   strcat(args, (char *) gtk_entry_get_text(GTK_ENTRY(messageEntry)));
+  printf("HERE2 %s\n", args);
   sendCommand(host, port, "SEND-MESSAGE", user, password, args, response);
-  
+  printf("HERE123 %s\n", args);
   if (strstr(response, "OK\r\n") != NULL) {
     printf("Message %s sent\n", args);
   }
