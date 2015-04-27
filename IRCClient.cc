@@ -583,7 +583,7 @@ time_handler(GtkWidget *widget)
 
   fprintf(stderr, "Hi\n");
   update_list_rooms();
-  room_changed(treeSel,currentStatus);
+  room_changed(widget,currentStatus);
   return TRUE;
 }
 
