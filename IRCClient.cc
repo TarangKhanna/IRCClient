@@ -422,8 +422,8 @@ void room_changed(GtkWidget *widget, gpointer text) {
     }
     if((strcmp(response2,"") != 0) && (strcmp(response2," ") != 0) && (strcmp(response2,"\r\n") != 0) && (strcmp(response2,"\n") != 0)) {
       printf("Creat NEW1\n");
-      viewUser = create_text_User("CREAT THIS!");
-      //strdup(print_users_in_room())
+      roomUser = create_text_User("CREAT THIS!");
+      //
     }
     for(i = 0; i < userRoomVec.size(); i++) {
      if((strcmp(userRoomVec[i].c_str(),"") != 0) && (strcmp(userRoomVec[i].c_str()," ") != 0) && (strcmp(userRoomVec[i].c_str(),"\r\n") != 0) && (strcmp(userRoomVec[i].c_str(),"\n") != 0)) {
