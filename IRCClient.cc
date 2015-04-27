@@ -376,13 +376,17 @@ void update_list_rooms() {
 
 void room_changed(GtkWidget *widget, gpointer text) {
   printf("1234TAR\n");
-  GtkTreeIter iter; //Iterator to represent a certain entry in the tree.
-  GtkTreeModel *model; //The model of the tree
-  char *entryText;
-  gtk_tree_selection_get_selected(GTK_TREE_SELECTION(widget), &model, &iter); //Sets iter and model to the selected entry
-  printf("Here = %s\n",entryText );
-  gtk_tree_model_get(model, &iter, 0, &entryText, -1);  
-  g_free(entryText); //Once you're done with it.
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  char *value;
+
+  if (gtk_tree_selection_get_selected(
+      GTK_TREE_SELECTION(widget), &model, &iter)) {
+
+    gtk_tree_model_get(model, &iter, LIST_ITEM, &value,  -1);
+    gtk_label_set_text(GTK_LABEL(label2), value);
+    g_free(value);
+  }
 }
 
 void update_list_users() {
@@ -694,9 +698,10 @@ int main( int   argc,
     gtk_widget_show(currentStatus);
 
     //selected rows
+    GtkWidget *label2 = gtk_label_new("");
     treeSel = gtk_tree_view_get_selection(GTK_TREE_VIEW(list_rooms));
     g_signal_connect(treeSel, "changed",  
-      G_CALLBACK(room_changed), NULL); 
+      G_CALLBACK(room_changed), label2); 
 
     gtk_widget_show (table);
     gtk_widget_show (window);
