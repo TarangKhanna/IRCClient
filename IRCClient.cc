@@ -128,7 +128,7 @@ void add_user(GtkButton *button, gpointer user_data)
   sendCommand(host, port, "ADD-USER", user, password, "", response);
   if (strcmp(response, "OK\r\n") == 0) {
     printf("User %s added\n", user);
-    gchar * status2 = (gchar *)"signedUp"; 
+    gchar * status2 = (gchar *)"Signed Up"; 
     gtk_label_set_text(GTK_LABEL(currentStatus),status2);
   }
 }
@@ -145,7 +145,7 @@ void login()
   if (strstr(response, "OK\r\n") != NULL) {
     gtk_label_set_text(GTK_LABEL(currentStatus),"Logged In");
     printf("User %s added\n", user);
-    list_room(); // to update response 
+    //list_room(); // to update response 
     update_list_rooms(); // put it in the widget 
   }
 }
@@ -160,7 +160,7 @@ void signup(GtkWidget *widget, gpointer data)
   if (strstr(response, "OK\r\n") != NULL) {
     printf("User %s added\n", user);
     gchar * status2 = (gchar *)"signedUp"; 
-    gtk_label_set_text(GTK_LABEL(currentStatus),"signedUp");
+    gtk_label_set_text(GTK_LABEL(currentStatus),"Signed Up");
   } else {
     printf("User %s taken\n", user);
   }
@@ -177,7 +177,7 @@ void create_room2() {
 }
 
 
-void list_room() {
+char * list_room() {
   char response[MAX_RESPONSE];
   sendCommand(host, port, "LIST-ROOMS", user, password, "", response);
   
@@ -186,6 +186,7 @@ void list_room() {
   } else {
     cout << response;
   }
+  return response;
 }
 
 void enter_room(char * host, int port, char * user,
@@ -301,17 +302,24 @@ gboolean resize_image(GtkWidget *widget, GdkEvent *event, GtkWidget *window)
 void update_list_rooms() {
     GtkTreeIter iter;
     int i;
+    char * response2 = strdup(list_room());
+    char * tok;
+    tok = strtok (response2,"\r\n");
+
     //list_room("localhost", 8013, "user", "password", "");
     // update 
     /* Add some messages to the window */
-    for (i = 0; i < 10; i++) {
-        gchar *msg = g_strdup_printf ("Room %d", i);
+    //for (i = 0; i < 10; i++) {
+     while (tok != NULL) { 
+        gchar *msg = g_strdup_printf (tok);
         gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
         gtk_list_store_set (GTK_LIST_STORE (list_rooms), 
                       &iter,
                             0, msg,
                       -1);
-  g_free (msg);
+        g_free (msg);
+        printf ("%s\n",tok);
+        tok = strtok (NULL, "\r\n");
     }
 }
 
