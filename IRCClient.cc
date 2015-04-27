@@ -336,6 +336,8 @@ void update_list_rooms() {
         for(y2 = 0; y2 < roomVec.size(); y2++) {
           if(roomVecNew[i2].compare(roomVec[y2]) != 0) {// diff 
              count2++;
+             printf("count2 Same! = %d\n", count2);
+
           }
           if(count2 == roomVec.size()) {
             printf("Adding room = %s, %d\n", roomVecNew[i2].c_str(), count2);
@@ -354,8 +356,8 @@ void update_list_rooms() {
       //printf("R SIZE after = %d\n", roomVec.size() );
       roomVecNew.clear(); 
        } else if(times ==  0) {
-    tok = strtok (response2,"\r\n");
-     while (tok != NULL) { 
+       tok = strtok (response2,"\r\n");
+       while (tok != NULL) { 
         gchar *msg = g_strdup_printf (tok);
         gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
         gtk_list_store_set (GTK_LIST_STORE (list_rooms), 
@@ -366,7 +368,7 @@ void update_list_rooms() {
         printf ("%s\n",tok);
         roomVec.push_back(tok);
         tok = strtok (NULL, "\r\n");
-    }
+       }
   }
   times++;
 }
