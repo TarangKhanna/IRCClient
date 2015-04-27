@@ -124,7 +124,7 @@ void add_user(GtkButton *button, gpointer user_data)
   sendCommand(host, port, "ADD-USER", user, password, "", response);
   if (strcmp(response, "OK\r\n") == 0) {
     printf("User %s added\n", user);
-    gchar status2 = "signedUp"; 
+    gchar * status2 = (gchar *)"signedUp"; 
     gtk_label_set_text(GTK_LABEL(currentStatus),gchar);
   }
 }
