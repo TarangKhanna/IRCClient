@@ -380,7 +380,7 @@ void update_list_rooms() {
 }
 
 void room_changed(GtkWidget *widget, gpointer text) {
-  printf("1234TAR\n");
+  
   GtkTreeIter iter;
   GtkTreeModel *model;
   char *value;
@@ -390,6 +390,7 @@ void room_changed(GtkWidget *widget, gpointer text) {
 
     gtk_tree_model_get(model, &iter, 0, &value,  -1);
     gtk_label_set_text(GTK_LABEL(currentStatus), value);
+    printf("Selected = %s\n",value);
     g_free(value);
   }
 }
