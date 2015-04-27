@@ -320,7 +320,7 @@ void update_list_rooms() {
     // check for change 
     tok = strtok (response2,"\r\n");
     vector<string> roomVec;
-    int i;
+    int i2;
     //roomVec.push_back();
     //list_room("localhost", 8013, "user", "password", "");
     // update 
@@ -333,8 +333,8 @@ void update_list_rooms() {
 
           printf("In Vector: "); 
 
-          for(i = 0; i < roomVec.size(); i++) {
-            cout << roomVec[i] << '\n'; 
+          for(i2 = 0; i2 < roomVec.size(); i2++) {
+            cout << roomVec[i2] << '\n'; 
           }
           printf("End Vector: "); 
           string stok(tok);
