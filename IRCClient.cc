@@ -218,6 +218,8 @@ void enter_room(char * host, int port, char * user,
 
   if (strstr(response, "OK\r\n") != NULL){
     printf("User %s Entered room %s\n", user, args);
+    gtk_label_set_text(GTK_LABEL(currentStatus), "Entered Room");
+    
   }
 }
 
@@ -402,6 +404,8 @@ void room_changed(GtkWidget *widget, gpointer text) {
     gtk_tree_model_get(model, &iter, 0, &roomName,  -1);
     gtk_label_set_text(GTK_LABEL(currentStatus), roomName);
     // enter room
+    strcpy(args,roomName);
+    enter_room();
     //printf("Selected = %s\n",roomName); // updated response
     buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (viewUser));
     char * response2 = strdup(print_users_in_room()); //crashes here
@@ -410,7 +414,7 @@ void room_changed(GtkWidget *widget, gpointer text) {
        insert_text(buffer ,response2);
     } else {
       // nothing to list- update currentstatus 
-      //gtk_label_set_text(GTK_LABEL(currentStatus), "No Users In Room");
+      gtk_label_set_text(GTK_LABEL(currentStatus), "No Users In Room");
     }
     g_free(roomName);
   }
