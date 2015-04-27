@@ -216,8 +216,8 @@ void enter_room(char * host, int port, char * user,
   char response[MAX_RESPONSE];
   sendCommand(host, port, "ENTER-ROOM", user, password, args, response);
 
-  if (strcmp(response, "OK\r\n") == 0) {
-    printf("User %s added\n", user);
+  if (strstr(response, "OK\r\n") != NULL){
+    printf("User %s Entered room %s\n", user, args);
   }
 }
 
@@ -401,7 +401,7 @@ void room_changed(GtkWidget *widget, gpointer text) {
       GTK_TREE_SELECTION(widget), &model, &iter)) {
     gtk_tree_model_get(model, &iter, 0, &roomName,  -1);
     gtk_label_set_text(GTK_LABEL(currentStatus), roomName);
-    // room == 
+    // enter room
     //printf("Selected = %s\n",roomName); // updated response
     buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (viewUser));
     char * response2 = strdup(print_users_in_room()); //crashes here
