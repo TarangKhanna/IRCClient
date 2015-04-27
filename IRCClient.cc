@@ -117,7 +117,7 @@ void printUsage()
   exit(1);
 }  
 
-void add_user()
+void add_user(GtkButton *button, gpointer user_data)
 {
   // Try first to add user in case it does not exist.
   char response[MAX_RESPONSE];
