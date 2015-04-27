@@ -381,7 +381,7 @@ void room_changed(GtkWidget *widget, gpointer text) {
   gtk_tree_selection_get_selected(GTK_TREE_SELECTION(widget), &model, &iter)); //Sets iter and model to the selected entry
   printf("Here = %s\n",entryText );
   gtk_tree_model_get(list_rooms, &iter, 0, &entryText, -1);  
-  g_free(entryText) //Once you're done with it.
+  g_free(entryText); //Once you're done with it.
 }
 
 void update_list_users() {
