@@ -635,9 +635,9 @@ int main( int   argc,
     gtk_widget_show(currentStatus);
 
     //add rooms
-    sendCommand(host, port, "CREATE-ROOM", "superman", "clarkkent", args, "");
-    sendCommand(host, port, "CREATE-ROOM", "superman", "clarkkent", args, "");
-    sendCommand(host, port, "CREATE-ROOM", "superman", "clarkkent", args, "");
+    //sendCommand(host, port, "CREATE-ROOM", "superman", "clarkkent", args, "");
+    //sendCommand(host, port, "CREATE-ROOM", "superman", "clarkkent", args, "");
+    //sendCommand(host, port, "CREATE-ROOM", "superman", "clarkkent", args, "");
     update_list_rooms();
     gtk_widget_show (table);
     gtk_widget_show (window);
