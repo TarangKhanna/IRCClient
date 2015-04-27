@@ -151,6 +151,7 @@ void add_user(GtkButton *button, gpointer user_data)
 
 void login()
 {
+  char response[MAX_RESPONSE];
   user = (char *) gtk_entry_get_text(GTK_ENTRY(userName));
   password = (char *) gtk_entry_get_text(GTK_ENTRY(passWord));
   sendCommand(host, port, "LOG-IN", user, password, "", response);
