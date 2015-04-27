@@ -217,14 +217,15 @@ char* list_room() {
   sendCommand(host, port, "LIST-ROOMS", user, password, "", response);
   char * responseDup = (char *)malloc(sizeof(response)+1) ;
   responseDup = strdup(response);
-  if (!(strstr(responseDup, "OK\r\n") != NULL)) {
+  if (!(strstr(responseDup, "DENIED\r\n") != NULL)) {
     //printf(response);
     //printf("OK\n");
     return response;
  } else {
     //printf(response);
     printf("Denied Listing\n");
-    //gtk_label_set_text(GTK_LABEL(currentStatus),"Room Created");
+    gtk_label_set_text(GTK_LABEL(currentStatus),"Denied Listing Room");
+    return "";
  }
   
 }
@@ -536,7 +537,7 @@ static GtkWidget *create_text_User( const char * initialText )
 
    viewUser = gtk_text_view_new ();
    buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (viewUser));
-   gtk_text_view_set_editable (viewUser,
+   gtk_text_view_set_editable (GTK_TEXT_VIEW(viewUser),
                             FALSE);
    scrolled_window = gtk_scrolled_window_new (NULL, NULL);
    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
