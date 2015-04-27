@@ -140,7 +140,7 @@ void login()
   user = (char *) gtk_entry_get_text(GTK_ENTRY(userName));
   password = (char *) gtk_entry_get_text(GTK_ENTRY(passWord));
   sendCommand(host, port, "LOG-IN", user, password, "", response);
-  if (strcmp(response, "OK\r\n") == 0) {
+  if (strstr(response, "OK\r\n") != NULL) {
     gtk_label_set_text(GTK_LABEL(currentStatus),"Logged In");
     printf("User %s added\n", user);
     list_room(); // to update response 
@@ -154,7 +154,7 @@ void signup(GtkWidget *widget, gpointer data)
   user = (char *) gtk_entry_get_text(GTK_ENTRY(userName));
   password = (char *) gtk_entry_get_text(GTK_ENTRY(passWord));
   sendCommand(host, port, "ADD-USER", user, password, "", response);
-  if (strcmp(response, "OK\r\n") == 0) {
+  if (strstr(response, "OK\r\n") != NULL) {
     printf("User %s added\n", user);
     gchar * status2 = (gchar *)"signedUp"; 
     gtk_label_set_text(GTK_LABEL(currentStatus),"signedUp");
@@ -167,7 +167,7 @@ void create_room2() {
   args = (char *) gtk_entry_get_text(GTK_ENTRY(entryRoom)); //strcat with message?
   sendCommand(host, port, "CREATE-ROOM", user, password, args, response);
   //create_room2("localhost", 8013, "user", "password", "Room43");
-  if (strcmp(response, "OK\r\n") == 0) {
+  if (strstr(response, "OK\r\n") != NULL) {
     printf("Room %s added\n", args);
   }
 }
