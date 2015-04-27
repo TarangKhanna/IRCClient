@@ -338,7 +338,7 @@ void update_list_rooms() {
           if(roomVecNew[i2].compare(roomVec[y2]) != 0) {// diff 
              count2++;
           }
-          if(count2 == roomVec.size()) {
+          if(count2 == roomVec.size()-1) {
             printf("Adding room = %s\n", roomVecNew[i2].c_str());
             gchar *msg = g_strdup_printf (roomVecNew[i2].c_str());
             gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
