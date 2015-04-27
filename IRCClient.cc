@@ -350,7 +350,7 @@ void update_list_rooms() {
           } else {
               printf("No change \n");
           }
-      roomVec.swap(original);
+      roomVec.swap(roomVecNew);
       roomVecNew.clear(); 
    } else if(times ==  0) {
     tok = strtok (response2,"\r\n");
