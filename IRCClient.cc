@@ -26,6 +26,7 @@
 char * list_room();
 void update_list_rooms();
 int times = 0;
+bool changed = FALSE;
 
 using namespace std;
 
@@ -319,9 +320,8 @@ void update_list_rooms() {
     int i;
     char * response2 = strdup(list_room());
     char * tok;
-    bool changed = false;
     printf("Reached room = %s\n", response2);
-     if(times > 0) {
+     if(changed) {
       tok = strtok (response2,"\r\n");
       while (tok != NULL) {
           string stok(tok); 
@@ -343,7 +343,7 @@ void update_list_rooms() {
             // printf("count2 diff! = %d, size = %d\n", count2, roomVec.size());
           }
           if(count2 == roomVec.size()) {
-            //printf("Adding room = %s, %d\n", roomVecNew[i2].c_str(), count2);
+            printf("Adding room2 = %s\n", roomVecNew[i2].c_str());
             gchar *msg = g_strdup_printf (roomVecNew[i2].c_str());
             gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
             gtk_list_store_set (GTK_LIST_STORE (list_rooms), 
@@ -358,7 +358,7 @@ void update_list_rooms() {
       roomVec.swap(roomVecNew);
       //printf("R SIZE after = %d\n", roomVec.size() );
       roomVecNew.clear(); 
-       } else if(times ==  0) {
+       } else {
        tok = strtok (response2,"\r\n");
        while (tok != NULL) { 
         gchar *msg = g_strdup_printf (tok);
@@ -372,8 +372,11 @@ void update_list_rooms() {
         roomVec.push_back(tok);
         tok = strtok (NULL, "\r\n");
        }
+       if(roomVec.size() > 0) { // changed
+          changed == true;
+       }
   }
-  times++;
+  //times++;
 }
 
 void room_changed(GtkWidget *widget, gpointer text) {
