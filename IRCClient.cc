@@ -36,6 +36,7 @@ using namespace std;
 GtkListStore * list_rooms;
 GtkWidget *tree_view;
 GtkListStore * list_users;
+GtkWidget *table;
 GtkWidget *view;
 GtkWidget *viewUser;
 GtkWidget *userName; //entry
@@ -423,6 +424,8 @@ void room_changed(GtkWidget *widget, gpointer text) {
     if((strcmp(response2,"") != 0) && (strcmp(response2," ") != 0) && (strcmp(response2,"\r\n") != 0) && (strcmp(response2,"\n") != 0)) {
       printf("Creat NEW1\n");
       roomUser = create_text_User("CREAT THIS!");
+      gtk_table_attach_defaults (GTK_TABLE (table), roomUser, 4, 8, 1, 4);
+      gtk_widget_show (roomUser);
       //
     }
     for(i = 0; i < userRoomVec.size(); i++) {
@@ -538,6 +541,7 @@ static GtkWidget *create_text_User( const char * initialText )
            GTK_POLICY_AUTOMATIC);
 
    gtk_container_add (GTK_CONTAINER (scrolled_window), viewUser);
+
    insert_text (buffer, initialText);
 
    gtk_widget_show_all (scrolled_window);
@@ -599,7 +603,7 @@ int main( int   argc,
     gtk_widget_modify_bg (GTK_WIDGET(window), GTK_STATE_NORMAL, &color2);
     
     // Create a table to place the widgets. Use a 7x4 Grid (7 rows x 4 columns)
-    GtkWidget *table = gtk_table_new (14, 12, TRUE);
+    table = gtk_table_new (14, 12, TRUE);
     gtk_container_add (GTK_CONTAINER (window), table);
     gtk_table_set_row_spacings(GTK_TABLE (table), 10);
     gtk_table_set_col_spacings(GTK_TABLE (table), 10);
