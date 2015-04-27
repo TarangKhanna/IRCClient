@@ -38,6 +38,7 @@ bool changed = FALSE;
 using namespace std;
 
 GtkListStore * list_rooms;
+GtkWidget *window;
 GtkWidget *tree_view;
 GtkListStore * list_users;
 GtkWidget *table;
@@ -588,7 +589,6 @@ time_handler(GtkWidget *widget)
 int main( int   argc,
           char *argv[] )
 {
-    GtkWidget *window;
     GtkWidget *list;
     GtkWidget *userList;
     GtkWidget *messages;
