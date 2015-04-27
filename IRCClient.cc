@@ -184,10 +184,11 @@ char * list_room() {
   char response[MAX_RESPONSE];
   sendCommand(host, port, "LIST-ROOMS", user, password, "", response);
   
-  if (strcmp(response, "DENIED\r\n") == 0) {
-    printf("Denied");
+  if (!(strstr(response, "OK\r\n") != NULL)) {
+    printf("Denied2");
   } else {
-    cout << response;
+    printf("OK");
+    //cout << response;
   }
   return response;
 }
