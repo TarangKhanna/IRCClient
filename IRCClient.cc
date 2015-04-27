@@ -42,6 +42,7 @@ GtkWidget *currentStatus; //label
 GtkWidget *entryRoom; //entry
 vector<string> roomVec;
 vector<string> roomVecNew;
+GtkWidget *roomUser;
 
 char * host = "localhost";
 char * user = "Tarang";
@@ -519,7 +520,6 @@ int main( int   argc,
     GtkWidget *userList;
     GtkWidget *messages;
     GtkWidget *myMessage;
-    GtkWidget *roomUser;
     GdkColor color;
     GdkColor color2;
     GdkColor color3;
