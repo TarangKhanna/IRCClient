@@ -320,7 +320,7 @@ void update_list_rooms() {
     char * response2 = strdup(list_room());
     char * tok;
     bool changed = false;
-     if(times > 0) {
+     if(times >= 0) {
       tok = strtok (response2,"\r\n");
       while (tok != NULL) {
           string stok(tok); 
@@ -357,22 +357,7 @@ void update_list_rooms() {
       roomVec.swap(roomVecNew);
       //printf("R SIZE after = %d\n", roomVec.size() );
       roomVecNew.clear(); 
-       } else if(times ==  0) {
-       tok = strtok (response2,"\r\n");
-       while (tok != NULL) { 
-        gchar *msg = g_strdup_printf (tok);
-        gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
-        gtk_list_store_set (GTK_LIST_STORE (list_rooms), 
-                      &iter,
-                            0, msg,
-                      -1);
-        g_free (msg);
-        printf ("%s\n",tok);
-        roomVec.push_back(tok);
-        tok = strtok (NULL, "\r\n");
-       }
-  }
-  times++;
+       } 
 }
 
 void room_changed(GtkWidget *widget, gpointer text) {
