@@ -184,9 +184,9 @@ void create_room2() {
   //create_room2("localhost", 8013, "user", "password", "Room43");
   if (strstr(response, "OK\r\n") != NULL) {
     update_list_rooms();
-    char * room = (char *) malloc(sizeof(args)+1);
-    strcpy(room, args);
-    strcat("Room Created: ", args);
+    //char * room = (char *) malloc(sizeof(args)+1);
+    //strcpy(room, args);
+    //strcat("Room Created: ", args);
     gtk_label_set_text(GTK_LABEL(currentStatus),"Room Created");
     printf("Room %s added\n", args);
   }
