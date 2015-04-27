@@ -24,6 +24,7 @@ GtkListStore * list_users;
 GtkWidget *userName;
 GtkWidget *passWord;
 GtkWidget *currentStatus;
+char response[MAX_RESPONSE];
 
 char * host = "localhost";
 char * user = "Tarang";
@@ -120,7 +121,6 @@ void printUsage()
 void add_user(GtkButton *button, gpointer user_data)
 {
   // Try first to add user in case it does not exist.
-  char response[MAX_RESPONSE];
   sendCommand(host, port, "ADD-USER", user, password, "", response);
   if (strcmp(response, "OK\r\n") == 0) {
     printf("User %s added\n", user);
@@ -132,17 +132,19 @@ void add_user(GtkButton *button, gpointer user_data)
 void login()
 {
   // Try first to add user in case it does not exist.
-  char response[MAX_RESPONSE];
+  //char response[MAX_RESPONSE];
+  //memset(buffer,0,sizeof(buffer));
   sendCommand(host, port, "LOG-IN", user, password, "", response);
   if (strcmp(response, "OK\r\n") == 0) {
     printf("User %s added\n", user);
+    list_room(); // to update response 
+    update_list_rooms(); // put it in the widget 
   }
 }
 
 void signup(GtkWidget *widget, gpointer data)
 {
   // Try first to add user in case it does not exist.
-  char response[MAX_RESPONSE];
   user = (char *) gtk_entry_get_text(GTK_ENTRY(userName));
   password = (char *) gtk_entry_get_text(GTK_ENTRY(passWord));
   sendCommand(host, port, "ADD-USER", user, password, "", response);
@@ -154,7 +156,6 @@ void signup(GtkWidget *widget, gpointer data)
 }
 
 void create_room2() {
-  char response[MAX_RESPONSE];
   sendCommand(host, port, "CREATE-ROOM", user, password, args, response);
   //create_room2("localhost", 8013, "user", "password", "Room43");
   if (strcmp(response, "OK\r\n") == 0) {
@@ -163,9 +164,7 @@ void create_room2() {
 }
 
 
-char * list_room(char * host, int port, char * user,
-  char * password, char * args) {
-  char response[MAX_RESPONSE];
+void list_room() {
   sendCommand(host, port, "LIST-ROOMS", user, password, "", response);
   
   if (strcmp(response, "DENIED\r\n") == 0) {
@@ -178,7 +177,6 @@ char * list_room(char * host, int port, char * user,
 
 void enter_room(char * host, int port, char * user,
   char * password, char * args) {
-    char response[MAX_RESPONSE];
   sendCommand(host, port, "ENTER-ROOM", user, password, args, response);
 
   if (strcmp(response, "OK\r\n") == 0) {
@@ -188,7 +186,6 @@ void enter_room(char * host, int port, char * user,
 
 void leave_room(char * host, int port, char * user,
   char * password, char * args) {
-    char response[MAX_RESPONSE];
   sendCommand(host, port, "LEAVE-ROOM", user, password, args, response);
 
   if (strcmp(response, "OK\r\n") == 0) {
@@ -197,7 +194,6 @@ void leave_room(char * host, int port, char * user,
 }
 
 void get_messages() {
-    char response[MAX_RESPONSE];
   sendCommand(host, port, "GET-MESSAGES", user, password, args, response);
 
   if (strcmp(response, "OK\r\n") == 0) {
@@ -207,7 +203,6 @@ void get_messages() {
 
 void send_message(char * host, int port, char * user,
   char * password, char * args) {
-    char response[MAX_RESPONSE];
   sendCommand(host, port, "SEND-MESSAGE", user, password, args, response);
 
   if (strcmp(response, "OK\r\n") == 0) {
@@ -216,7 +211,6 @@ void send_message(char * host, int port, char * user,
 }
 
 void print_users_in_room() {
-  char response[MAX_RESPONSE];
   sendCommand(host, port, "GET-USERS-IN-ROOM", user, password, args, response);
 
   if (strcmp(response, "OK\r\n") == 0) {
@@ -226,7 +220,6 @@ void print_users_in_room() {
 
 void print_users() {
   // Try first to add user in case it does not exist.
-    char response[MAX_RESPONSE];
   sendCommand(host, port, "GET-ALL-USERS", user, password, "", response);
 
   if (strcmp(response, "OK\r\n") == 0) {
