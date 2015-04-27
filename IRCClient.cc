@@ -33,6 +33,7 @@ using namespace std;
 GtkListStore * list_rooms;
 GtkWidget *tree_view;
 GtkListStore * list_users;
+GtkWidget *view;
 GtkWidget *userName; //entry
 GtkWidget *passWord; //entry
 GtkWidget *currentStatus; //label
@@ -384,10 +385,13 @@ void room_changed(GtkWidget *widget, gpointer text) {
   GtkTreeIter iter;
   GtkTreeModel *model;
   char *value;
+  GtkTextBuffer *buffer;
 
   if (gtk_tree_selection_get_selected(
       GTK_TREE_SELECTION(widget), &model, &iter)) {
-
+    print_users_in_room(); // updated response
+    buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+    insert_text(buffer ,response) 
     gtk_tree_model_get(model, &iter, 0, &value,  -1);
     gtk_label_set_text(GTK_LABEL(currentStatus), value);
     printf("Selected = %s\n",value);
@@ -438,7 +442,7 @@ a hierarchy first */
 static void insert_text( GtkTextBuffer *buffer, const char * initialText )
 {
    GtkTextIter iter;
- 
+   
    gtk_text_buffer_get_iter_at_offset (buffer, &iter, 0);
    gtk_text_buffer_insert (buffer, &iter, initialText,-1);
 }
@@ -461,7 +465,7 @@ GdkPixbuf *create_pixbuf(const gchar * filename)
 static GtkWidget *create_text( const char * initialText )
 {
    GtkWidget *scrolled_window;
-   GtkWidget *view;
+   
    GtkTextBuffer *buffer;
 
    view = gtk_text_view_new ();
@@ -479,6 +483,8 @@ static GtkWidget *create_text( const char * initialText )
 
    return scrolled_window;
 }
+
+
 
 static void entry_toggle_visibility( GtkWidget *checkbutton,
                                      GtkWidget *entry )
@@ -576,12 +582,6 @@ int main( int   argc,
     myMessage = create_text ("Hello\n");
     gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 2, 10, 11, 13);
     gtk_widget_show (myMessage);
-    
-    //create a text box
-    //entry = gtk_entry_new_with_max_length(0);
-    //gtk_entry_set_max_length (GTK_ENTRY (entry),3);
-    //gtk_table_attach_defaults (GTK_TABLE (table), entry, 2, 6, 5, 8);
-    //gtk_widget_show(entry);
 
     //create a text Room box
     entryRoom = gtk_entry_new_with_max_length(0);
