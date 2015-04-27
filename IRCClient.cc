@@ -158,6 +158,7 @@ void login()
     gtk_label_set_text(GTK_LABEL(currentStatus),"Logged In");
     //printf("User %s added\n", user);
     //list_room(); // to update response 
+    list_room()
     update_list_rooms(); // put it in the widget 
   } else {
     gtk_label_set_text(GTK_LABEL(currentStatus),"Incorrect Login");
@@ -400,6 +401,8 @@ void room_changed(GtkWidget *widget, gpointer text) {
           userRoomVec.push_back(stok);
           tok = strtok (NULL, "\r\n");
     }
+    free(response2);
+    response2 = strdup(response);
     if((strcmp(response2,"") != 0) && (strcmp(response2," ") != 0) && (strcmp(response2,"\r\n") != 0) && (strcmp(response2,"\n") != 0)) {
       //printf("Creat NEW1\n");
       roomUser = create_text_User(strdup(response));
@@ -414,7 +417,9 @@ void room_changed(GtkWidget *widget, gpointer text) {
      }
     }
     g_free(roomName);
+    free(response2);
   }
+  
 }
 /* Create the list of "messages" */
 static GtkWidget *create_list( const char * titleColumn, GtkListStore *model )
