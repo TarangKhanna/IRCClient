@@ -536,7 +536,8 @@ static GtkWidget *create_text_User( const char * initialText )
 
    viewUser = gtk_text_view_new ();
    buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (viewUser));
-
+   gtk_text_view_set_editable (viewUser,
+                            FALSE);
    scrolled_window = gtk_scrolled_window_new (NULL, NULL);
    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
                    GTK_POLICY_AUTOMATIC,
@@ -768,7 +769,7 @@ int main( int   argc,
     gtk_table_attach(GTK_TABLE(table), status,8, 9, 1, 3, GTK_FILL, GTK_FILL, 0, 0);
     gtk_widget_show(status);
 
-    currentStatus = gtk_label_new("Start Up");
+    currentStatus = gtk_label_new("Login/Signup");
     gtk_misc_set_alignment(GTK_MISC(currentStatus),0.0,0.5);
     gtk_table_attach(GTK_TABLE(table), currentStatus,8, 9, 2, 4, GTK_FILL, GTK_FILL, 0, 0);
     gtk_widget_show(currentStatus);
