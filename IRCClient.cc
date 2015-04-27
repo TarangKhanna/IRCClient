@@ -257,8 +257,6 @@ char * print_users_in_room() {
 
   if (!(strstr(response, "OK\r\n") != NULL)) {
     //printf("Print User  = %s\n", user);
-    printf(" USERS2 is = %s\n", response);
-    printf(" USERS2 TILL HERE\n");
     return response;
   } else {
     printf("Denied Print User = %s\n", user);
@@ -398,8 +396,10 @@ void room_changed(GtkWidget *widget, gpointer text) {
   GtkTreeIter iter;
   GtkTreeModel *model;
   char *roomName;
+  int i;
   GtkTextBuffer *buffer;
-
+  vector<string> userRoomVec;// copy all into a vector and on roomchanged
+  // create new view and add the whole vector into it
   if (gtk_tree_selection_get_selected(
       GTK_TREE_SELECTION(widget), &model, &iter)) {
     gtk_tree_model_get(model, &iter, 0, &roomName,  -1);
@@ -410,13 +410,21 @@ void room_changed(GtkWidget *widget, gpointer text) {
     //printf("Selected = %s\n",roomName); // updated response
     buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (viewUser));
     char * response2 = strdup(print_users_in_room()); //crashes here
+    char * tok;
+    //printf("Reached room = %s\n", response2);
+     if(changed) {
+      tok = strtok (response2,"\r\n");
+      while (tok != NULL) {
+          string stok(tok); 
+          userRoomVec.push_back(stok);
+          tok = strtok (NULL, "\r\n");
+      }
     printf("PRINT USERS is = %s\n", print_users_in_room());
     printf("PRINT USERS TILL HERE\n");
-    if((strcmp(response2,"") != 0) && (strcmp(response2," ") != 0) && (strcmp(response2,"\r\n") != 0) && (strcmp(response2,"\n") != 0)) {
-       insert_text(buffer ,response2);
-    } else {
-      // nothing to list- update currentstatus 
-      gtk_label_set_text(GTK_LABEL(currentStatus), "No Users In Room");
+    for(i = 0; i < userRoomVec.size(); i++) {
+     if((strcmp(userRoomVec[i],"") != 0) && (strcmp(userRoomVec[i]," ") != 0) && (strcmp(userRoomVec[i],"\r\n") != 0) && (strcmp(userRoomVec[i],"\n") != 0)) {
+       insert_text(buffer ,userRoomVec[i]);
+     }
     }
     g_free(roomName);
   }
