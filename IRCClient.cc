@@ -384,7 +384,7 @@ void room_changed(GtkWidget *widget, gpointer text) {
       GTK_TREE_SELECTION(widget), &model, &iter)) {
 
     gtk_tree_model_get(model, &iter, LIST_ITEM, &value,  -1);
-    gtk_label_set_text(GTK_LABEL(label2), value);
+    gtk_label_set_text(GTK_LABEL(currentStatus), value);
     g_free(value);
   }
 }
