@@ -408,7 +408,8 @@ void room_changed(GtkWidget *widget, gpointer text) {
     //printf("Selected = %s\n",roomName); // updated response
     buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (viewUser));
     char * response2 = strdup(print_users_in_room()); //crashes here
-    printf("response is = %s\n", response2);
+    printf("PRINT USERS is = %s\n", print_users_in_room());
+    printf("PRINT USERS TILL HERE\n");
     if((strcmp(response2,"") != 0) && (strcmp(response2," ") != 0) && (strcmp(response2,"\r\n") != 0) && (strcmp(response2,"\n") != 0)) {
        insert_text(buffer ,response2);
     } else {
