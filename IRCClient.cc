@@ -323,23 +323,14 @@ void update_list_rooms() {
     vector<string> roomVecNew;
     int i2;
     int count2 = 0;
-    //roomVec.push_back();
-    //list_room("localhost", 8013, "user", "password", "");
-    // update 
-    /* Add some messages to the window */
-    //for (i = 0; i < 10; i++) {
     if(times > 0) {
       bool changed = false;
       while (tok != NULL) { 
-          //roomVec.push_back(tok);
           roomVecNew.push_back(tok);
           string stok(tok);
-          
           tok = strtok (NULL, "\r\n");
       }
       if(roomVecNew.size() > roomVec.size())  {
-
-            printf("NEW ENTRY : %s\n", roomVecNew[roomVecNew.size() -1].c_str());
             gchar *msg = g_strdup_printf (roomVecNew[roomVecNew.size() -1].c_str());
             gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
             gtk_list_store_set (GTK_LIST_STORE (list_rooms), 
@@ -348,17 +339,12 @@ void update_list_rooms() {
                             -1);
             g_free (msg);
           } else {
-              printf("No change \n");
+              //printf("No change \n");
           }
       roomVec.swap(roomVecNew);
       roomVecNew.clear(); 
    } else if(times ==  0) {
     tok = strtok (response2,"\r\n");
-    //list_room("localhost", 8013, "user", "password", "");
-    // update 
-    /* Add some messages to the window */
-    //for (i = 0; i < 10; i++) {
-    printf("HEREEEE\n");
      while (tok != NULL) { 
         gchar *msg = g_strdup_printf (tok);
         gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
