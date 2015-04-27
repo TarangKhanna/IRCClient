@@ -15,13 +15,16 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <iostream>
+#include <vector>
 #define MAX_MESSAGES 100
 #define MAX_MESSAGE_LEN 300
 #define MAX_RESPONSE (20 * 1024)
+
 //#include <curses.h>
 
 char * list_room();
 void update_list_rooms();
+int times = 0;
 
 using namespace std;
 
@@ -310,8 +313,32 @@ void update_list_rooms() {
     int i;
     char * response2 = strdup(list_room());
     char * tok;
+    // check for change 
     tok = strtok (response2,"\r\n");
-
+    vector<string> roomVec;
+    //roomVec.push_back();
+    //list_room("localhost", 8013, "user", "password", "");
+    // update 
+    /* Add some messages to the window */
+    //for (i = 0; i < 10; i++) {
+    if(times > 0) {
+    bool changed = false;
+    while (tok != NULL) { 
+        //roomVec.push_back(tok);
+        if(std::find(roomVec.begin(), roomVec.end(), tok) != roomVec.end())  {
+            changed = true;
+            gchar *msg = g_strdup_printf (tok);
+            gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
+            gtk_list_store_set (GTK_LIST_STORE (list_rooms), 
+                          &iter,
+                                0, msg,
+                          -1);
+            g_free (msg);
+        }
+        tok = strtok (NULL, "\r\n");
+    }
+   } else if(times ==  0) {
+    tok = strtok (response2,"\r\n");
     //list_room("localhost", 8013, "user", "password", "");
     // update 
     /* Add some messages to the window */
@@ -325,8 +352,11 @@ void update_list_rooms() {
                       -1);
         g_free (msg);
         printf ("%s\n",tok);
+        roomVec.push_back(tok);
         tok = strtok (NULL, "\r\n");
     }
+  }
+  times++;
 }
 
 void update_list_users() {
