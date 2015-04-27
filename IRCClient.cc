@@ -30,6 +30,7 @@ int times = 0;
 using namespace std;
 
 GtkListStore * list_rooms;
+GtkWidget *tree_view;
 GtkListStore * list_users;
 GtkWidget *userName; //entry
 GtkWidget *passWord; //entry
@@ -409,7 +410,7 @@ void update_list_users() {
 static GtkWidget *create_list( const char * titleColumn, GtkListStore *model )
 {
     GtkWidget *scrolled_window;
-    GtkWidget *tree_view;
+    
     //GtkListStore *model;
     GtkCellRenderer *cell;
     GtkTreeViewColumn *column;
@@ -698,7 +699,7 @@ int main( int   argc,
     gtk_widget_show(currentStatus);
 
     //selected rows
-    treeSel = gtk_tree_view_get_selection(GTK_TREE_VIEW(list_rooms));
+    treeSel = gtk_tree_view_get_selection(GTK_TREE_VIEW(tree_view));
     g_signal_connect(treeSel, "changed",  
       G_CALLBACK(room_changed), currentStatus); 
 
