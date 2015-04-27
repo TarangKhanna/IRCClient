@@ -125,7 +125,7 @@ void add_user(GtkButton *button, gpointer user_data)
   if (strcmp(response, "OK\r\n") == 0) {
     printf("User %s added\n", user);
     gchar * status2 = (gchar *)"signedUp"; 
-    gtk_label_set_text(GTK_LABEL(currentStatus),gchar);
+    gtk_label_set_text(GTK_LABEL(currentStatus),status2);
   }
 }
 
