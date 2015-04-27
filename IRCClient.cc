@@ -333,6 +333,7 @@ void update_list_rooms() {
       int y2;
       int count2 = 0;
       for(i2 = 0; i2 < roomVecNew.size(); i2++) {
+        count2 = 0;
         for(y2 = 0; y2 < roomVec.size(); y2++) {
           if(roomVecNew[i2].compare(roomVec[y2]) != 0) {// diff 
              count2++;
