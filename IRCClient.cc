@@ -399,7 +399,7 @@ void room_changed(GtkWidget *widget, gpointer text) {
     printf("Selected = %s\n",value); // updated response
     buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
     response2 = strdup(print_users_in_room());
-    insert_text(buffer ,response2) 
+    insert_text(buffer ,response2);
     g_free(value);
   }
 }
