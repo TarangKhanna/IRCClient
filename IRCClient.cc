@@ -586,10 +586,6 @@ int main( int   argc,
     gtk_widget_show (signup_button);  
     g_signal_connect (signup_button, "clicked", G_CALLBACK (signup), (gpointer) "Signup");
 
-    entryRoom = gtk_entry_new_with_max_length(0);
-    //gtk_entry_set_max_length (GTK_ENTRY (entry),3);
-    gtk_table_attach_defaults (GTK_TABLE (table), entryRoom, 0, 2, 3, 4);
-    gtk_widget_show(entryRoom);
 
     labelRoom = gtk_label_new("Enter User Name:");
     gtk_misc_set_alignment(GTK_MISC(labelRoom),0.0,0.5);
