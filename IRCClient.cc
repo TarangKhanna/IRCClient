@@ -49,6 +49,7 @@ GtkWidget *userName; //entry
 GtkWidget *passWord; //entry
 GtkWidget *currentStatus; //label
 GtkWidget *entryRoom; //entry
+GtkWidget *messageEntry;
 vector<string> roomVec;
 vector<string> roomVecNew;
 GtkWidget *roomUser;
@@ -237,7 +238,7 @@ void enter_room() {
   //char * responseDup = (char *)malloc(sizeof(response)+1) ;
   //responseDup = strdup(response);
   if (strstr(response, "OK\r\n") != NULL){
-    printf("User %s Entered room %s\n", user, args);
+    //printf("User %s Entered room %s\n", user, args);
     gtk_label_set_text(GTK_LABEL(currentStatus), "Entered Room");
 
   }
@@ -257,18 +258,20 @@ void get_messages() {
   char response[MAX_RESPONSE];
   sendCommand(host, port, "GET-MESSAGES", user, password, args, response);
 
-  if (strcmp(response, "OK\r\n") == 0) {
-    printf("User %s added\n", user);
+  if (strstr(response, "OK\r\n") != NULL) {
+    printf("User %s sent message\n", user);
   }
 }
 
 void send_message(char * host, int port, char * user,
   char * password, char * args) {
   char response[MAX_RESPONSE];
+  printf("Room %s\n", args);
+  strcat(args, (char *) gtk_entry_get_text(GTK_ENTRY(messageEntry)));
   sendCommand(host, port, "SEND-MESSAGE", user, password, args, response);
-
-  if (strcmp(response, "OK\r\n") == 0) {
-    printf("User %s added\n", user);
+  
+  if (strstr(response, "OK\r\n") != NULL) {
+    printf("Message %s sent\n", args);
   }
 }
 
@@ -581,8 +584,7 @@ time_handler(GtkWidget *widget)
   if (widget->window == NULL) return FALSE;
 
   //gtk_widget_queue_draw(widget);
-
-  fprintf(stderr, "Hi\n");
+  //fprintf(stderr, "Hi\n");
   update_list_rooms();
   room_changed(widget,currentStatus);
   return TRUE;
@@ -658,17 +660,15 @@ int main( int   argc,
     gtk_widget_show (messages);
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
     //wcout << L"Hello, \u0444!\n";
-    myMessage = create_text ("Hello\n");
-    gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 2, 10, 11, 13);
-    gtk_widget_show (myMessage);
+    //myMessage = create_text ("Hello\n");
+    //gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 2, 10, 11, 13);
+    //gtk_widget_show (myMessage);
 
     //create a text Room box
     entryRoom = gtk_entry_new_with_max_length(0);
     //gtk_entry_set_max_length (GTK_ENTRY (entry),3);
     gtk_table_attach_defaults (GTK_TABLE (table), entryRoom, 0, 2, 6, 7);
     gtk_widget_show(entryRoom);
-  
-
   
     //Label for room
     labelRoom = gtk_label_new("Enter room name:");
@@ -684,7 +684,12 @@ int main( int   argc,
     gtk_table_attach_defaults(GTK_TABLE (table), send_button, 2, 4, 13, 14); 
     gdk_color_parse ("orange", &color);
     gtk_widget_modify_bg (GTK_WIDGET(send_button), GTK_STATE_NORMAL, &color);
+    g_signal_connect (send_button, "clicked", G_CALLBACK (send_message), NULL);
     gtk_widget_show (send_button); 
+    messageEntry = gtk_entry_new_with_max_length(0);
+    //gtk_entry_set_max_length (GTK_ENTRY (entry),3);
+    gtk_table_attach_defaults (GTK_TABLE (table), messageEntry, 2, 10, 11, 13);
+    gtk_widget_show(messageEntry);
 
     //GtkWidget *create_account = gtk_button_new_with_label ("Create");
     //gdk_color_parse ("orange", &color);
