@@ -320,7 +320,9 @@ void update_list_rooms() {
     // check for change 
     tok = strtok (response2,"\r\n");
     vector<string> roomVec;
+    vector<string> roomVecNew;
     int i2;
+    int count2 = 0;
     //roomVec.push_back();
     //list_room("localhost", 8013, "user", "password", "");
     // update 
@@ -330,30 +332,26 @@ void update_list_rooms() {
       bool changed = false;
       while (tok != NULL) { 
           //roomVec.push_back(tok);
-
-          printf("In Vector: "); 
-
-          for(i2 = 0; i2 < roomVec.size(); i2++) {
-            cout << roomVec[i2] << '\n'; 
-          }
-          printf("End Vector: "); 
+          roomVecNew.push_back(tok);
           string stok(tok);
-          if(find(roomVec.begin(), roomVec.end(), stok) != roomVec.end())  {
-              printf("Found : %s\n", tok);
-          } else {
-            changed = true;
-            printf("New : %s\n", tok);
-            gchar *msg = g_strdup_printf (tok);
+          
+          tok = strtok (NULL, "\r\n");
+      }
+      if(roomVecNew.size() > roomVec.size())  {
+
+            printf("NEW ENTRY : %s\n", roomVecNew.end());
+            gchar *msg = g_strdup_printf (roomVecNew.end());
             gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
             gtk_list_store_set (GTK_LIST_STORE (list_rooms), 
                             &iter,
                                   0, msg,
                             -1);
             g_free (msg);
-            roomVec.push_back(tok);
+          } else {
+              printf("No change \n");
           }
-          tok = strtok (NULL, "\r\n");
-      } 
+      roomVec.swap(original);
+      roomVecNew.clear(); 
    } else if(times ==  0) {
     tok = strtok (response2,"\r\n");
     //list_room("localhost", 8013, "user", "password", "");
