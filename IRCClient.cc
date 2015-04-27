@@ -378,7 +378,7 @@ void room_changed(GtkWidget *widget, gpointer text) {
   GtkTreeIter iter; //Iterator to represent a certain entry in the tree.
   GtkTreeModel *model; //The model of the tree
   char *entryText;
-  gtk_tree_selection_get_selected(GTK_TREE_SELECTION(widget), &model, &iter)); //Sets iter and model to the selected entry
+  gtk_tree_selection_get_selected(GTK_TREE_SELECTION(widget), &model, &iter); //Sets iter and model to the selected entry
   printf("Here = %s\n",entryText );
   gtk_tree_model_get(model, &iter, 0, &entryText, -1);  
   g_free(entryText); //Once you're done with it.
