@@ -320,17 +320,23 @@ void update_list_rooms() {
     // check for change 
     tok = strtok (response2,"\r\n");
     vector<string> roomVec;
-    //roomVec.clear();
+    int i;
     //roomVec.push_back();
     //list_room("localhost", 8013, "user", "password", "");
     // update 
     /* Add some messages to the window */
     //for (i = 0; i < 10; i++) {
     if(times > 0) {
-      printf("TARANg\n");
       bool changed = false;
       while (tok != NULL) { 
           //roomVec.push_back(tok);
+
+          printf("In Vector: "); 
+
+          for(i = 0; i < roomVec.end; i++) {
+            cout << roomVec[i] << '\n'; 
+          }
+          printf("End Vector: "); 
           string stok(tok);
           if(find(roomVec.begin(), roomVec.end(), stok) != roomVec.end())  {
               printf("Found : %s\n", tok);
