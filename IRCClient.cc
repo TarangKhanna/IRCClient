@@ -319,11 +319,11 @@ void update_list_rooms() {
     char * tok;
     // check for change 
     tok = strtok (response2,"\r\n");
-    
+    //string stok(tok);
       bool changed = false;
-      while (tok != NULL) { 
-          roomVecNew.push_back(tok);
-          string stok(tok);
+      while (tok != NULL) {
+          string stok(tok); 
+          roomVecNew.push_back(stok);
           tok = strtok (NULL, "\r\n");
       }
       int rn = roomVecNew.size();
@@ -331,9 +331,9 @@ void update_list_rooms() {
       printf("RN SIZE = %d\n", rn );
       printf("R SIZE = %d\n", r );
       while(rn > r)  {
-            if(rn-r == 1) {
-               printf("Could - Adding room = %s\n", roomVecNew[rn].c_str());
-            }
+            //if(rn-r == 1) {
+              // printf("Could - Adding room = %s\n", roomVecNew[rn].c_str());
+            //}
             printf("Adding room = %s\n", roomVecNew[r].c_str());
             gchar *msg = g_strdup_printf (roomVecNew[r].c_str());
             gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
