@@ -23,6 +23,7 @@ GtkListStore * list_rooms;
 GtkListStore * list_users;
 GtkWidget *userName;
 GtkWidget *passWord;
+GtkWidget *currentStatus;
 
 char * host = "localhost";
 char * user = "Tarang";
@@ -607,6 +608,10 @@ int main( int   argc,
     gtk_table_attach(GTK_TABLE(table), status,8, 9, 1, 3, GTK_FILL, GTK_FILL, 0, 0);
     gtk_widget_show(status);
 
+    currentStatus = gtk_label_new("Start Up");
+    gtk_misc_set_alignment(GTK_MISC(currentStatus),0.0,0.5);
+    gtk_table_attach(GTK_TABLE(table), currentStatus,8, 9, 3, 5, GTK_FILL, GTK_FILL, 0, 0);
+    gtk_widget_show(currentStatus);
 
     gtk_widget_show (table);
     gtk_widget_show (window);
