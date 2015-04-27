@@ -698,10 +698,9 @@ int main( int   argc,
     gtk_widget_show(currentStatus);
 
     //selected rows
-    GtkWidget *label2 = gtk_label_new("");
     treeSel = gtk_tree_view_get_selection(GTK_TREE_VIEW(list_rooms));
     g_signal_connect(treeSel, "changed",  
-      G_CALLBACK(room_changed), label2); 
+      G_CALLBACK(room_changed), currentStatus); 
 
     gtk_widget_show (table);
     gtk_widget_show (window);
