@@ -124,7 +124,7 @@ void add_user()
   sendCommand(host, port, "ADD-USER", user, password, "", response);
   if (strcmp(response, "OK\r\n") == 0) {
     printf("User %s added\n", user);
-    gtk_label_set_text(currentStatus,signedUp);
+    gtk_label_set_text(currentStatus,"signedUp");
   }
 }
 
