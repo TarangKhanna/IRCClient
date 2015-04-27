@@ -141,6 +141,7 @@ void login()
   password = (char *) gtk_entry_get_text(GTK_ENTRY(passWord));
   sendCommand(host, port, "LOG-IN", user, password, "", response);
   if (strcmp(response, "OK\r\n") == 0) {
+    gtk_label_set_text(GTK_LABEL(currentStatus),"Logged In");
     printf("User %s added\n", user);
     list_room(); // to update response 
     update_list_rooms(); // put it in the widget 
@@ -156,7 +157,7 @@ void signup(GtkWidget *widget, gpointer data)
   if (strcmp(response, "OK\r\n") == 0) {
     printf("User %s added\n", user);
     gchar * status2 = (gchar *)"signedUp"; 
-    gtk_label_set_text(GTK_LABEL(currentStatus),status2);
+    gtk_label_set_text(GTK_LABEL(currentStatus),"signedUp");
   } else {
     printf("User %s taken\n", user);
   }
@@ -611,7 +612,7 @@ int main( int   argc,
 
     currentStatus = gtk_label_new("Start Up");
     gtk_misc_set_alignment(GTK_MISC(currentStatus),0.0,0.5);
-    gtk_table_attach(GTK_TABLE(table), currentStatus,8, 9, 3, 5, GTK_FILL, GTK_FILL, 0, 0);
+    gtk_table_attach(GTK_TABLE(table), currentStatus,8, 9, 2, 4, GTK_FILL, GTK_FILL, 0, 0);
     gtk_widget_show(currentStatus);
 
     gtk_widget_show (table);
