@@ -394,14 +394,15 @@ void room_changed(GtkWidget *widget, gpointer text) {
   
   GtkTreeIter iter;
   GtkTreeModel *model;
-  char *value;
+  char *roomName;
   GtkTextBuffer *buffer;
 
   if (gtk_tree_selection_get_selected(
       GTK_TREE_SELECTION(widget), &model, &iter)) {
-    gtk_tree_model_get(model, &iter, 0, &value,  -1);
-    gtk_label_set_text(GTK_LABEL(currentStatus), value);
-    //printf("Selected = %s\n",value); // updated response
+    gtk_tree_model_get(model, &iter, 0, &roomName,  -1);
+    gtk_label_set_text(GTK_LABEL(currentStatus), roomName);
+    // room == 
+    //printf("Selected = %s\n",roomName); // updated response
     buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (viewUser));
     char * response2 = strdup(print_users_in_room()); //crashes here
     printf("reposnse is = %s\n", response2);
@@ -409,8 +410,9 @@ void room_changed(GtkWidget *widget, gpointer text) {
        insert_text(buffer ,response2);
     } else {
       // nothing to list- update currentstatus 
+      gtk_label_set_text(GTK_LABEL(currentStatus), "No Users In Room");
     }
-    g_free(value);
+    g_free(roomName);
   }
 }
 /* Create the list of "messages" */
