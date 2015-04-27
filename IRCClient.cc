@@ -154,6 +154,7 @@ void add_user(GtkButton *button, gpointer user_data)
 void login()
 {
   loggedIn = true;
+  g_timeout_add(5000, (GSourceFunc) time_handler, (gpointer) window);
   char response[MAX_RESPONSE];
   user = (char *) gtk_entry_get_text(GTK_ENTRY(userName));
   password = (char *) gtk_entry_get_text(GTK_ENTRY(passWord));
@@ -783,9 +784,9 @@ int main( int   argc,
 
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
     gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("chat_pic.png"));
-    if(loggedIn){
-      g_timeout_add(5000, (GSourceFunc) time_handler, (gpointer) window);
-    }
+    
+    //g_timeout_add(5000, (GSourceFunc) time_handler, (gpointer) window);
+    
     gtk_main ();
 
     
