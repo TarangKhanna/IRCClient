@@ -333,17 +333,17 @@ void update_list_rooms() {
           //roomVec.push_back(tok);
           string stok(tok);
           if(find(roomVec.begin(), roomVec.end(), stok) != roomVec.end())  {
-              changed = true;
-              printf("Found : %s", tok);
-              gchar *msg = g_strdup_printf (tok);
-              gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
-              gtk_list_store_set (GTK_LIST_STORE (list_rooms), 
+              printf("Found : %s\n", tok);
+          } else {
+            changed = true;
+            printf("New : %s\n", tok);
+            gchar *msg = g_strdup_printf (tok);
+            gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
+            gtk_list_store_set (GTK_LIST_STORE (list_rooms), 
                             &iter,
                                   0, msg,
                             -1);
-              g_free (msg);
-          } else {
-             printf("New : %s", tok);
+            g_free (msg);
           }
           tok = strtok (NULL, "\r\n");
       } 
