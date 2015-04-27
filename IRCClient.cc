@@ -342,6 +342,7 @@ void update_list_rooms() {
             r++;
           } // or no change
       roomVec.swap(roomVecNew);
+      printf("R SIZE after %d\n", roomVec.size() );
       roomVecNew.clear(); 
 }
 
