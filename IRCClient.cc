@@ -255,7 +255,7 @@ char * print_users_in_room() {
   sendCommand(host, port, "GET-USERS-IN-ROOM", user, password, args, response);
 
   if (!(strstr(response, "OK\r\n") != NULL)) {
-    printf("Print = %s\n", user);
+    printf("Print User  = %s\n", user);
     return response;
   } else {
     printf("Denied Print User = %s\n", user);
@@ -331,7 +331,7 @@ void update_list_rooms() {
     int i;
     char * response2 = strdup(list_room());
     char * tok;
-    printf("Reached room = %s\n", response2);
+    //printf("Reached room = %s\n", response2);
      if(changed) {
       tok = strtok (response2,"\r\n");
       while (tok != NULL) {
@@ -354,7 +354,7 @@ void update_list_rooms() {
             // printf("count2 diff! = %d, size = %d\n", count2, roomVec.size());
           }
           if(count2 == roomVec.size()) {
-            printf("Adding room2 = %s\n", roomVecNew[i2].c_str());
+            //printf("Adding room2 = %s\n", roomVecNew[i2].c_str());
             gchar *msg = g_strdup_printf (roomVecNew[i2].c_str());
             gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
             gtk_list_store_set (GTK_LIST_STORE (list_rooms), 
@@ -379,7 +379,7 @@ void update_list_rooms() {
                             0, msg,
                       -1);
         g_free (msg);
-        printf ("%s\n",tok);
+        //printf ("%s\n",tok);
         roomVec.push_back(tok);
         tok = strtok (NULL, "\r\n");
        }
@@ -401,10 +401,15 @@ void room_changed(GtkWidget *widget, gpointer text) {
       GTK_TREE_SELECTION(widget), &model, &iter)) {
     gtk_tree_model_get(model, &iter, 0, &value,  -1);
     gtk_label_set_text(GTK_LABEL(currentStatus), value);
-    printf("Selected = %s\n",value); // updated response
+    //printf("Selected = %s\n",value); // updated response
     buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (viewUser));
     char * response2 = strdup(print_users_in_room()); //crashes here
-    insert_text(buffer ,response2);
+    printf("reposnse is = %s\n", response2);
+    if(response2 != "" && response2 != NULL && response2 != " ") {
+       insert_text(buffer ,response2);
+    } else {
+      // nothing to list- update currentstatus 
+    }
     g_free(value);
   }
 }
