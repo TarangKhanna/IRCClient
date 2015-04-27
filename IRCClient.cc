@@ -322,8 +322,7 @@ void startGetMessageThread()
 void update_list_rooms() {
     GtkTreeIter iter;
     int i;
-    list_room();
-    char * response2 = strdup(response);
+    char * response2 = strdup(list_room());
     char * tok;
     //printf("Reached room = %s\n", response2);
      if(changed) {
