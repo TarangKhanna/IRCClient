@@ -400,7 +400,6 @@ void room_changed(GtkWidget *widget, gpointer text) {
   char *roomName;
   int i;
   GtkTextBuffer *buffer;
-
   vector<string> userRoomVec;// copy all into a vector and on roomchanged
   // create new view and add the whole vector into it
   if (gtk_tree_selection_get_selected(
@@ -643,7 +642,7 @@ int main( int   argc,
     //userList = create_list ("Users in room", list_users);
     //gtk_table_attach_defaults (GTK_TABLE (table), userList, 4, 8, 0, 4);
     //gtk_widget_show (userList);
-    roomUser = create_text_User ("User 1\n");
+    roomUser = create_text_User ("");
     gtk_table_attach_defaults (GTK_TABLE (table), roomUser, 4, 8, 1, 4);
     gtk_widget_show (roomUser);
 
