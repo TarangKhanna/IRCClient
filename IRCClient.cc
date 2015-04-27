@@ -383,7 +383,7 @@ void room_changed(GtkWidget *widget, gpointer text) {
   if (gtk_tree_selection_get_selected(
       GTK_TREE_SELECTION(widget), &model, &iter)) {
 
-    gtk_tree_model_get(model, &iter, LIST_ITEM, &value,  -1);
+    gtk_tree_model_get(model, &iter, 0, &value,  -1);
     gtk_label_set_text(GTK_LABEL(currentStatus), value);
     g_free(value);
   }
