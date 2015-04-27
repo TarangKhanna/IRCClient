@@ -171,7 +171,6 @@ void list_room() {
   } else {
     cout << response;
   }
-  return response;
 }
 
 void enter_room(char * host, int port, char * user,
