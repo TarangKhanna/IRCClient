@@ -320,6 +320,7 @@ void update_list_rooms() {
     // check for change 
     tok = strtok (response2,"\r\n");
     vector<string> roomVec;
+    //roomVec.clear();
     //roomVec.push_back();
     //list_room("localhost", 8013, "user", "password", "");
     // update 
@@ -333,6 +334,7 @@ void update_list_rooms() {
           string stok(tok);
           if(find(roomVec.begin(), roomVec.end(), stok) != roomVec.end())  {
               changed = true;
+              printf("Found : %s", stok);
               gchar *msg = g_strdup_printf (tok);
               gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
               gtk_list_store_set (GTK_LIST_STORE (list_rooms), 
@@ -340,6 +342,8 @@ void update_list_rooms() {
                                   0, msg,
                             -1);
               g_free (msg);
+          } else {
+             printf("New : %s", stok);
           }
           tok = strtok (NULL, "\r\n");
       } 
