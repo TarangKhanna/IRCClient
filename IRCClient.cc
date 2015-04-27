@@ -333,7 +333,7 @@ void update_list_rooms() {
 
           printf("In Vector: "); 
 
-          for(i = 0; i < roomVec.end(); i++) {
+          for(i = 0; i < roomVec.size(); i++) {
             cout << roomVec[i] << '\n'; 
           }
           printf("End Vector: "); 
