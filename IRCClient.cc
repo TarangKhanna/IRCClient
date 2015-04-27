@@ -126,7 +126,7 @@ int sendCommand(char * host, int port, char * command, char * user,
     len += n;
   }
 
-  printf("response:%s\n", response);
+  //printf("response:%s\n", response);
 
   close(sock);
 }
@@ -237,7 +237,7 @@ void leave_room(char * host, int port, char * user,
   sendCommand(host, port, "LEAVE-ROOM", user, password, args, response);
 
   if (strcmp(response, "OK\r\n") == 0) {
-    printf("User %s added\n", user);
+    //printf("User %s added\n", user);
   }
 }
 
@@ -316,24 +316,6 @@ void startGetMessageThread()
 {
   //pthread_t threads;
   pthread_create(NULL, NULL, getMessagesThread, NULL);
-}
-
-gboolean resize_image(GtkWidget *widget, GdkEvent *event, GtkWidget *window)
-{
-  GdkPixbuf *pixbuf = gtk_image_get_pixbuf(GTK_IMAGE(widget));
-  if (pixbuf == NULL)
-  {
-    g_printerr("Failed to resize image\n");
-    return 1;
-  }
-  
-  printf("Width: %i\nHeight%i\n", widget->allocation.width, widget->allocation.height);
-  
-  pixbuf = gdk_pixbuf_scale_simple(pixbuf, widget->allocation.width, widget->allocation.height, GDK_INTERP_BILINEAR);
-  
-  gtk_image_set_from_pixbuf(GTK_IMAGE(widget), pixbuf);
-  
-  return FALSE;
 }
 
 void update_list_rooms() {
