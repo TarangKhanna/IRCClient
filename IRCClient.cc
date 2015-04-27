@@ -256,7 +256,9 @@ char * print_users_in_room() {
   sendCommand(host, port, "GET-USERS-IN-ROOM", user, password, args, response);
 
   if (!(strstr(response, "OK\r\n") != NULL)) {
-    printf("Print User  = %s\n", user);
+    //printf("Print User  = %s\n", user);
+    printf(" USERS2 is = %s\n", response);
+    printf(" USERS2 TILL HERE\n");
     return response;
   } else {
     printf("Denied Print User = %s\n", user);
