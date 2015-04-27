@@ -323,7 +323,7 @@ void update_list_rooms() {
     vector<string> roomVecNew;
     int i2;
     int count2 = 0;
-    if(times > 0) {
+    
       bool changed = false;
       while (tok != NULL) { 
           roomVecNew.push_back(tok);
@@ -345,22 +345,7 @@ void update_list_rooms() {
           } // or no change
       roomVec.swap(roomVecNew);
       roomVecNew.clear(); 
-   } else if(times ==  0) {
-    tok = strtok (response2,"\r\n");
-     while (tok != NULL) { 
-        gchar *msg = g_strdup_printf (tok);
-        gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
-        gtk_list_store_set (GTK_LIST_STORE (list_rooms), 
-                      &iter,
-                            0, msg,
-                      -1);
-        g_free (msg);
-        printf ("%s\n",tok);
-        roomVec.push_back(tok);
-        tok = strtok (NULL, "\r\n");
-    }
-  }
-  times++;
+   
 }
 
 void update_list_users() {
