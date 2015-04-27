@@ -211,15 +211,14 @@ char * list_room() {
   return response;
 }
 
-void enter_room(char * host, int port, char * user,
-  char * password, char * args) {
+void enter_room() {
   char response[MAX_RESPONSE];
   sendCommand(host, port, "ENTER-ROOM", user, password, args, response);
 
   if (strstr(response, "OK\r\n") != NULL){
     printf("User %s Entered room %s\n", user, args);
     gtk_label_set_text(GTK_LABEL(currentStatus), "Entered Room");
-    
+
   }
 }
 
