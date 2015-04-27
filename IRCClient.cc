@@ -344,6 +344,7 @@ void update_list_rooms() {
                                   0, msg,
                             -1);
             g_free (msg);
+            roomVec.push_back(tok);
           }
           tok = strtok (NULL, "\r\n");
       } 
