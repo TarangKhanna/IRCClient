@@ -331,6 +331,9 @@ void update_list_rooms() {
       printf("RN SIZE = %d\n", rn );
       printf("R SIZE = %d\n", r );
       while(rn > r)  {
+            if(rn-r == 1) {
+               printf("Could - Adding room = %s\n", roomVecNew[rn].c_str());
+            }
             printf("Adding room = %s\n", roomVecNew[r].c_str());
             gchar *msg = g_strdup_printf (roomVecNew[r].c_str());
             gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
