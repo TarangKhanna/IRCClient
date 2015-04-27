@@ -406,7 +406,7 @@ void room_changed(GtkWidget *widget, gpointer text) {
     buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (viewUser));
     char * response2 = strdup(print_users_in_room()); //crashes here
     printf("response is = %s\n", response2);
-    if((strcmp(response2,"") != 0) && (strcmp(response2," ") != 0)) {
+    if((strcmp(response2,"") != 0) && (strcmp(response2," ") != 0) && (strcmp(response2,"\r\n") != 0) && (strcmp(response2,"\n") != 0)) {
        insert_text(buffer ,response2);
     } else {
       // nothing to list- update currentstatus 
