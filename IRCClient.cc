@@ -344,6 +344,11 @@ void update_list_rooms() {
             g_free (msg);
             r++;
           } // or no change
+          int j;
+          printf("RN contains: \n");
+          for(j = 0; j< roomVecNew.size();j++) {
+            cout << roomVecNew[i] << '\n';
+          }
       roomVec.swap(roomVecNew);
       printf("R SIZE after = %d\n", roomVec.size() );
       roomVecNew.clear(); 
