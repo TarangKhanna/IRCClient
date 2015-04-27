@@ -42,6 +42,7 @@ GtkWidget *window;
 GtkWidget *tree_view;
 GtkListStore * list_users;
 GtkWidget *table;
+GtkTreeSelection *treeSel;
 GtkWidget *view;
 GtkWidget *viewUser;
 GtkWidget *userName; //entry
@@ -403,7 +404,7 @@ void room_changed(GtkWidget *widget, gpointer text) {
   vector<string> userRoomVec;// copy all into a vector and on roomchanged
   // create new view and add the whole vector into it
   if (gtk_tree_selection_get_selected(
-      GTK_TREE_SELECTION(widget), &model, &iter)) {
+      GTK_TREE_SELECTION(treeSel), &model, &iter)) {
     gtk_tree_model_get(model, &iter, 0, &roomName,  -1);
     gtk_label_set_text(GTK_LABEL(currentStatus), roomName);
     // enter room
@@ -582,7 +583,7 @@ time_handler(GtkWidget *widget)
 
   fprintf(stderr, "Hi\n");
   update_list_rooms();
-  room_changed(widget,currentStatus);
+  room_changed(treeSel,currentStatus);
   return TRUE;
 }
 
@@ -604,7 +605,6 @@ int main( int   argc,
     GtkWidget *labelPass;
     GtkWidget *status;
     GtkWidget *labelMsg;
-    GtkTreeSelection *treeSel;
 
     gtk_init (&argc, &argv);
    
