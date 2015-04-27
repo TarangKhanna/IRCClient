@@ -153,6 +153,8 @@ void login()
     printf("User %s added\n", user);
     //list_room(); // to update response 
     update_list_rooms(); // put it in the widget 
+  } else {
+    gtk_label_set_text(GTK_LABEL(currentStatus),"Incorrect Login");
   }
 }
 
@@ -169,6 +171,7 @@ void signup(GtkWidget *widget, gpointer data)
     gtk_label_set_text(GTK_LABEL(currentStatus),"Signed Up");
   } else {
     printf("User %s taken\n", user);
+    gtk_label_set_text(GTK_LABEL(currentStatus),"UserName Taken");
   }
 }
 
@@ -181,6 +184,9 @@ void create_room2() {
   //create_room2("localhost", 8013, "user", "password", "Room43");
   if (strstr(response, "OK\r\n") != NULL) {
     update_list_rooms();
+    char * room = strcpy(args);
+    strcat("Room Created: ", args);
+    gtk_label_set_text(GTK_LABEL(currentStatus),"Room Created");
     printf("Room %s added\n", args);
   }
 }
