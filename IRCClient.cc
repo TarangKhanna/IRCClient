@@ -373,7 +373,7 @@ void update_list_rooms() {
         tok = strtok (NULL, "\r\n");
        }
        if(roomVec.size() > 0) { // changed
-          changed == true;
+          changed = true;
        }
   }
   //times++;
