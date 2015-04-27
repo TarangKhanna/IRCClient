@@ -35,6 +35,8 @@ GtkWidget *userName; //entry
 GtkWidget *passWord; //entry
 GtkWidget *currentStatus; //label
 GtkWidget *entryRoom; //entry
+vector<string> roomVec;
+vector<string> roomVecNew;
 
 char * host = "localhost";
 char * user = "Tarang";
@@ -319,8 +321,6 @@ void update_list_rooms() {
     char * tok;
     // check for change 
     tok = strtok (response2,"\r\n");
-    vector<string> roomVec;
-    vector<string> roomVecNew;
     
       bool changed = false;
       while (tok != NULL) { 
