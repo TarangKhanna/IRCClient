@@ -375,6 +375,7 @@ void update_list_rooms() {
 }
 
 void room_changed(GtkWidget *widget, gpointer text) {
+  printf("1234TAR\n");
   GtkTreeIter iter; //Iterator to represent a certain entry in the tree.
   GtkTreeModel *model; //The model of the tree
   char *entryText;
