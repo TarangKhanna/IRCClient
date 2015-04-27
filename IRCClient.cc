@@ -254,9 +254,12 @@ char * print_users_in_room() {
   char response[MAX_RESPONSE];
   sendCommand(host, port, "GET-USERS-IN-ROOM", user, password, args, response);
 
-  if (strcmp(response, "OK\r\n") == 0) {
-    printf("User %s added\n", user);
+  if (strstr(response, "OK\r\n") != NULL) {
+    printf("Print = %s\n", user);
     return response;
+  } else {
+    printf("Denied Print User = %s\n", user);
+    return "";
   }
 
 }
