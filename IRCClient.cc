@@ -565,7 +565,7 @@ int main( int   argc,
 
     labelUserRoom = gtk_label_new("Users In Room:");
     gtk_misc_set_alignment(GTK_MISC(labelUserRoom),0.0,0.5);
-    gtk_table_attach(GTK_TABLE(table), labelUserRoom,4, 8, 0, 1, GTK_FILL, GTK_FILL, 0, 0);
+    gtk_table_attach(GTK_TABLE(table), labelUserRoom,4, 8, 1, 2, GTK_FILL, GTK_FILL, 0, 0);
 
     messages = create_text ("Peter: Hi how are you\nMary: I am fine, thanks and you?\nPeter: Fine thanks.\n");
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 2, 10, 5, 11);
