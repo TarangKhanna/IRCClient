@@ -421,7 +421,7 @@ void room_changed(GtkWidget *widget, gpointer text) {
           tok = strtok (NULL, "\r\n");
     }
     if((strcmp(response2,"") != 0) && (strcmp(response2," ") != 0) && (strcmp(response2,"\r\n") != 0) && (strcmp(response2,"\n") != 0)) {
-       
+      printf("Creat NEW1\n");
       create_text_User(response2);
     }
     for(i = 0; i < userRoomVec.size(); i++) {
