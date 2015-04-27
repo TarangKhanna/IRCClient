@@ -412,18 +412,17 @@ void room_changed(GtkWidget *widget, gpointer text) {
     char * response2 = strdup(print_users_in_room()); //crashes here
     char * tok;
     //printf("Reached room = %s\n", response2);
-     if(changed) {
-      tok = strtok (response2,"\r\n");
-      while (tok != NULL) {
+    tok = strtok (response2,"\r\n");
+    while (tok != NULL) {
           string stok(tok); 
           userRoomVec.push_back(stok);
           tok = strtok (NULL, "\r\n");
-      }
-    printf("PRINT USERS is = %s\n", print_users_in_room());
-    printf("PRINT USERS TILL HERE\n");
+    }
     for(i = 0; i < userRoomVec.size(); i++) {
      if((strcmp(userRoomVec[i],"") != 0) && (strcmp(userRoomVec[i]," ") != 0) && (strcmp(userRoomVec[i],"\r\n") != 0) && (strcmp(userRoomVec[i],"\n") != 0)) {
        insert_text(buffer ,userRoomVec[i]);
+       printf("PRINT USERS is = %s\n",userRoomVec[i]);
+       printf("PRINT USERS TILL HERE\n");
      }
     }
     g_free(roomName);
