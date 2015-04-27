@@ -320,6 +320,7 @@ void update_list_rooms() {
     char * response2 = strdup(list_room());
     char * tok;
     bool changed = false;
+    printf("Reached room = %s\n", response2);
      if(times > 0) {
       tok = strtok (response2,"\r\n");
       while (tok != NULL) {
