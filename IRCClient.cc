@@ -44,6 +44,7 @@ char * password = "Khanna";
 char * sport;
 char * args = "Room42";
 int port = 8013;
+char * room[30];
 
 int lastMessage = 0;
 
@@ -337,11 +338,10 @@ void update_list_rooms() {
         for(y2 = 0; y2 < roomVec.size(); y2++) {
           if(roomVecNew[i2].compare(roomVec[y2]) != 0) {// diff 
              count2++;
-             printf("count2 diff! = %d, size = %d\n", count2, roomVec.size());
-
+            // printf("count2 diff! = %d, size = %d\n", count2, roomVec.size());
           }
           if(count2 == roomVec.size()) {
-            printf("Adding room = %s, %d\n", roomVecNew[i2].c_str(), count2);
+            //printf("Adding room = %s, %d\n", roomVecNew[i2].c_str(), count2);
             gchar *msg = g_strdup_printf (roomVecNew[i2].c_str());
             gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
             gtk_list_store_set (GTK_LIST_STORE (list_rooms), 
@@ -374,9 +374,19 @@ void update_list_rooms() {
   times++;
 }
 
+void room_changed(GtkWidget *widget, gpointer text) {
+  GtkTreeIter iter; //Iterator to represent a certain entry in the tree.
+
+  char *entryText
+  gtk_tree_selection_get_selected(GTK_TREE_SELECTION(widget), &model, &iter)); //Sets iter and model to the selected entry
+  printf("Here = %s\n",entryText );
+  gtk_tree_model_get(list_rooms, &iter, 0, &entryText, -1);  
+  g_free(entryText) //Once you're done with it.
+}
+
 void update_list_users() {
     GtkTreeIter iter;
-    int i;
+    int i; //Once you're done with it.
     // update 
     /* Add some messages to the window */
     for (i = 0; i < 10; i++) {
@@ -514,6 +524,7 @@ int main( int   argc,
     GtkWidget *labelPass;
     GtkWidget *status;
     GtkWidget *labelMsg;
+    GtkTreeSelection *treeSel;
 
     gtk_init (&argc, &argv);
    
@@ -573,7 +584,9 @@ int main( int   argc,
     //gtk_entry_set_max_length (GTK_ENTRY (entry),3);
     gtk_table_attach_defaults (GTK_TABLE (table), entryRoom, 0, 2, 6, 7);
     gtk_widget_show(entryRoom);
+  
 
+  
     //Label for room
     labelRoom = gtk_label_new("Enter room name:");
     gtk_misc_set_alignment(GTK_MISC(labelRoom),0.0,0.5);
@@ -667,10 +680,8 @@ int main( int   argc,
     gtk_widget_show (image);
     
     // g_signal_connect(image, "expose-event", G_CALLBACK(resize_image), (gpointer)window);
-
     
     // STATUS
-
     status = gtk_label_new("Status:");
     gtk_misc_set_alignment(GTK_MISC(status),0.0,0.5);
     gtk_table_attach(GTK_TABLE(table), status,8, 9, 1, 3, GTK_FILL, GTK_FILL, 0, 0);
@@ -681,11 +692,11 @@ int main( int   argc,
     gtk_table_attach(GTK_TABLE(table), currentStatus,8, 9, 2, 4, GTK_FILL, GTK_FILL, 0, 0);
     gtk_widget_show(currentStatus);
 
-    //add rooms
-    //sendCommand(host, port, "CREATE-ROOM", "superman", "clarkkent", args, "");
-    //sendCommand(host, port, "CREATE-ROOM", "superman", "clarkkent", args, "");
-    //sendCommand(host, port, "CREATE-ROOM", "superman", "clarkkent", args, "");
-    //update_list_rooms();
+    //selected rows
+    treeSel = gtk_tree_view_get_selection(GTK_TREE_VIEW(list_rooms));
+    g_signal_connect(selection, "changed",  
+      G_CALLBACK(room_changed), ""); 
+
     gtk_widget_show (table);
     gtk_widget_show (window);
     gtk_widget_hide (window);
@@ -693,12 +704,7 @@ int main( int   argc,
     gtk_window_set_title(GTK_WINDOW(window), "Tarang's IRCClient");
 
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
-
     gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("chat_pic.png"));
-    //add_user ("localhost", 8013, "user", "password");
-    //create_room2("localhost", 8013, "user", "password", "Room HA");
-    //list_room("localhost", 8013, "user", "password", "");
-    //list_room("localhost", 8013, "user", "password", "");
     gtk_main ();
 
     
