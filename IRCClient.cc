@@ -15,6 +15,9 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <iostream>
+#define MAX_MESSAGES 100
+#define MAX_MESSAGE_LEN 300
+#define MAX_RESPONSE (20 * 1024)
 //#include <curses.h>
 
 using namespace std;
@@ -24,7 +27,6 @@ GtkListStore * list_users;
 GtkWidget *userName;
 GtkWidget *passWord;
 GtkWidget *currentStatus;
-char response[MAX_RESPONSE];
 
 char * host = "localhost";
 char * user = "Tarang";
@@ -32,12 +34,9 @@ char * password = "Khanna";
 char * sport;
 char * args = "Room42";
 int port = 8013;
-
-#define MAX_MESSAGES 100
-#define MAX_MESSAGE_LEN 300
-#define MAX_RESPONSE (20 * 1024)
-
+char response[MAX_RESPONSE];
 int lastMessage = 0;
+
 int open_client_socket(char * host, int port) {
   // Initialize socket address structure
   struct  sockaddr_in socketAddress;
