@@ -566,6 +566,19 @@ void show_error(GtkWidget *widget, gpointer window)
   gtk_widget_destroy(dialog);
 }
 
+static gboolean
+time_handler(GtkWidget *widget)
+{
+  if (widget->window == NULL) return FALSE;
+
+  //gtk_widget_queue_draw(widget);
+
+  fprintf(stderr, "Hi\n");
+  update_list_rooms();
+  room_changed(widget,"");
+  return TRUE;
+}
+
 int main( int   argc,
           char *argv[] )
 {
@@ -768,6 +781,7 @@ int main( int   argc,
 
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
     gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("chat_pic.png"));
+    g_timeout_add(5000, (GSourceFunc) time_handler, (gpointer) window);
     gtk_main ();
 
     
