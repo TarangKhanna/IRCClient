@@ -406,11 +406,11 @@ void room_changed(GtkWidget *widget, gpointer text) {
     buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (viewUser));
     char * response2 = strdup(print_users_in_room()); //crashes here
     printf("response is = %s\n", response2);
-    if((strcmp(response2,"") != 0) && (strcmp(response2,NULL) != 0) && (strcmp(response2," ") != 0)) {
+    if((strcmp(response2,"") != 0) && (strcmp(response2," ") != 0)) {
        insert_text(buffer ,response2);
     } else {
       // nothing to list- update currentstatus 
-      gtk_label_set_text(GTK_LABEL(currentStatus), "No Users In Room");
+      //gtk_label_set_text(GTK_LABEL(currentStatus), "No Users In Room");
     }
     g_free(roomName);
   }
