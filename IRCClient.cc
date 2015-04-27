@@ -333,7 +333,8 @@ void update_list_rooms() {
       int rn = roomVecNew.size();
       int r = roomVec.size();
       while(rn > r)  {
-            gchar *msg = g_strdup_printf (roomVecNew[r -1].c_str());
+            printf("%s\n", roomVecNew[r].c_str());
+            gchar *msg = g_strdup_printf (roomVecNew[r].c_str());
             gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
             gtk_list_store_set (GTK_LIST_STORE (list_rooms), 
                             &iter,
