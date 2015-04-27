@@ -337,7 +337,7 @@ void update_list_rooms() {
           }
           if(count2 == roomVec.size()) {
             //printf("Adding room2 = %s\n", roomVecNew[i2].c_str());
-            gchar *msg = g_strdup_printf (roomVecNew[i2].c_str());
+            //gchar *msg = g_strdup_printf (roomVecNew[i2].c_str());
             gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
             gtk_list_store_set (GTK_LIST_STORE (list_rooms), 
                             &iter,
@@ -401,7 +401,7 @@ void room_changed(GtkWidget *widget, gpointer text) {
           tok = strtok (NULL, "\r\n");
     }
     if((strcmp(response2,"") != 0) && (strcmp(response2," ") != 0) && (strcmp(response2,"\r\n") != 0) && (strcmp(response2,"\n") != 0)) {
-      printf("Creat NEW1\n");
+      //printf("Creat NEW1\n");
       roomUser = create_text_User(strdup(print_users_in_room()));
       gtk_table_attach_defaults (GTK_TABLE (table), roomUser, 4, 8, 1, 4);
       gtk_widget_show (roomUser);
