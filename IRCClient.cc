@@ -328,8 +328,8 @@ void update_list_rooms() {
       }
       int rn = roomVecNew.size();
       int r = roomVec.size();
-      printf("RN SIZE%d\n", rn );
-      printf("R SIZE%d\n", r );
+      printf("RN SIZE = %d\n", rn );
+      printf("R SIZE = %d\n", r );
       while(rn > r)  {
             printf("Adding room = %s\n", roomVecNew[r].c_str());
             gchar *msg = g_strdup_printf (roomVecNew[r].c_str());
@@ -342,7 +342,7 @@ void update_list_rooms() {
             r++;
           } // or no change
       roomVec.swap(roomVecNew);
-      printf("R SIZE after %d\n", roomVec.size() );
+      printf("R SIZE after = %d\n", roomVec.size() );
       roomVecNew.clear(); 
 }
 
