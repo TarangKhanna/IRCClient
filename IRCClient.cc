@@ -325,7 +325,8 @@ void update_list_rooms() {
       bool changed = false;
       while (tok != NULL) { 
           //roomVec.push_back(tok);
-          if(find(roomVec.begin(), roomVec.end(), tok) != roomVec.end())  {
+          string stok(tok);
+          if(find(roomVec.begin(), roomVec.end(), stok) != roomVec.end())  {
               changed = true;
               gchar *msg = g_strdup_printf (tok);
               gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
