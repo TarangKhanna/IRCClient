@@ -158,7 +158,7 @@ void login()
     gtk_label_set_text(GTK_LABEL(currentStatus),"Logged In");
     //printf("User %s added\n", user);
     //list_room(); // to update response 
-    list_room()
+    list_room();
     update_list_rooms(); // put it in the widget 
   } else {
     gtk_label_set_text(GTK_LABEL(currentStatus),"Incorrect Login");
