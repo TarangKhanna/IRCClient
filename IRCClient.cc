@@ -439,6 +439,7 @@ int main( int   argc,
     GtkWidget *labelRoom;
     GtkWidget *labelUser;
     GtkWidget *labelPass;
+    GtkWidget *status;
     GtkWidget *labelMsg;
 
     gtk_init (&argc, &argv);
@@ -597,6 +598,15 @@ int main( int   argc,
     gtk_widget_show (image);
     
     // g_signal_connect(image, "expose-event", G_CALLBACK(resize_image), (gpointer)window);
+
+    
+    // STATUS
+
+    status = gtk_label_new("Status:");
+    gtk_misc_set_alignment(GTK_MISC(status),0.0,0.5);
+    gtk_table_attach(GTK_TABLE(table), status,8, 9, 1, 3, GTK_FILL, GTK_FILL, 0, 0);
+    gtk_widget_show(status);
+
 
     gtk_widget_show (table);
     gtk_widget_show (window);
