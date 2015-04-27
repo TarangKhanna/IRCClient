@@ -309,7 +309,8 @@ void startGetMessageThread()
 void update_list_rooms() {
     GtkTreeIter iter;
     int i;
-    char * response2 = strdup(list_room());
+    list_room();
+    char * response2 = strdup(response);
     char * tok;
     //printf("Reached room = %s\n", response2);
      if(changed) {
@@ -389,7 +390,8 @@ void room_changed(GtkWidget *widget, gpointer text) {
     enter_room();
     //printf("Selected = %s\n",roomName); // updated response
     buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (viewUser));
-    char * response2 = strdup(print_users_in_room()); //crashes here
+    print_users_in_room();
+    char * response2 = strdup(response); //crashes here
     char * tok;
     //printf("Reached room = %s\n", response2);
     tok = strtok (response2,"\r\n");
@@ -400,7 +402,7 @@ void room_changed(GtkWidget *widget, gpointer text) {
     }
     if((strcmp(response2,"") != 0) && (strcmp(response2," ") != 0) && (strcmp(response2,"\r\n") != 0) && (strcmp(response2,"\n") != 0)) {
       //printf("Creat NEW1\n");
-      roomUser = create_text_User(strdup(print_users_in_room()));
+      roomUser = create_text_User(strdup(response);
       gtk_table_attach_defaults (GTK_TABLE (table), roomUser, 4, 8, 1, 4);
       gtk_widget_show (roomUser);
     }
