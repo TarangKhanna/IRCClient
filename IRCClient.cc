@@ -59,7 +59,7 @@ char * host = "localhost";
 char * user = "Tarang";
 char * password = "Khanna";
 char * sport;
-char * args = (char * ) malloc(sizeof(char)* 100);
+char * args = (char * ) malloc(sizeof(char)* 10000);
 int port = 8013;
 char * room[30];
 
@@ -281,7 +281,7 @@ char* print_users_in_room() {
   char * responseDup = (char *)malloc(sizeof(response)+1) ;
   responseDup = strdup(response);
   if ((strstr(responseDup, "DENIED\r\n") == NULL)) {
-    printf("OK response from print user in R is = %s\n", response);
+    //printf("OK response from print user in R is = %s\n", response);
     return response;
   } else {
     printf("Denied Print User = %s\n", user);
