@@ -16,6 +16,7 @@
 #include <pthread.h>
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #define MAX_MESSAGES 100
 #define MAX_MESSAGE_LEN 300
 #define MAX_RESPONSE (20 * 1024)
