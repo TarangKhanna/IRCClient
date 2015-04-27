@@ -634,6 +634,11 @@ int main( int   argc,
     gtk_table_attach(GTK_TABLE(table), currentStatus,8, 9, 2, 4, GTK_FILL, GTK_FILL, 0, 0);
     gtk_widget_show(currentStatus);
 
+    //add rooms
+    sendCommand(host, port, "CREATE-ROOM", "superman", "clarkkent", args, response);
+    sendCommand(host, port, "CREATE-ROOM", "superman", "clarkkent", args, response);
+    sendCommand(host, port, "CREATE-ROOM", "superman", "clarkkent", args, response);
+    update_list_rooms();
     gtk_widget_show (table);
     gtk_widget_show (window);
     gtk_widget_hide (window);
