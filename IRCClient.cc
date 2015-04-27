@@ -20,6 +20,8 @@
 #define MAX_RESPONSE (20 * 1024)
 //#include <curses.h>
 
+void update_list_rooms();
+
 using namespace std;
 
 GtkListStore * list_rooms;
