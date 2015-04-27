@@ -403,8 +403,8 @@ void room_changed(GtkWidget *widget, gpointer text) {
     enter_room();
     //printf("Selected = %s\n",roomName); // updated response
     buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (viewUser));
-    print_users_in_room();
-    char * response2 = strdup(response); //crashes here
+    
+    char * response2 = strdup(print_users_in_room()); //crashes here
     char * tok;
     //printf("Reached room = %s\n", response2);
     tok = strtok (response2,"\r\n");
@@ -414,7 +414,7 @@ void room_changed(GtkWidget *widget, gpointer text) {
           tok = strtok (NULL, "\r\n");
     }
     free(response2);
-    response2 = strdup(response);
+    response2 = strdup(print_users_in_room());
     if((strcmp(response2,"") != 0) && (strcmp(response2," ") != 0) && (strcmp(response2,"\r\n") != 0) && (strcmp(response2,"\n") != 0)) {
       //printf("Creat NEW1\n");
       roomUser = create_text_User(strdup(response));
