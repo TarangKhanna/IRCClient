@@ -172,7 +172,7 @@ void create_room2() {
   char response[MAX_RESPONSE];
   args = (char *) gtk_entry_get_text(GTK_ENTRY(entryRoom)); //strcat with message?
   printf("here %s\n", args);
-  printf("OR%s\n",(char *) gtk_entry_get_text(GTK_ENTRY(entryRoom));
+  printf("OR%s\n",(char *) gtk_entry_get_text(GTK_ENTRY(entryRoom)));
   sendCommand(host, port, "CREATE-ROOM", user, password, args, response);
   //create_room2("localhost", 8013, "user", "password", "Room43");
   if (strstr(response, "OK\r\n") != NULL) {
