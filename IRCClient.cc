@@ -393,7 +393,6 @@ void room_changed(GtkWidget *widget, gpointer text) {
   GtkTreeModel *model;
   char *value;
   GtkTextBuffer *buffer;
-  char * response2;
 
   if (gtk_tree_selection_get_selected(
       GTK_TREE_SELECTION(widget), &model, &iter)) {
@@ -401,8 +400,8 @@ void room_changed(GtkWidget *widget, gpointer text) {
     gtk_label_set_text(GTK_LABEL(currentStatus), value);
     printf("Selected = %s\n",value); // updated response
     buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (viewUser));
-    response2 = strdup(print_users_in_room());
-    //insert_text(buffer ,"THIS");
+    char * response2 = strdup(print_users_in_room()); //crashes here
+    insert_text(buffer ,response2);
     g_free(value);
   }
 }
