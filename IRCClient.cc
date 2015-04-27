@@ -139,8 +139,6 @@ void add_user(GtkButton *button, gpointer user_data)
   char response[MAX_RESPONSE];
   sendCommand(host, port, "ADD-USER", user, password, "", response);
   if (strcmp(response, "OK\r\n") == 0) {
-    printf("User %s added\n", user);
-    gchar * status2 = (gchar *)"Signed Up"; 
     gtk_label_set_text(GTK_LABEL(currentStatus),status2);
   }
 }
@@ -155,7 +153,7 @@ void login()
   //strcpy()
   if (strstr(response, "OK\r\n") != NULL) {
     gtk_label_set_text(GTK_LABEL(currentStatus),"Logged In");
-    printf("User %s added\n", user);
+    //printf("User %s added\n", user);
     //list_room(); // to update response 
     update_list_rooms(); // put it in the widget 
   } else {
@@ -171,10 +169,10 @@ void signup(GtkWidget *widget, gpointer data)
   password = (char *) gtk_entry_get_text(GTK_ENTRY(passWord));
   sendCommand(host, port, "ADD-USER", user, password, "", response);
   if (strstr(response, "OK\r\n") != NULL) {
-    printf("User %s added\n", user);
+    //printf("User %s added\n", user);
     gtk_label_set_text(GTK_LABEL(currentStatus),"Signed Up");
   } else {
-    printf("User %s taken\n", user);
+    //printf("User %s taken\n", user);
     gtk_label_set_text(GTK_LABEL(currentStatus),"UserName Taken");
   }
 }
@@ -190,7 +188,7 @@ void create_room2() {
     //strcpy(room, args);
     //strcat("Room Created: ", args);
     gtk_label_set_text(GTK_LABEL(currentStatus),"Room Created");
-    printf("Room %s added\n", args);
+    //printf("Room %s added\n", args);
   }
 }
 
@@ -200,11 +198,12 @@ char * list_room() {
   sendCommand(host, port, "LIST-ROOMS", user, password, "", response);
   
   if (!(strstr(response, "OK\r\n") != NULL)) {
-    printf(response);
+    //printf(response);
     //printf("OK\n");
  } else {
     //printf(response);
     printf("Denied Listing\n");
+    //gtk_label_set_text(GTK_LABEL(currentStatus),"Room Created");
  }
   return response;
 }
