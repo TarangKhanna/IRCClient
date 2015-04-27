@@ -25,6 +25,7 @@
 
 char * list_room();
 void update_list_rooms();
+static void insert_text( GtkTextBuffer *buffer, const char * initialText);
 int times = 0;
 bool changed = FALSE;
 
