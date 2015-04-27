@@ -423,17 +423,15 @@ void room_changed(GtkWidget *widget, gpointer text) {
     }
     if((strcmp(response2,"") != 0) && (strcmp(response2," ") != 0) && (strcmp(response2,"\r\n") != 0) && (strcmp(response2,"\n") != 0)) {
       printf("Creat NEW1\n");
-      roomUser = create_text_User(response2);
+      roomUser = create_text_User(strdup(print_users_in_room()));
       gtk_table_attach_defaults (GTK_TABLE (table), roomUser, 4, 8, 1, 4);
       gtk_widget_show (roomUser);
-      //
     }
     for(i = 0; i < userRoomVec.size(); i++) {
      if((strcmp(userRoomVec[i].c_str(),"") != 0) && (strcmp(userRoomVec[i].c_str()," ") != 0) && (strcmp(userRoomVec[i].c_str(),"\r\n") != 0) && (strcmp(userRoomVec[i].c_str(),"\n") != 0)) {
        //insert_text(buffer ,userRoomVec[i].c_str());
        //insert_text(buffer ,"\n");
        cout << userRoomVec[i] << '\n';
-       printf("PRINT USERS TILL HERE\n");
      }
     }
     g_free(roomName);
