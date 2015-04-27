@@ -128,7 +128,6 @@ void printUsage()
 void add_user(GtkButton *button, gpointer user_data)
 {
   char response[MAX_RESPONSE];
-  // Try first to add user in case it does not exist.
   sendCommand(host, port, "ADD-USER", user, password, "", response);
   if (strcmp(response, "OK\r\n") == 0) {
     printf("User %s added\n", user);
@@ -139,9 +138,6 @@ void add_user(GtkButton *button, gpointer user_data)
 
 void login()
 {
-  // Try first to add user in case it does not exist.
-  //char response[MAX_RESPONSE];
-  //memset(buffer,0,sizeof(buffer));
   char response[MAX_RESPONSE];
   char response3[MAX_RESPONSE];
   user = (char *) gtk_entry_get_text(GTK_ENTRY(userName));
@@ -167,7 +163,6 @@ void signup(GtkWidget *widget, gpointer data)
   sendCommand(host, port, "ADD-USER", user, password, "", response);
   if (strstr(response, "OK\r\n") != NULL) {
     printf("User %s added\n", user);
-    gchar * status2 = (gchar *)"signedUp"; 
     gtk_label_set_text(GTK_LABEL(currentStatus),"Signed Up");
   } else {
     printf("User %s taken\n", user);
@@ -198,9 +193,9 @@ char * list_room() {
   sendCommand(host, port, "LIST-ROOMS", user, password, "", response);
   
   if (!(strstr(response, "OK\r\n") != NULL)) {
-    printf("Denied2");
+    printf("Denied Listing\n");
   } else {
-    printf("OK");
+    printf("OK\n");
     //cout << response;
   }
   return response;
@@ -330,6 +325,7 @@ void update_list_rooms() {
     /* Add some messages to the window */
     //for (i = 0; i < 10; i++) {
     if(times > 0) {
+      printf("TARANg\n");
       bool changed = false;
       while (tok != NULL) { 
           //roomVec.push_back(tok);
@@ -352,6 +348,7 @@ void update_list_rooms() {
     // update 
     /* Add some messages to the window */
     //for (i = 0; i < 10; i++) {
+    printf("HEREEEE\n");
      while (tok != NULL) { 
         gchar *msg = g_strdup_printf (tok);
         gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
