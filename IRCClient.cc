@@ -24,6 +24,7 @@
 //#include <curses.h>
 
 char* list_room();
+bool loggedIn = false;
 void update_list_rooms();
 char* print_users_in_room();
 static GtkWidget *create_text_User( const char * initialText );
@@ -152,6 +153,7 @@ void add_user(GtkButton *button, gpointer user_data)
 
 void login()
 {
+  loggedIn = true;
   char response[MAX_RESPONSE];
   user = (char *) gtk_entry_get_text(GTK_ENTRY(userName));
   password = (char *) gtk_entry_get_text(GTK_ENTRY(passWord));
@@ -781,7 +783,9 @@ int main( int   argc,
 
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
     gtk_window_set_icon(GTK_WINDOW(window), create_pixbuf("chat_pic.png"));
-    g_timeout_add(5000, (GSourceFunc) time_handler, (gpointer) window);
+    if(loggedIn){
+      g_timeout_add(5000, (GSourceFunc) time_handler, (gpointer) window);
+    }
     gtk_main ();
 
     
