@@ -36,6 +36,7 @@ GtkListStore * list_rooms;
 GtkWidget *tree_view;
 GtkListStore * list_users;
 GtkWidget *view;
+GtkWidget *viewUser;
 GtkWidget *userName; //entry
 GtkWidget *passWord; //entry
 GtkWidget *currentStatus; //label
@@ -399,7 +400,7 @@ void room_changed(GtkWidget *widget, gpointer text) {
     gtk_tree_model_get(model, &iter, 0, &value,  -1);
     gtk_label_set_text(GTK_LABEL(currentStatus), value);
     printf("Selected = %s\n",value); // updated response
-    buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (roomUser));
+    buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (viewUser));
     response2 = strdup(print_users_in_room());
     insert_text(buffer ,response2);
     g_free(value);
@@ -491,6 +492,29 @@ static GtkWidget *create_text( const char * initialText )
    return scrolled_window;
 }
 
+/* Create a scrolled text area that displays a "message" */
+static GtkWidget *create_text_User( const char * initialText )
+{
+   GtkWidget *scrolled_window;
+   
+   GtkTextBuffer *buffer;
+
+   viewUser = gtk_text_view_new ();
+   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (viewUser));
+
+   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
+                   GTK_POLICY_AUTOMATIC,
+           GTK_POLICY_AUTOMATIC);
+
+   gtk_container_add (GTK_CONTAINER (scrolled_window), viewUser);
+   insert_text (buffer, initialText);
+
+   gtk_widget_show_all (scrolled_window);
+
+   return scrolled_window;
+}
+
 
 
 static void entry_toggle_visibility( GtkWidget *checkbutton,
@@ -571,7 +595,7 @@ int main( int   argc,
     //userList = create_list ("Users in room", list_users);
     //gtk_table_attach_defaults (GTK_TABLE (table), userList, 4, 8, 0, 4);
     //gtk_widget_show (userList);
-    roomUser = create_text ("User 1\n");
+    roomUser = create_text_User ("User 1\n");
     gtk_table_attach_defaults (GTK_TABLE (table), roomUser, 4, 8, 1, 4);
     gtk_widget_show (roomUser);
 
