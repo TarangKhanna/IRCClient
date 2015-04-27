@@ -254,7 +254,7 @@ char * print_users_in_room() {
   char response[MAX_RESPONSE];
   sendCommand(host, port, "GET-USERS-IN-ROOM", user, password, args, response);
 
-  if (strstr(response, "OK\r\n") != NULL) {
+  if (!(strstr(response, "OK\r\n") != NULL)) {
     printf("Print = %s\n", user);
     return response;
   } else {
