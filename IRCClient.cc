@@ -49,7 +49,7 @@ char * host = "localhost";
 char * user = "Tarang";
 char * password = "Khanna";
 char * sport;
-char * args = "Room42";
+char * args = (char * ) malloc(sizeof(char)* 100);
 int port = 8013;
 char * room[30];
 
@@ -214,7 +214,7 @@ char * list_room() {
 void enter_room() {
   char response[MAX_RESPONSE];
   sendCommand(host, port, "ENTER-ROOM", user, password, args, response);
-
+  printf("HERE3\n");
   if (strstr(response, "OK\r\n") != NULL){
     printf("User %s Entered room %s\n", user, args);
     gtk_label_set_text(GTK_LABEL(currentStatus), "Entered Room");
