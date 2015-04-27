@@ -694,7 +694,7 @@ int main( int   argc,
 
     //selected rows
     treeSel = gtk_tree_view_get_selection(GTK_TREE_VIEW(list_rooms));
-    g_signal_connect(selection, "changed",  
+    g_signal_connect(treeSel, "changed",  
       G_CALLBACK(room_changed), ""); 
 
     gtk_widget_show (table);
