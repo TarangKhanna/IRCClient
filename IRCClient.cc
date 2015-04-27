@@ -265,11 +265,8 @@ void get_messages() {
 
 void send_message() {
   char response[MAX_RESPONSE];
-  printf("Room %s\n", args);
   strcat(args, (char *) gtk_entry_get_text(GTK_ENTRY(messageEntry)));
-  printf("HERE2 %s\n", args);
   sendCommand(host, port, "SEND-MESSAGE", user, password, args, response);
-  printf("HERE123 %s\n", args);
   if (strstr(response, "OK\r\n") != NULL) {
     printf("Message %s sent\n", args);
   }
@@ -281,7 +278,6 @@ char* print_users_in_room() {
   char * responseDup = (char *)malloc(sizeof(response)+1) ;
   responseDup = strdup(response);
   if ((strstr(responseDup, "DENIED\r\n") == NULL)) {
-    //printf("OK response from print user in R is = %s\n", response);
     return response;
   } else {
     printf("Denied Print User = %s\n", user);
@@ -432,13 +428,6 @@ void room_changed(GtkWidget *widget, gpointer text) {
       roomUser = create_text_User(strdup(response2));
       gtk_table_attach_defaults (GTK_TABLE (table), roomUser, 4, 8, 1, 4);
       gtk_widget_show (roomUser);
-    }
-    for(i = 0; i < userRoomVec.size(); i++) {
-     if((strcmp(userRoomVec[i].c_str(),"") != 0) && (strcmp(userRoomVec[i].c_str()," ") != 0) && (strcmp(userRoomVec[i].c_str(),"\r\n") != 0) && (strcmp(userRoomVec[i].c_str(),"\n") != 0)) {
-       //insert_text(buffer ,userRoomVec[i].c_str());
-       //insert_text(buffer ,"\n");
-       cout << userRoomVec[i] << '\n';
-     }
     }
     g_free(roomName);
     free(response2);
