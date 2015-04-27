@@ -143,7 +143,7 @@ void login()
   user = (char *) gtk_entry_get_text(GTK_ENTRY(userName));
   password = (char *) gtk_entry_get_text(GTK_ENTRY(passWord));
   sendCommand(host, port, "LOG-IN", user, password, "", response);
-  strcpy()
+  //strcpy()
   if (strstr(response, "OK\r\n") != NULL) {
     gtk_label_set_text(GTK_LABEL(currentStatus),"Logged In");
     printf("User %s added\n", user);
