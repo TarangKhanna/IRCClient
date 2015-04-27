@@ -193,11 +193,12 @@ char * list_room() {
   sendCommand(host, port, "LIST-ROOMS", user, password, "", response);
   
   if (!(strstr(response, "OK\r\n") != NULL)) {
-    printf("Denied Listing\n");
-  } else {
+    printf(response);
     printf("OK\n");
-    //cout << response;
-  }
+ } else {
+    printf(response);
+    printf("Denied Listing\n");
+ }
   return response;
 }
 
