@@ -394,23 +394,6 @@ void room_changed(GtkWidget *widget, gpointer text) {
     g_free(value);
   }
 }
-
-void update_list_users() {
-    GtkTreeIter iter;
-    int i; //Once you're done with it.
-    // update 
-    /* Add some messages to the window */
-    for (i = 0; i < 10; i++) {
-        gchar *msg = g_strdup_printf ("User %d", i);
-        gtk_list_store_append (GTK_LIST_STORE (list_users), &iter);
-        gtk_list_store_set (GTK_LIST_STORE (list_users), 
-                      &iter,
-                            0, msg,
-                      -1);
-  g_free (msg);
-    }
-}
-
 /* Create the list of "messages" */
 static GtkWidget *create_list( const char * titleColumn, GtkListStore *model )
 {
@@ -533,6 +516,7 @@ int main( int   argc,
     GtkWidget *entry;
     GtkWidget *labelRoom;
     GtkWidget *labelUser;
+    GtkWidget *labelUserRoom;
     GtkWidget *labelPass;
     GtkWidget *status;
     GtkWidget *labelMsg;
@@ -576,8 +560,12 @@ int main( int   argc,
     //gtk_table_attach_defaults (GTK_TABLE (table), userList, 4, 8, 0, 4);
     //gtk_widget_show (userList);
     roomUser = create_text ("User 1\n");
-    gtk_table_attach_defaults (GTK_TABLE (table), roomUser, 4, 8, 0, 4);
+    gtk_table_attach_defaults (GTK_TABLE (table), roomUser, 4, 8, 1, 4);
     gtk_widget_show (roomUser);
+
+    labelUserRoom = gtk_label_new("Users In Room:");
+    gtk_misc_set_alignment(GTK_MISC(labelUserRoom),0.0,0.5);
+    gtk_table_attach(GTK_TABLE(table), labelUserRoom,4, 8, 0, 1, GTK_FILL, GTK_FILL, 0, 0);
 
     messages = create_text ("Peter: Hi how are you\nMary: I am fine, thanks and you?\nPeter: Fine thanks.\n");
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 2, 10, 5, 11);
