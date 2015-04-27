@@ -321,8 +321,6 @@ void update_list_rooms() {
     tok = strtok (response2,"\r\n");
     vector<string> roomVec;
     vector<string> roomVecNew;
-    int i2;
-    int count2 = 0;
     
       bool changed = false;
       while (tok != NULL) { 
@@ -332,6 +330,8 @@ void update_list_rooms() {
       }
       int rn = roomVecNew.size();
       int r = roomVec.size();
+      printf("RN SIZE%d\n", rn );
+      printf("R SIZE%d\n", r );
       while(rn > r)  {
             printf("%s\n", roomVecNew[r].c_str());
             gchar *msg = g_strdup_printf (roomVecNew[r].c_str());
@@ -345,7 +345,6 @@ void update_list_rooms() {
           } // or no change
       roomVec.swap(roomVecNew);
       roomVecNew.clear(); 
-   
 }
 
 void update_list_users() {
