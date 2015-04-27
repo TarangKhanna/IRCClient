@@ -520,6 +520,7 @@ int main( int   argc,
     GtkWidget *userList;
     GtkWidget *messages;
     GtkWidget *myMessage;
+    GtkWidget *roomUser;
     GdkColor color;
     GdkColor color2;
     GdkColor color3;
@@ -564,11 +565,14 @@ int main( int   argc,
     gtk_widget_show(labelMsg);
 
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
-    list_users = gtk_list_store_new (1, G_TYPE_STRING);
-    update_list_users();
-    userList = create_list ("Users in room", list_users);
-    gtk_table_attach_defaults (GTK_TABLE (table), userList, 4, 8, 0, 4);
-    gtk_widget_show (userList);
+    //list_users = gtk_list_store_new (1, G_TYPE_STRING);
+    //update_list_users();
+    //userList = create_list ("Users in room", list_users);
+    //gtk_table_attach_defaults (GTK_TABLE (table), userList, 4, 8, 0, 4);
+    //gtk_widget_show (userList);
+    roomUser = create_text ("User 1\n");
+    gtk_table_attach_defaults (GTK_TABLE (table), roomUser, 4, 8, 0, 4);
+    gtk_widget_show (roomUser);
 
     messages = create_text ("Peter: Hi how are you\nMary: I am fine, thanks and you?\nPeter: Fine thanks.\n");
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 2, 10, 5, 11);
@@ -622,14 +626,14 @@ int main( int   argc,
     gtk_widget_show (create_room); 
     g_signal_connect (create_room, "clicked", G_CALLBACK (create_room2), NULL);
 
-    GtkWidget *enter_room = gtk_button_new_with_label ("Enter Room");
-    gtk_table_attach_defaults(GTK_TABLE (table), enter_room, 0, 2, 8, 9); 
+    //GtkWidget *enter_room = gtk_button_new_with_label ("Enter Room");
+    //gtk_table_attach_defaults(GTK_TABLE (table), enter_room, 0, 2, 8, 9); 
     //gdk_color_parse ("orange", &color);
-    gtk_widget_modify_bg (GTK_WIDGET(enter_room), GTK_STATE_NORMAL, &color);
-    gtk_widget_show (enter_room); 
+    //gtk_widget_modify_bg (GTK_WIDGET(enter_room), GTK_STATE_NORMAL, &color);
+    //gtk_widget_show (enter_room); 
 
     GtkWidget *leave_room = gtk_button_new_with_label ("Leave Room");
-    gtk_table_attach_defaults(GTK_TABLE (table), leave_room, 0, 2, 9, 10); 
+    gtk_table_attach_defaults(GTK_TABLE (table), leave_room, 0, 2, 8, 9); 
     //gdk_color_parse ("orange", &color);
     gtk_widget_modify_bg (GTK_WIDGET(leave_room), GTK_STATE_NORMAL, &color);
     gtk_widget_show (leave_room); 
