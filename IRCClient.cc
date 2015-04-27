@@ -33,10 +33,10 @@ GtkWidget *currentStatus; //label
 GtkWidget *entryRoom; //entry
 
 char * host = "localhost";
-char * user = "Tarang";
-char * password = "Khanna";
+char * user;
+char * password;
 char * sport;
-char * args = "Room42";
+char * args;
 int port = 8013;
 
 int lastMessage = 0;
