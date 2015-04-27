@@ -25,6 +25,7 @@
 
 char * list_room();
 void update_list_rooms();
+char * print_users_in_room();
 static void insert_text( GtkTextBuffer *buffer, const char * initialText);
 int times = 0;
 bool changed = FALSE;
@@ -246,13 +247,15 @@ void send_message(char * host, int port, char * user,
   }
 }
 
-void print_users_in_room() {
+char * print_users_in_room() {
   char response[MAX_RESPONSE];
   sendCommand(host, port, "GET-USERS-IN-ROOM", user, password, args, response);
 
   if (strcmp(response, "OK\r\n") == 0) {
     printf("User %s added\n", user);
+    return response;
   }
+
 }
 
 void print_users() {
@@ -387,15 +390,16 @@ void room_changed(GtkWidget *widget, gpointer text) {
   GtkTreeModel *model;
   char *value;
   GtkTextBuffer *buffer;
+  char * response2;
 
   if (gtk_tree_selection_get_selected(
       GTK_TREE_SELECTION(widget), &model, &iter)) {
-    print_users_in_room(); // updated response
-    buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
-    insert_text(buffer ,response) 
     gtk_tree_model_get(model, &iter, 0, &value,  -1);
     gtk_label_set_text(GTK_LABEL(currentStatus), value);
-    printf("Selected = %s\n",value);
+    printf("Selected = %s\n",value); // updated response
+    buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+    response2 = strdup(print_users_in_room());
+    insert_text(buffer ,response2) 
     g_free(value);
   }
 }
