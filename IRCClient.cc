@@ -421,6 +421,7 @@ void room_changed(GtkWidget *widget, gpointer text) {
     for(i = 0; i < userRoomVec.size(); i++) {
      if((strcmp(userRoomVec[i].c_str(),"") != 0) && (strcmp(userRoomVec[i].c_str()," ") != 0) && (strcmp(userRoomVec[i].c_str(),"\r\n") != 0) && (strcmp(userRoomVec[i].c_str(),"\n") != 0)) {
        insert_text(buffer ,userRoomVec[i].c_str());
+       insert_text(buffer ,"\n");
        cout << userRoomVec[i] << '\n';
        printf("PRINT USERS TILL HERE\n");
      }
