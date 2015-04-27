@@ -402,7 +402,7 @@ void room_changed(GtkWidget *widget, gpointer text) {
     }
     if((strcmp(response2,"") != 0) && (strcmp(response2," ") != 0) && (strcmp(response2,"\r\n") != 0) && (strcmp(response2,"\n") != 0)) {
       //printf("Creat NEW1\n");
-      roomUser = create_text_User(strdup(response);
+      roomUser = create_text_User(strdup(response));
       gtk_table_attach_defaults (GTK_TABLE (table), roomUser, 4, 8, 1, 4);
       gtk_widget_show (roomUser);
     }
