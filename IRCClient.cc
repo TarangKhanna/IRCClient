@@ -23,9 +23,9 @@
 
 //#include <curses.h>
 
-char * list_room();
+void list_room();
 void update_list_rooms();
-char * print_users_in_room();
+void print_users_in_room();
 static GtkWidget *create_text_User( const char * initialText );
 static void insert_text( GtkTextBuffer *buffer, const char * initialText);
 int times = 0;
@@ -199,7 +199,7 @@ void create_room2() {
 }
 
 
-char * list_room() {
+void list_room() {
   sendCommand(host, port, "LIST-ROOMS", user, password, "", response);
   char * responseDup = (char *)malloc(sizeof(response)+1) ;
   responseDup = strdup(response);
@@ -211,7 +211,7 @@ char * list_room() {
     printf("Denied Listing\n");
     //gtk_label_set_text(GTK_LABEL(currentStatus),"Room Created");
  }
-  return response;
+  
 }
 
 void enter_room() {
@@ -252,18 +252,16 @@ void send_message(char * host, int port, char * user,
   }
 }
 
-char * print_users_in_room() {
+void print_users_in_room() {
   sendCommand(host, port, "GET-USERS-IN-ROOM", user, password, args, response);
   char * responseDup = (char *)malloc(sizeof(response)+1) ;
   responseDup = strdup(response);
-  if (!(strstr(responseDup, "OK\r\n") != NULL)) {
-    //printf("Print User  = %s\n", user);
-    return response;
+  if ((strstr(responseDup, "DENIED\r\n") == NULL)) {
+    printf("OK response from print user in R is = %s\n", response);
   } else {
     printf("Denied Print User = %s\n", user);
-    return "";
   }
-
+ 
 }
 
 void print_users() {
