@@ -302,21 +302,19 @@ char * get_messages() {
           userRoomVec.push_back(stok);
           tok = strtok (NULL, "\r\n");
     }
-    free(response2);
     response2 = strdup(get_messages());
     //printf("HERE\n");
     
       //printf("Creat NEW1\n");
-      printf("HNOTTTTERE , %s\n", response2);
-
-      messages_1 = create_text (strdup(response2));
-      gtk_table_attach_defaults (GTK_TABLE (table), messages_1, 2, 10, 5, 11);
-      gtk_widget_show (messages_1);
+      //printf("HNOTTTTERE , %s\n", response2);
+    printf("Users in room: %s\n", print_users_in_room());
+    printf("Response: %s\n", get_messages());
+    
+    messages_1 = create_text (strdup(response2));
+    gtk_table_attach_defaults (GTK_TABLE (table), messages_1, 2, 10, 5, 11);
+    gtk_widget_show (messages_1);
     g_free(roomName);
-    free(response2);
   }
-  
-  
 }
 
 void send_message() {
@@ -346,9 +344,7 @@ void send_message() {
 char* print_users_in_room() {
   char response[MAX_RESPONSE];
   sendCommand(host, port, "GET-USERS-IN-ROOM", user, password, args, response);
-  char * responseDup = (char *)malloc(sizeof(response)+1) ;
-  responseDup = strdup(response);
-  if ((strstr(responseDup, "DENIED\r\n") == NULL)) {
+  if ((strstr(response, "DENIED\r\n") == NULL)) {
     //printf("USERS in room = %s\n", response);
     return response;
   } else {
