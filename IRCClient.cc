@@ -214,7 +214,7 @@ char* list_room() {
   char * responseDup = (char *)malloc(sizeof(response)+1) ;
   responseDup = strdup(response);
   printf("respose here is = %s\n", response);
-  if (!(strstr(responseDup, "DENIED\r\n") != NULL) || !(strstr(responseDup, "ERROR (Wrong password)\r\n") != NULL)) {
+  if (!(strstr(responseDup, "DENIED\r\n") != NULL) && !(strstr(responseDup, "ERROR (Wrong password)\r\n") != NULL)) {
     return response;
   } else {
     printf("Denied Listing\n");
