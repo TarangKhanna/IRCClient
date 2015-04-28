@@ -293,7 +293,6 @@ char * get_messages() {
     args = strdup(roomName);
     //printf("Selected = %s\n",roomName); // updated response
     buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
-    
     char * response2 = strdup(get_messages()); //crashes here
     char * tok;
     //printf("Reached room = %s\n", response2);
@@ -305,7 +304,7 @@ char * get_messages() {
     }
     free(response2);
     response2 = strdup(get_messages());
-    printf("HERE\n");
+    //printf("HERE\n");
     
       //printf("Creat NEW1\n");
       printf("HNOTTTTERE , %s\n", response2);
@@ -333,7 +332,7 @@ void send_message() {
     strcat(room_1, (char *) gtk_entry_get_text(GTK_ENTRY(messageEntry)));
     sendCommand(host, port, "SEND-MESSAGE", user, password, room_1, response);
     if (strstr(response, "OK\r\n") != NULL) {
-      printf("Message %s sent\n", room_1);
+      //printf("Message %s sent\n", room_1);
       update_messages(widget, currentStatus);
       gtk_label_set_text(GTK_LABEL(currentStatus), "Message Sent");
     }
@@ -349,7 +348,7 @@ char* print_users_in_room() {
   char * responseDup = (char *)malloc(sizeof(response)+1) ;
   responseDup = strdup(response);
   if ((strstr(responseDup, "DENIED\r\n") == NULL)) {
-    printf("USERS in room = %s\n", response);
+    //printf("USERS in room = %s\n", response);
     return response;
   } else {
     printf("Denied Print User = %s\n", user);
@@ -500,7 +499,7 @@ void room_changed(GtkWidget *widget, gpointer text) {
     //free(response2);
     response2 = strdup(print_users_in_room());
     if((strcmp(response2,"") != 0) && (strcmp(response2," ") != 0) && (strcmp(response2,"\r\n") != 0) && (strcmp(response2,"\n") != 0)) {
-      printf("USERS IN ROOM !=%s\n",response2);
+      //printf("USERS IN ROOM !=%s\n",response2);
 
       roomUser = create_text_User(strdup(response2));
       gtk_table_attach_defaults (GTK_TABLE (table), roomUser, 4, 8, 1, 4);
