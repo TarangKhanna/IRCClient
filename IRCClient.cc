@@ -320,6 +320,7 @@ void room_changed_message(GtkWidget *widget, gpointer text) {
 }
 
 void send_message() {
+  GtkWidget* widget;
   char response[MAX_RESPONSE];
   char* room_1 = strdup(args);
   if(loggedIn) {
@@ -331,6 +332,7 @@ void send_message() {
     strcat(room_1, (char *) gtk_entry_get_text(GTK_ENTRY(messageEntry)));
     sendCommand(host, port, "SEND-MESSAGE", user, password, room_1, response);
     if (strstr(response, "OK\r\n") != NULL) {
+      room_changed_message(widget, currentStatus);
       //printf("Message %s sent\n", args);
     }
    }
