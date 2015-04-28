@@ -765,7 +765,7 @@ int main( int   argc,
 
     currentStatus = gtk_label_new("Login/Signup");
     gtk_misc_set_alignment(GTK_MISC(currentStatus),0.0,0.5);
-    gtk_table_attach(GTK_TABLE(table), currentStatus,8, 9, 2, 4, GTK_FILL, GTK_FILL, 0, 0);
+    gtk_table_attach(GTK_TABLE(table), currentStatus,8, 11, 2, 4, GTK_FILL, GTK_FILL, 0, 0);
     gtk_widget_show(currentStatus);
 
     //selected rows
