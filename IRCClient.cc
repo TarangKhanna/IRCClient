@@ -344,7 +344,7 @@ void send_message() {
    }
    } else {
      gtk_label_set_text(GTK_LABEL(currentStatus), "Not Logged In!");
-  }
+   }
 }
 
 char* print_users_in_room() {
@@ -678,9 +678,9 @@ int main( int   argc,
     GtkWidget *labelPass;
     GtkWidget *status;
     GtkWidget *labelMsg;
-
+    
     gtk_init (&argc, &argv);
-   
+    loggedIn = false;
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
     g_signal_connect (window, "destroy",
                 G_CALLBACK (gtk_main_quit), NULL);
