@@ -52,6 +52,7 @@ GtkWidget *passWord; //entry
 GtkWidget *currentStatus; //label
 GtkWidget *entryRoom; //entry
 GtkWidget *messageEntry;
+GtkWidget *messages;
 vector<string> roomVec;
 vector<string> roomVecNew;
 GtkWidget *roomUser;
@@ -658,7 +659,6 @@ int main( int   argc,
 {
     GtkWidget *list;
     GtkWidget *userList;
-    GtkWidget *messages;
     GtkWidget *myMessage;
     GdkColor color;
     GdkColor color2;
