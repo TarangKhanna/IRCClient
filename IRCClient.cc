@@ -307,7 +307,7 @@ char * get_messages() {
     
       //printf("Creat NEW1\n");
       //printf("HNOTTTTERE , %s\n", response2);
-    printf("Users in room: %s\n", print_users_in_room());
+    printf("Users in room: %s, room = %s\n", print_users_in_room(), args);
     printf("Response: %s\n", get_messages());
     
     messages_1 = create_text (strdup(response2));
