@@ -253,7 +253,7 @@ void leave_room() {
      //args = strdup("");
      gtk_label_set_text(GTK_LABEL(currentStatus), "Left Room");
      room_changed(widget,currentStatus);
-     printf("Response = %s , User %s left Room %s\n",response, user, args);
+     //printf("Response = %s , User %s left Room %s\n",response, user, args);
   } 
 }
 
@@ -273,12 +273,14 @@ void send_message() {
     //printf("Empty Message\n");
     gtk_label_set_text(GTK_LABEL(currentStatus), "Message Empty");
   } else {
+  strcat(room_1," "); // add space  
   strcat(room_1, (char *) gtk_entry_get_text(GTK_ENTRY(messageEntry)));
   sendCommand(host, port, "SEND-MESSAGE", user, password, room_1, response);
   if (strstr(response, "OK\r\n") != NULL) {
     printf("Message %s sent\n", args);
   }
  }
+ free(room_1);
 }
 
 char* print_users_in_room() {
