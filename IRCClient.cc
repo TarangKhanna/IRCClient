@@ -259,20 +259,11 @@ void leave_room() {
 
 void get_messages() {
   char response[MAX_RESPONSE];
-  //char* room_1 = strdup(args);
   sendCommand(host, port, "GET-MESSAGES", user, password, args, response);
-  char * responseDup = (char *)malloc(sizeof(response)+1) ;
-  responseDup = strdup(response);
-  //printf("respose here is = %s\n", response);
-  if (!(strstr(responseDup, "ERROR (User not in room)\r\n") != NULL) && !(strstr(responseDup, "ERROR (Wrong password)\r\n") != NULL)) {
-    free(responseDup);
-    return response;
-  } else {
-    free(responseDup);
-    //printf("Denied Listing\n");
-    gtk_label_set_text(GTK_LABEL(currentStatus),"Denied Getting Messages(Wrong Pass)");
-    return "";
- }
+
+  if (strstr(response, "OK\r\n") != NULL) {
+    printf("User %s sent message\n", user);
+  }
 }
 
 void send_message() {
@@ -418,7 +409,7 @@ void update_list_rooms() {
   //times++;
 }
 
-//update user in room
+//enter user in room
 void room_changed(GtkWidget *widget, gpointer text) {
   
   GtkTreeIter iter;
