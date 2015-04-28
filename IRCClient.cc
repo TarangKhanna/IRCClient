@@ -241,7 +241,7 @@ void leave_room() {
   sendCommand(host, port, "LEAVE-ROOM", user, password, args, response);
   
   if (strstr(response, "OK\r\n") != NULL) {
-     room_changed(widget,currentStatus);
+     //room_changed(widget,currentStatus);
      printf("Response = %s , User %s left Room %s\n",response, user, args);
   } 
 }
