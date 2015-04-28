@@ -344,9 +344,8 @@ void send_message() {
 char* print_users_in_room() {
   char response[MAX_RESPONSE];
   sendCommand(host, port, "GET-USERS-IN-ROOM", user, password, args, response);
-  char * responseDup = (char *)malloc(sizeof(response)+1) ;
-  responseDup = strdup(response);
-  if ((strstr(responseDup, "DENIED\r\n") == NULL)) {
+  printf("response in e is = %s\n",response );
+  if ((strstr(response, "DENIED\r\n") == NULL)) {
     return response;
   } else {
     printf("Denied Print User = %s\n", user);
