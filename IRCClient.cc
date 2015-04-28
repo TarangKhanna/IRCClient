@@ -43,6 +43,7 @@ using namespace std;
 GtkListStore * list_rooms;
 GtkWidget *window;
 GtkWidget *tree_view;
+GtkWidget *messages_1;
 GtkListStore * list_users;
 GtkWidget *table;
 GtkTreeSelection *treeSel;
@@ -658,7 +659,6 @@ int main( int   argc,
 {
     GtkWidget *list;
     GtkWidget *userList;
-    GtkWidget *messages;
     GtkWidget *myMessage;
     GdkColor color;
     GdkColor color2;
