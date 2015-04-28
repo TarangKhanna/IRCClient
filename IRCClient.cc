@@ -262,7 +262,11 @@ void leave_room() {
 
 char * get_messages() {
   char response[MAX_RESPONSE];
+  char* room_1 = strdup(args);
   //char* room_1 = strdup(args);
+  char* room_2 = strdup("0 "); // from
+  strcat(room_2, room_1 ); 
+  //strcat(room_2, (char *) "\n");
   sendCommand(host, port, "GET-MESSAGES", user, password, args, response);
   //printf("respose here is = %s\n", response);
   printf("user = %s, room = %s, Response here is = %s\n",user, args, response);
