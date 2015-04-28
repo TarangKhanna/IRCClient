@@ -330,6 +330,7 @@ void send_message() {
     } else {
     strcat(room_1," "); // add space  
     strcat(room_1, (char *) gtk_entry_get_text(GTK_ENTRY(messageEntry)));
+    strcat(room_1, (char *) "\n");
     sendCommand(host, port, "SEND-MESSAGE", user, password, room_1, response);
     if (strstr(response, "OK\r\n") != NULL) {
       //printf("Message %s sent\n", room_1);
