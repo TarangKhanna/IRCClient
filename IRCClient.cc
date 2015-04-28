@@ -253,8 +253,8 @@ void leave_room() {
      //room_changed(widget,currentStatus);
      //added = true;
      //args = strdup("");
-     gtk_label_set_text(GTK_LABEL(currentStatus), "Left Room");
      room_changed(widget,currentStatus);
+     gtk_label_set_text(GTK_LABEL(currentStatus), "Left Room");
      //printf("Response = %s , User %s left Room %s\n",response, user, args);
   } 
 }
@@ -263,18 +263,14 @@ char * get_messages() {
   char response[MAX_RESPONSE];
   //char* room_1 = strdup(args);
   sendCommand(host, port, "GET-MESSAGES", user, password, args, response);
-  char * responseDup = (char *)malloc(sizeof(response)+1) ;
-  responseDup = strdup(response);
   //printf("respose here is = %s\n", response);
   printf("user = %s, room = %s, Response here is = %s\n",user, args, response);
-  if (!(strstr(responseDup, "ERROR (User not in room)\r\n") != NULL) && !(strstr(responseDup, "ERROR (Wrong password)\r\n") != NULL)) {
+  if (!(strstr(response, "ERROR (User not in room)\r\n") != NULL) && !(strstr(responseDup, "ERROR (Wrong password)\r\n") != NULL)) {
     //printf("Response here is = %s\n",response);
-    free(responseDup);
     return response;
   } else {
-    free(responseDup);
     //printf("Denied Listing\n");
-    gtk_label_set_text(GTK_LABEL(currentStatus),"Denied Getting Messages(Wrong Pass)");
+    gtk_label_set_text(GTK_LABEL(currentStatus),"Denied Getting Messages");
     return "";
  }
 }
@@ -340,6 +336,7 @@ void send_message() {
    }
      free(room_1);
    } else {
+     free(room_1);
      gtk_label_set_text(GTK_LABEL(currentStatus), "Not Logged In!");
   }
 }
