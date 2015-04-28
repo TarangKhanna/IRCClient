@@ -58,10 +58,10 @@ GtkWidget *roomUser;
 
 
 char * host = "localhost";
-char * user = "Tarang";
-char * password = "Khanna";
+char * user = (char *) malloc(sizeof(char)* 10000);
+char * password = (char *) malloc(sizeof(char)* 10000);
 char * sport;
-char * args = (char * ) malloc(sizeof(char)* 10000);
+char * args = (char *) malloc(sizeof(char)* 10000);
 int port = 8013;
 char * room[30];
 
@@ -277,7 +277,7 @@ void send_message() {
   strcat(room_1, (char *) gtk_entry_get_text(GTK_ENTRY(messageEntry)));
   sendCommand(host, port, "SEND-MESSAGE", user, password, room_1, response);
   if (strstr(response, "OK\r\n") != NULL) {
-    printf("Message %s sent\n", args);
+    //printf("Message %s sent\n", args);
   }
  }
  free(room_1);
