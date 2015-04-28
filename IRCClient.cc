@@ -242,6 +242,7 @@ void leave_room() {
   
   if (strstr(response, "OK\r\n") != NULL) {
      //room_changed(widget,currentStatus);
+     args = "";
      printf("Response = %s , User %s left Room %s\n",response, user, args);
   } 
 }
