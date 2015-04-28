@@ -227,13 +227,14 @@ char* list_room() {
 }
 
 void enter_room() {
+  GtkWidget *widget;
   char response[MAX_RESPONSE];
   sendCommand(host, port, "ENTER-ROOM", user, password, args, response);
   //added = false;
   //printf("HERE3\n");
   //char * responseDup = (char *)malloc(sizeof(response)+1) ;
   //responseDup = strdup(response);
-  if (strstr(response, "OK\r\n") != NULL){
+  if (strstr(response, "OK\r\n") != NULL) {
     //printf("User %s Entered room %s\n", user, args);
     room_changed(widget,currentStatus);
     gtk_label_set_text(GTK_LABEL(currentStatus), "Entered Room");
