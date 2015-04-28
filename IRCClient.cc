@@ -493,7 +493,7 @@ void room_changed(GtkWidget *widget, gpointer text) {
           userRoomVec.push_back(stok);
           tok = strtok (NULL, "\r\n");
     }
-    free(response2);
+    //free(response2);
     response2 = strdup(print_users_in_room());
     if((strcmp(response2,"") != 0) && (strcmp(response2," ") != 0) && (strcmp(response2,"\r\n") != 0) && (strcmp(response2,"\n") != 0)) {
       //printf("Creat NEW1\n");
@@ -502,7 +502,7 @@ void room_changed(GtkWidget *widget, gpointer text) {
       gtk_widget_show (roomUser);
     }
     g_free(roomName);
-    free(response2);
+    //free(response2);
   }
   
 }
