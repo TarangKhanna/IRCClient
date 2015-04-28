@@ -413,7 +413,7 @@ void room_changed(GtkWidget *widget, gpointer text) {
     // enter room
     args = strdup(roomName);
     //if(!added) {
-       enter_room();
+    //enter_room();
     //}
     //printf("Selected = %s\n",roomName); // updated response
     buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (viewUser));
@@ -582,7 +582,7 @@ time_handler(GtkWidget *widget)
   //fprintf(stderr, "Hi\n");
   update_list_rooms();
   //update
-  // room_changed(widget,currentStatus);
+  room_changed(widget,currentStatus);
   return TRUE;
 }
 
@@ -705,7 +705,7 @@ int main( int   argc,
     gdk_color_parse ("orange", &color);
     gtk_widget_modify_bg (GTK_WIDGET(enter_room_Btn), GTK_STATE_NORMAL, &color);
     gtk_widget_show (enter_room_Btn); 
-    g_signal_connect (leave_room_Btn, "clicked", G_CALLBACK (leave_room), NULL);
+    g_signal_connect (enter_room_Btn, "clicked", G_CALLBACK (enter_room), NULL);
 
     GtkWidget *leave_room_Btn = gtk_button_new_with_label ("Leave Room");
     gtk_table_attach_defaults(GTK_TABLE (table), leave_room_Btn, 0, 2, 9, 10); 
