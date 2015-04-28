@@ -308,11 +308,6 @@ char * get_messages() {
           tok = strtok (NULL, "\r\n");
     }
     response2 = strdup(get_messages());
-    printf("PRINT THIS=%s\n", get_messages());
-    printf("TILL HEREs\n");
-    //printf("HERE\n");
-      //printf("Creat NEW1\n");
-      //printf("HNOTTTTERE , %s\n", response2);
     //printf("Users in room: %s, room = %s\n", print_users_in_room(), args);
     //printf("Response: %s\n", get_messages());
     
