@@ -318,6 +318,7 @@ char * get_messages() {
 }
 
 void send_message() {
+  GtkWidget * widget;
   char response[MAX_RESPONSE];
   char* room_1 = strdup(args);
   if(loggedIn) {
@@ -330,7 +331,7 @@ void send_message() {
     sendCommand(host, port, "SEND-MESSAGE", user, password, room_1, response);
     if (strstr(response, "OK\r\n") != NULL) {
       printf("Message %s sent\n", room_1);
-      update_messages();
+      update_messages(widget, currentStatus);
       gtk_label_set_text(GTK_LABEL(currentStatus), "Message Sent");
     }
    }
@@ -650,6 +651,7 @@ time_handler(GtkWidget *widget)
   //fprintf(stderr, "Hi\n");
   update_list_rooms();
   //update
+  update_messages(widget, currentStatus);
   room_changed(widget,currentStatus);
   return TRUE;
 }
