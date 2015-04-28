@@ -265,7 +265,7 @@ char * get_messages() {
   sendCommand(host, port, "GET-MESSAGES", user, password, args, response);
   //printf("respose here is = %s\n", response);
   printf("user = %s, room = %s, Response here is = %s\n",user, args, response);
-  if (!(strstr(response, "ERROR (User not in room)\r\n") != NULL) && !(strstr(responseDup, "ERROR (Wrong password)\r\n") != NULL)) {
+  if (!(strstr(response, "ERROR (User not in room)\r\n") != NULL) && !(strstr(response, "ERROR (Wrong password)\r\n") != NULL)) {
     //printf("Response here is = %s\n",response);
     return response;
   } else {
