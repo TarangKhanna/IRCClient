@@ -197,18 +197,11 @@ void signup(GtkWidget *widget, gpointer data)
 
 void create_room2() {
   char response[MAX_RESPONSE];
-  args = (char *) gtk_entry_get_text(GTK_ENTRY(entryRoom)); //strcat with message?
+  args = (char *) gtk_entry_get_text(GTK_ENTRY(entryRoom)); 
   sendCommand(host, port, "CREATE-ROOM", user, password, args, response);
-  //create_room2("localhost", 8013, "user", "password", "Room43");
-  //char * responseDup = (char *)malloc(sizeof(response)+1) ;
-  //responseDup = strdup(response);
   if (strstr(response, "OK\r\n") != NULL) {
     update_list_rooms();
-    //char * room = (char *) malloc(sizeof(args)+1);
-    //strcpy(room, args);
-    //strcat("Room Created: ", args);
     gtk_label_set_text(GTK_LABEL(currentStatus),"Room Created");
-    //printf("Room %s added\n", args);
   }
 }
 
@@ -219,11 +212,8 @@ char* list_room() {
   char * responseDup = (char *)malloc(sizeof(response)+1) ;
   responseDup = strdup(response);
   if (!(strstr(responseDup, "DENIED\r\n") != NULL)) {
-    //printf(response);
-    //printf("OK\n");
     return response;
  } else {
-    //printf(response);
     printf("Denied Listing\n");
     gtk_label_set_text(GTK_LABEL(currentStatus),"Denied Listing Room");
     return "";
@@ -240,18 +230,17 @@ void enter_room() {
   if (strstr(response, "OK\r\n") != NULL){
     //printf("User %s Entered room %s\n", user, args);
     gtk_label_set_text(GTK_LABEL(currentStatus), "Entered Room");
-
   }
 }
 
-void leave_room(char * host, int port, char * user,
-  char * password, char * args) {
+void leave_room() {
+  GtkWidget *widget;
   char response[MAX_RESPONSE];
   sendCommand(host, port, "LEAVE-ROOM", user, password, args, response);
-
-  if (strcmp(response, "OK\r\n") == 0) {
-    //printf("User %s added\n", user);
-  }
+  room_changed(widget,currentStatus);
+  if (strstr(response, "OK\r\n") != NULL) {
+     printf("User %s left Room %s\n", user, args);
+  } 
 }
 
 void get_messages() {
@@ -265,8 +254,9 @@ void get_messages() {
 
 void send_message() {
   char response[MAX_RESPONSE];
-  strcat(args, (char *) gtk_entry_get_text(GTK_ENTRY(messageEntry)));
-  sendCommand(host, port, "SEND-MESSAGE", user, password, args, response);
+  char* room_1 = strdup(args);
+  strcat(room_1, (char *) gtk_entry_get_text(GTK_ENTRY(messageEntry)));
+  sendCommand(host, port, "SEND-MESSAGE", user, password, room_1, response);
   if (strstr(response, "OK\r\n") != NULL) {
     printf("Message %s sent\n", args);
   }
@@ -699,11 +689,12 @@ int main( int   argc,
     //gtk_widget_modify_bg (GTK_WIDGET(enter_room), GTK_STATE_NORMAL, &color);
     //gtk_widget_show (enter_room); 
 
-    GtkWidget *leave_room = gtk_button_new_with_label ("Leave Room");
+    GtkWidget *leave_room_Btn = gtk_button_new_with_label ("Leave Room");
     gtk_table_attach_defaults(GTK_TABLE (table), leave_room, 0, 2, 8, 9); 
     //gdk_color_parse ("orange", &color);
     gtk_widget_modify_bg (GTK_WIDGET(leave_room), GTK_STATE_NORMAL, &color);
-    gtk_widget_show (leave_room); 
+    gtk_widget_show (leave_room_Btn); 
+    g_signal_connect (leave_room_Btn, "clicked", G_CALLBACK (leave_room), NULL);
 
     // login-if user exists - dont add- if user doesnt exist
     // dont add just login - no signup button - 1 button, two text entry
