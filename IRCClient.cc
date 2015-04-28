@@ -293,6 +293,7 @@ char* print_users_in_room() {
   char * responseDup = (char *)malloc(sizeof(response)+1) ;
   responseDup = strdup(response);
   if ((strstr(responseDup, "DENIED\r\n") == NULL)) {
+    printf("USERS in room = %s\n", response);
     return response;
   } else {
     printf("Denied Print User = %s\n", user);
@@ -440,16 +441,17 @@ void room_changed(GtkWidget *widget, gpointer text) {
           userRoomVec.push_back(stok);
           tok = strtok (NULL, "\r\n");
     }
-    free(response2);
+    //free(response2);
     response2 = strdup(print_users_in_room());
     if((strcmp(response2,"") != 0) && (strcmp(response2," ") != 0) && (strcmp(response2,"\r\n") != 0) && (strcmp(response2,"\n") != 0)) {
-      //printf("Creat NEW1\n");
+      printf("USERS IN ROOM !=%s\n",response2);
+
       roomUser = create_text_User(strdup(response2));
       gtk_table_attach_defaults (GTK_TABLE (table), roomUser, 4, 8, 1, 4);
       gtk_widget_show (roomUser);
     }
     g_free(roomName);
-    free(response2);
+    //free(response2);
   }
   
 }
