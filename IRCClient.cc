@@ -269,18 +269,22 @@ void get_messages() {
 void send_message() {
   char response[MAX_RESPONSE];
   char* room_1 = strdup(args);
-  if(strcmp(((char *) gtk_entry_get_text(GTK_ENTRY(messageEntry))),"") == 0) {
-    //printf("Empty Message\n");
-    gtk_label_set_text(GTK_LABEL(currentStatus), "Message Empty");
-  } else {
-  strcat(room_1," "); // add space  
-  strcat(room_1, (char *) gtk_entry_get_text(GTK_ENTRY(messageEntry)));
-  sendCommand(host, port, "SEND-MESSAGE", user, password, room_1, response);
-  if (strstr(response, "OK\r\n") != NULL) {
-    //printf("Message %s sent\n", args);
+  if(loggedIn) {
+    if(strcmp(((char *) gtk_entry_get_text(GTK_ENTRY(messageEntry))),"") == 0) {
+      //printf("Empty Message\n");
+      gtk_label_set_text(GTK_LABEL(currentStatus), "Message Empty");
+    } else {
+    strcat(room_1," "); // add space  
+    strcat(room_1, (char *) gtk_entry_get_text(GTK_ENTRY(messageEntry)));
+    sendCommand(host, port, "SEND-MESSAGE", user, password, room_1, response);
+    if (strstr(response, "OK\r\n") != NULL) {
+      //printf("Message %s sent\n", args);
+    }
+   }
+   free(room_1);
+   } else {
+     gtk_label_set_text(GTK_LABEL(currentStatus), "Not Logged In!");
   }
- }
- free(room_1);
 }
 
 char* print_users_in_room() {
