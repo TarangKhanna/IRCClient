@@ -213,6 +213,7 @@ char* list_room() {
   sendCommand(host, port, "LIST-ROOMS", user, password, "", response);
   char * responseDup = (char *)malloc(sizeof(response)+1) ;
   responseDup = strdup(response);
+  printf("respose here is = %s\n", response);
   if (!(strstr(responseDup, "DENIED\r\n") != NULL) || !(strstr(responseDup, "ERROR(Wrong password)\r\n") != NULL)) {
     return response;
   } else {
