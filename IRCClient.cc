@@ -266,9 +266,9 @@ char * get_messages() {
   char * responseDup = (char *)malloc(sizeof(response)+1) ;
   responseDup = strdup(response);
   //printf("respose here is = %s\n", response);
-  printf("Response here is = %s\n",response);
+  printf("user = %s, room = %s, Response here is = %s\n",user, args, response);
   if (!(strstr(responseDup, "ERROR (User not in room)\r\n") != NULL) && !(strstr(responseDup, "ERROR (Wrong password)\r\n") != NULL)) {
-    printf("Response here is = %s\n",response);
+    //printf("Response here is = %s\n",response);
     free(responseDup);
     return response;
   } else {
