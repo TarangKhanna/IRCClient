@@ -237,12 +237,12 @@ void enter_room() {
 void leave_room() {
   GtkWidget *widget;
   char response[MAX_RESPONSE];
-  printf("HERE %s = Room  user is = %s\n", args, user);
+  //printf("HERE %s = Room  user is = %s\n", args, user);
   sendCommand(host, port, "LEAVE-ROOM", user, password, args, response);
   
   if (strstr(response, "OK\r\n") != NULL) {
      //room_changed(widget,currentStatus);
-     args = "";
+     args = strdup("");
      printf("Response = %s , User %s left Room %s\n",response, user, args);
   } 
 }
