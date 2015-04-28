@@ -61,10 +61,10 @@ GtkWidget *roomUser;
 
 
 char * host = "localhost";
-char * user = (char *) malloc(sizeof(char)* 10000);
-char * password = (char *) malloc(sizeof(char)* 10000);
+char * user;
+char * password;
 char * sport;
-char * args = (char *) malloc(sizeof(char)* 10000);
+char * args;
 int port = 8013;
 char * room[30];
 
