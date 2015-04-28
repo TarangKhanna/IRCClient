@@ -235,6 +235,7 @@ void enter_room() {
   //responseDup = strdup(response);
   if (strstr(response, "OK\r\n") != NULL){
     //printf("User %s Entered room %s\n", user, args);
+    room_changed(widget,currentStatus);
     gtk_label_set_text(GTK_LABEL(currentStatus), "Entered Room");
   }
 }
