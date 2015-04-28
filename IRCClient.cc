@@ -27,9 +27,8 @@ char* list_room();
 bool loggedIn = false;
 bool added = false;
 
-static gboolean
+static gboolean time_handler(GtkWidget *widget);
 char * get_messages();
-time_handler(GtkWidget *widget);
 void update_list_rooms();
 char* print_users_in_room();
 static GtkWidget *create_text( const char * initialText );
