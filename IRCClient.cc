@@ -278,10 +278,10 @@ void send_message() {
     strcat(room_1, (char *) gtk_entry_get_text(GTK_ENTRY(messageEntry)));
     sendCommand(host, port, "SEND-MESSAGE", user, password, room_1, response);
     if (strstr(response, "OK\r\n") != NULL) {
-      //printf("Message %s sent\n", args);
+      printf("Message %s sent\n", room_1);
+      gtk_label_set_text(GTK_LABEL(currentStatus), "Message Sent");
     }
    }
-   free(room_1);
    } else {
      gtk_label_set_text(GTK_LABEL(currentStatus), "Not Logged In!");
   }
