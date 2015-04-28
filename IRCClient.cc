@@ -256,11 +256,15 @@ void get_messages() {
 void send_message() {
   char response[MAX_RESPONSE];
   char* room_1 = strdup(args);
+  if(strcmp(((char *) gtk_entry_get_text(GTK_ENTRY(messageEntry))),"") == 0) {
+    printf("Empty Message\n");
+  } else {
   strcat(room_1, (char *) gtk_entry_get_text(GTK_ENTRY(messageEntry)));
   sendCommand(host, port, "SEND-MESSAGE", user, password, room_1, response);
   if (strstr(response, "OK\r\n") != NULL) {
     printf("Message %s sent\n", args);
   }
+ }
 }
 
 char* print_users_in_room() {
