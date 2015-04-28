@@ -52,7 +52,7 @@ GtkWidget *passWord; //entry
 GtkWidget *currentStatus; //label
 GtkWidget *entryRoom; //entry
 GtkWidget *messageEntry;
-GtkWidget *messages;
+GtkWidget *messages_1;
 vector<string> roomVec;
 vector<string> roomVecNew;
 GtkWidget *roomUser;
@@ -308,9 +308,9 @@ void room_changed_message(GtkWidget *widget, gpointer text) {
     response2 = strdup(print_users_in_room());
     if((strcmp(response2,"") != 0) && (strcmp(response2," ") != 0) && (strcmp(response2,"\r\n") != 0) && (strcmp(response2,"\n") != 0)) {
       //printf("Creat NEW1\n");
-      messages = create_text (strdup(response2));
-      gtk_table_attach_defaults (GTK_TABLE (table), messages, 2, 10, 5, 11);
-      gtk_widget_show (messages);
+      messages_1 = create_text (strdup(response2));
+      gtk_table_attach_defaults (GTK_TABLE (table), messages_1, 2, 10, 5, 11);
+      gtk_widget_show (messages_1);
     }
     g_free(roomName);
     free(response2);
@@ -718,9 +718,9 @@ int main( int   argc,
     gtk_table_attach(GTK_TABLE(table), labelUserRoom,4, 8, 0, 1, GTK_FILL, GTK_FILL, 0, 0);
     gtk_widget_show(labelUserRoom);
 
-    messages = create_text ("");
+    messages_1 = create_text ("");
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 2, 10, 5, 11);
-    gtk_widget_show (messages);
+    gtk_widget_show (messages_1);
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
     //wcout << L"Hello, \u0444!\n";
     //myMessage = create_text ("Hello\n");
