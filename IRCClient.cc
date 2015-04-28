@@ -213,12 +213,14 @@ char* list_room() {
   sendCommand(host, port, "LIST-ROOMS", user, password, "", response);
   char * responseDup = (char *)malloc(sizeof(response)+1) ;
   responseDup = strdup(response);
-  printf("respose here is = %s\n", response);
+  //printf("respose here is = %s\n", response);
   if (!(strstr(responseDup, "DENIED\r\n") != NULL) && !(strstr(responseDup, "ERROR (Wrong password)\r\n") != NULL)) {
+    free(responseDup);
     return response;
   } else {
-    printf("Denied Listing\n");
-    gtk_label_set_text(GTK_LABEL(currentStatus),"Denied Listing Room");
+    free(responseDup);
+    //printf("Denied Listing\n");
+    gtk_label_set_text(GTK_LABEL(currentStatus),"Denied Listing Room(Wrong Pass)");
     return "";
  }
   
