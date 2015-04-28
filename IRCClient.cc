@@ -654,7 +654,7 @@ time_handler(GtkWidget *widget)
   //fprintf(stderr, "Hi\n");
   update_list_rooms();
   //update
-  room_changed_message(widget, currentStatus);
+  //room_changed_message(widget, currentStatus);
   room_changed(widget, currentStatus);
   return TRUE;
 }
@@ -753,7 +753,7 @@ int main( int   argc,
     gdk_color_parse ("orange", &color);
     gtk_widget_modify_bg (GTK_WIDGET(send_button), GTK_STATE_NORMAL, &color);
     g_signal_connect (send_button, "clicked", G_CALLBACK (send_message), NULL);
-    gtk_widget_show (send_button); 
+    gtk_widget_show (send_button);   
     messageEntry = gtk_entry_new_with_max_length(0);
     //gtk_entry_set_max_length (GTK_ENTRY (entry),3);
     gtk_table_attach_defaults (GTK_TABLE (table), messageEntry, 2, 10, 11, 13);
@@ -855,9 +855,9 @@ int main( int   argc,
     g_signal_connect(treeSel, "changed",  
       G_CALLBACK(room_changed), currentStatus); 
     
-    treeSel = gtk_tree_view_get_selection(GTK_TREE_VIEW(tree_view));
-    g_signal_connect(treeSel, "changed",  
-      G_CALLBACK(room_changed_message), currentStatus); 
+    //treeSel = gtk_tree_view_get_selection(GTK_TREE_VIEW(tree_view));
+    //g_signal_connect(treeSel, "changed",  
+     // G_CALLBACK(room_changed_message), currentStatus); 
 
     gtk_widget_show (table);
     gtk_widget_show (window);
