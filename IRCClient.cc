@@ -249,6 +249,8 @@ void leave_room() {
      //room_changed(widget,currentStatus);
      //added = true;
      //args = strdup("");
+     gtk_label_set_text(GTK_LABEL(currentStatus), "Left Room");
+     room_changed(widget,currentStatus);
      printf("Response = %s , User %s left Room %s\n",response, user, args);
   } 
 }
