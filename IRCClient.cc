@@ -519,7 +519,8 @@ static GtkWidget *create_text( const char * initialText )
 
    view = gtk_text_view_new ();
    buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
-
+   gtk_text_view_set_editable (GTK_TEXT_VIEW(view),
+                            FALSE);
    scrolled_window = gtk_scrolled_window_new (NULL, NULL);
    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
                    GTK_POLICY_AUTOMATIC,
