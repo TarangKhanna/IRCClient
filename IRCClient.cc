@@ -307,7 +307,7 @@ char * get_messages() {
     response2 = strdup(get_messages());
     if((strcmp(response2,"") != 0) && (strcmp(response2," ") != 0) && (strcmp(response2,"\r\n") != 0) && (strcmp(response2,"\n") != 0)) {
       //printf("Creat NEW1\n");
-      messages_1 = create_text (strdup(response2));
+      messages_1 = create_text ("strdup(response2)");
       gtk_table_attach_defaults (GTK_TABLE (table), messages_1, 2, 10, 5, 11);
       gtk_widget_show (messages_1);
     }
