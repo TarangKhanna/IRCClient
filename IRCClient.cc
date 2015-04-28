@@ -28,6 +28,7 @@ bool loggedIn = false;
 bool added = false;
 
 static gboolean
+char * get_messages();
 time_handler(GtkWidget *widget);
 void update_list_rooms();
 char* print_users_in_room();
@@ -259,7 +260,7 @@ void leave_room() {
   } 
 }
 
-void get_messages() {
+char * get_messages() {
   char response[MAX_RESPONSE];
   //char* room_1 = strdup(args);
   sendCommand(host, port, "GET-MESSAGES", user, password, args, response);
