@@ -25,6 +25,7 @@
 
 char* list_room();
 bool loggedIn = false;
+bool added = false;
 
 static gboolean
 time_handler(GtkWidget *widget);
@@ -225,6 +226,7 @@ char* list_room() {
 void enter_room() {
   char response[MAX_RESPONSE];
   sendCommand(host, port, "ENTER-ROOM", user, password, args, response);
+  //added = false;
   //printf("HERE3\n");
   //char * responseDup = (char *)malloc(sizeof(response)+1) ;
   //responseDup = strdup(response);
@@ -242,6 +244,7 @@ void leave_room() {
   
   if (strstr(response, "OK\r\n") != NULL) {
      //room_changed(widget,currentStatus);
+     //added = true;
      args = strdup("");
      printf("Response = %s , User %s left Room %s\n",response, user, args);
   } 
@@ -393,7 +396,7 @@ void update_list_rooms() {
   //times++;
 }
 
-//users in room
+//enter user in room
 void room_changed(GtkWidget *widget, gpointer text) {
   
   GtkTreeIter iter;
@@ -409,7 +412,9 @@ void room_changed(GtkWidget *widget, gpointer text) {
     gtk_label_set_text(GTK_LABEL(currentStatus), roomName);
     // enter room
     args = strdup(roomName);
-    enter_room();
+    //if(!added) {
+       enter_room();
+    //}
     //printf("Selected = %s\n",roomName); // updated response
     buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (viewUser));
     
@@ -576,7 +581,8 @@ time_handler(GtkWidget *widget)
   //gtk_widget_queue_draw(widget);
   //fprintf(stderr, "Hi\n");
   update_list_rooms();
-  room_changed(widget,currentStatus);
+  //update
+  // room_changed(widget,currentStatus);
   return TRUE;
 }
 
