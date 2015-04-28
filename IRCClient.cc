@@ -245,7 +245,7 @@ void leave_room() {
   if (strstr(response, "OK\r\n") != NULL) {
      //room_changed(widget,currentStatus);
      //added = true;
-     args = strdup("");
+     //args = strdup("");
      printf("Response = %s , User %s left Room %s\n",response, user, args);
   } 
 }
@@ -700,14 +700,15 @@ int main( int   argc,
     gtk_widget_show (create_room); 
     g_signal_connect (create_room, "clicked", G_CALLBACK (create_room2), NULL);
 
-    //GtkWidget *enter_room = gtk_button_new_with_label ("Enter Room");
-    //gtk_table_attach_defaults(GTK_TABLE (table), enter_room, 0, 2, 8, 9); 
-    //gdk_color_parse ("orange", &color);
-    //gtk_widget_modify_bg (GTK_WIDGET(enter_room), GTK_STATE_NORMAL, &color);
-    //gtk_widget_show (enter_room); 
+    GtkWidget *enter_room_Btn = gtk_button_new_with_label ("Enter Room");
+    gtk_table_attach_defaults(GTK_TABLE (table), enter_room_Btn, 0, 2, 8, 9); 
+    gdk_color_parse ("orange", &color);
+    gtk_widget_modify_bg (GTK_WIDGET(enter_room_Btn), GTK_STATE_NORMAL, &color);
+    gtk_widget_show (enter_room_Btn); 
+    g_signal_connect (leave_room_Btn, "clicked", G_CALLBACK (leave_room), NULL);
 
     GtkWidget *leave_room_Btn = gtk_button_new_with_label ("Leave Room");
-    gtk_table_attach_defaults(GTK_TABLE (table), leave_room_Btn, 0, 2, 8, 9); 
+    gtk_table_attach_defaults(GTK_TABLE (table), leave_room_Btn, 0, 2, 9, 10); 
     //gdk_color_parse ("orange", &color);
     gtk_widget_modify_bg (GTK_WIDGET(leave_room_Btn), GTK_STATE_NORMAL, &color);
     gtk_widget_show (leave_room_Btn); 
