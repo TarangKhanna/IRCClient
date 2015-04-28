@@ -258,7 +258,7 @@ void send_message() {
   char* room_1 = strdup(args);
   if(strcmp(((char *) gtk_entry_get_text(GTK_ENTRY(messageEntry))),"") == 0) {
     //printf("Empty Message\n");
-    gtk_label_set_text(GTK_LABEL(currentStatus), "Can't Empty Message");
+    gtk_label_set_text(GTK_LABEL(currentStatus), "Message Empty");
   } else {
   strcat(room_1, (char *) gtk_entry_get_text(GTK_ENTRY(messageEntry)));
   sendCommand(host, port, "SEND-MESSAGE", user, password, room_1, response);
