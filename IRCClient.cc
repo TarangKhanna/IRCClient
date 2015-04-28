@@ -495,6 +495,7 @@ void room_changed(GtkWidget *widget, gpointer text) {
     }
     //free(response2);
     response2 = strdup(print_users_in_room());
+    printf("here is = %s\n", response2);
     if((strcmp(response2,"") != 0) && (strcmp(response2," ") != 0) && (strcmp(response2,"\r\n") != 0) && (strcmp(response2,"\n") != 0)) {
       //printf("Creat NEW1\n");
       roomUser = create_text_User(strdup(response2));
