@@ -695,7 +695,7 @@ int main( int   argc,
     GtkWidget *leave_room_Btn = gtk_button_new_with_label ("Leave Room");
     gtk_table_attach_defaults(GTK_TABLE (table), leave_room_Btn, 0, 2, 8, 9); 
     //gdk_color_parse ("orange", &color);
-    gtk_widget_modify_bg (GTK_WIDGET(leave_room), GTK_STATE_NORMAL, &color);
+    gtk_widget_modify_bg (GTK_WIDGET(leave_room_Btn), GTK_STATE_NORMAL, &color);
     gtk_widget_show (leave_room_Btn); 
     g_signal_connect (leave_room_Btn, "clicked", G_CALLBACK (leave_room), NULL);
 
