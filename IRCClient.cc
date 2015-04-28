@@ -32,6 +32,7 @@ time_handler(GtkWidget *widget);
 void update_list_rooms();
 char* print_users_in_room();
 static GtkWidget *create_text_User( const char * initialText );
+static GtkWidget *create_text_User( const char * initialText );
 static void insert_text( GtkTextBuffer *buffer, const char * initialText);
 void room_changed(GtkWidget *widget, gpointer text);
 int times = 0;
