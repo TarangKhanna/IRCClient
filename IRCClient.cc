@@ -58,10 +58,10 @@ GtkWidget *roomUser;
 
 
 char * host = "localhost";
-char * user = "Tarang";
-char * password = "Khanna";
+char * user = (char *) malloc(sizeof(char)* 10000);
+char * password = (char *) malloc(sizeof(char)* 10000);
 char * sport;
-char * args = (char * ) malloc(sizeof(char)* 10000);
+char * args = (char *) malloc(sizeof(char)* 10000);
 int port = 8013;
 char * room[30];
 
@@ -259,28 +259,41 @@ void leave_room() {
 
 void get_messages() {
   char response[MAX_RESPONSE];
+  //char* room_1 = strdup(args);
   sendCommand(host, port, "GET-MESSAGES", user, password, args, response);
-
-  if (strstr(response, "OK\r\n") != NULL) {
-    printf("User %s sent message\n", user);
-  }
+  char * responseDup = (char *)malloc(sizeof(response)+1) ;
+  responseDup = strdup(response);
+  //printf("respose here is = %s\n", response);
+  if (!(strstr(responseDup, "ERROR (User not in room)\r\n") != NULL) && !(strstr(responseDup, "ERROR (Wrong password)\r\n") != NULL)) {
+    free(responseDup);
+    return response;
+  } else {
+    free(responseDup);
+    //printf("Denied Listing\n");
+    gtk_label_set_text(GTK_LABEL(currentStatus),"Denied Getting Messages(Wrong Pass)");
+    return "";
+ }
 }
 
 void send_message() {
   char response[MAX_RESPONSE];
   char* room_1 = strdup(args);
-  if(strcmp(((char *) gtk_entry_get_text(GTK_ENTRY(messageEntry))),"") == 0) {
-    //printf("Empty Message\n");
-    gtk_label_set_text(GTK_LABEL(currentStatus), "Message Empty");
-  } else {
-  strcat(room_1," "); // add space  
-  strcat(room_1, (char *) gtk_entry_get_text(GTK_ENTRY(messageEntry)));
-  sendCommand(host, port, "SEND-MESSAGE", user, password, room_1, response);
-  if (strstr(response, "OK\r\n") != NULL) {
-    printf("Message %s sent\n", args);
+  if(loggedIn) {
+    if(strcmp(((char *) gtk_entry_get_text(GTK_ENTRY(messageEntry))),"") == 0) {
+      //printf("Empty Message\n");
+      gtk_label_set_text(GTK_LABEL(currentStatus), "Message Empty");
+    } else {
+    strcat(room_1," "); // add space  
+    strcat(room_1, (char *) gtk_entry_get_text(GTK_ENTRY(messageEntry)));
+    sendCommand(host, port, "SEND-MESSAGE", user, password, room_1, response);
+    if (strstr(response, "OK\r\n") != NULL) {
+      //printf("Message %s sent\n", args);
+    }
+   }
+   free(room_1);
+   } else {
+     gtk_label_set_text(GTK_LABEL(currentStatus), "Not Logged In!");
   }
- }
- free(room_1);
 }
 
 char* print_users_in_room() {
@@ -405,7 +418,7 @@ void update_list_rooms() {
   //times++;
 }
 
-//enter user in room
+//update user in room
 void room_changed(GtkWidget *widget, gpointer text) {
   
   GtkTreeIter iter;
