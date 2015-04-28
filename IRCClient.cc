@@ -31,6 +31,7 @@ static gboolean
 time_handler(GtkWidget *widget);
 void update_list_rooms();
 char* print_users_in_room();
+char * get_messages();
 static GtkWidget *create_text_User( const char * initialText );
 static void insert_text( GtkTextBuffer *buffer, const char * initialText);
 void room_changed(GtkWidget *widget, gpointer text);
@@ -257,13 +258,62 @@ void leave_room() {
   } 
 }
 
-void get_messages() {
+char * get_messages() {
   char response[MAX_RESPONSE];
+  //char* room_1 = strdup(args);
   sendCommand(host, port, "GET-MESSAGES", user, password, args, response);
+  //printf("respose here is = %s\n", response);
+  printf("user = %s, room = %s, Response here is = %s\n",user, args, response);
+  if (!(strstr(response, "ERROR (User not in room)\r\n") != NULL) && !(strstr(response, "ERROR (Wrong password)\r\n") != NULL)) {
+    //printf("Response here is = %s\n",response);
+    return response;
+  } else {
+    //printf("Denied Listing\n");
+    gtk_label_set_text(GTK_LABEL(currentStatus),"Denied Getting Messages");
+    return "";
+ }
+}
 
-  if (strstr(response, "OK\r\n") != NULL) {
-    printf("User %s sent message\n", user);
+ void update_messages(GtkWidget *widget, gpointer text) {
+  
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  char *roomName;
+  int i;
+  GtkTextBuffer *buffer;
+  vector<string> userRoomVec;// copy all into a vector and on roomchanged
+  // create new view and add the whole vector into it
+  if (gtk_tree_selection_get_selected(
+      GTK_TREE_SELECTION(treeSel), &model, &iter)) {
+    gtk_tree_model_get(model, &iter, 0, &roomName,  -1);
+    gtk_label_set_text(GTK_LABEL(currentStatus), roomName);
+    // enter room
+    args = strdup(roomName);
+    //printf("Selected = %s\n",roomName); // updated response
+    buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+    
+    char * response2 = strdup(get_messages()); //crashes here
+    char * tok;
+    //printf("Reached room = %s\n", response2);
+    tok = strtok (response2,"\r\n");
+    while (tok != NULL) {
+          string stok(tok); 
+          userRoomVec.push_back(stok);
+          tok = strtok (NULL, "\r\n");
+    }
+    free(response2);
+    response2 = strdup(get_messages());
+    if((strcmp(response2,"") != 0) && (strcmp(response2," ") != 0) && (strcmp(response2,"\r\n") != 0) && (strcmp(response2,"\n") != 0)) {
+      //printf("Creat NEW1\n");
+      messages_1 = create_text (strdup(response2));
+      gtk_table_attach_defaults (GTK_TABLE (table), messages_1, 2, 10, 5, 11);
+      gtk_widget_show (messages_1);
+    }
+    g_free(roomName);
+    free(response2);
   }
+  
+  
 }
 
 void send_message() {
@@ -279,6 +329,7 @@ void send_message() {
     sendCommand(host, port, "SEND-MESSAGE", user, password, room_1, response);
     if (strstr(response, "OK\r\n") != NULL) {
       printf("Message %s sent\n", room_1);
+      update_messages();
       gtk_label_set_text(GTK_LABEL(currentStatus), "Message Sent");
     }
    }
@@ -667,9 +718,9 @@ int main( int   argc,
     gtk_table_attach(GTK_TABLE(table), labelUserRoom,4, 8, 0, 1, GTK_FILL, GTK_FILL, 0, 0);
     gtk_widget_show(labelUserRoom);
 
-    messages = create_text ("Peter: Hi how are you\nMary: I am fine, thanks and you?\nPeter: Fine thanks.\n");
-    gtk_table_attach_defaults (GTK_TABLE (table), messages, 2, 10, 5, 11);
-    gtk_widget_show (messages);
+    messages_1 = create_text ("");
+    gtk_table_attach_defaults (GTK_TABLE (table), messages_1, 2, 10, 5, 11);
+    gtk_widget_show (messages_1);
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
     //wcout << L"Hello, \u0444!\n";
     //myMessage = create_text ("Hello\n");
