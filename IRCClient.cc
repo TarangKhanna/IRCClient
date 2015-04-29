@@ -463,7 +463,7 @@ void update_list_rooms() {
   //times++;
 }
 
-//enter user in room
+//update user in room
 void room_changed(GtkWidget *widget, gpointer text) {
   
   GtkTreeIter iter;
@@ -496,13 +496,10 @@ void room_changed(GtkWidget *widget, gpointer text) {
     }
     //free(response2);
     response2 = strdup(print_users_in_room());
-    if((strcmp(response2,"") != 0) && (strcmp(response2," ") != 0) && (strcmp(response2,"\r\n") != 0) && (strcmp(response2,"\n") != 0)) {
-      //printf("USERS IN ROOM !=%s\n",response2);
-
-      roomUser = create_text_User(strdup(response2));
-      gtk_table_attach_defaults (GTK_TABLE (table), roomUser, 4, 8, 1, 4);
-      gtk_widget_show (roomUser);
-    }
+    roomUser = create_text_User(strdup(response2));
+    gtk_table_attach_defaults (GTK_TABLE (table), roomUser, 4, 8, 1, 4);
+    gtk_widget_show (roomUser);
+    
     g_free(roomName);
     //free(response2);
   }
@@ -652,7 +649,7 @@ time_handler(GtkWidget *widget)
   update_list_rooms();
   //update
   update_messages(widget, currentStatus);
-  room_changed(widget,currentStatus);
+  room_changed(widget,currentStatus); //update users in room
   return TRUE;
 }
 
