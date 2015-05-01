@@ -708,7 +708,7 @@ int main( int   argc,
     //userList = create_list ("Users in room", list_users);
     //gtk_table_attach_defaults (GTK_TABLE (table), userList, 4, 8, 0, 4);
     //gtk_widget_show (userList);
-    roomUser = create_text_User ("");
+    roomUser = create_text_User (""); //users in room
     gtk_table_attach_defaults (GTK_TABLE (table), roomUser, 4, 8, 1, 4);
     gtk_widget_show (roomUser);
 
